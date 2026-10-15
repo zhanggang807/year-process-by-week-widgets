@@ -1,0 +1,7360 @@
+{
+  "generatedAt" : "2026-10-15T11:32:46Z",
+  "probes" : [
+    {
+      "date" : "2015-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 1,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-01-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 2,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-01-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 3,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-01-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 4,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-02-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 5,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-02-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 6,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-02-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 7,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-02-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 8,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-03-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 9,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-03-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 10,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-03-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 11,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-03-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 12,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-04-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 14,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-04-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 15,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-04-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 16,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-04-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 17,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-05-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 18,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-05-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 19,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-05-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 20,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-05-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 21,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-06-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 23,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-06-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 24,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-06-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 25,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-06-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 26,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-07-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 27,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-07-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 28,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-07-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 29,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-07-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 30,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-08-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 31,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-08-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 32,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-08-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 33,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-08-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 34,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-09-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 36,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-09-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 37,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-09-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 38,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-09-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 39,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-10-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 40,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-10-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 41,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-10-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 42,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-10-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 43,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-11-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 44,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-11-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 45,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-11-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 46,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-11-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 47,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-12-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 49,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-12-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 50,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-12-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 51,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-12-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 52,
+      "year" : 2015
+    },
+    {
+      "date" : "2015-12-31",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2015
+    },
+    {
+      "date" : "2016-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2015
+    },
+    {
+      "date" : "2016-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2016
+    },
+    {
+      "date" : "2016-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2016
+    },
+    {
+      "date" : "2017-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2016
+    },
+    {
+      "date" : "2017-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2017
+    },
+    {
+      "date" : "2017-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2017
+    },
+    {
+      "date" : "2018-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2018
+    },
+    {
+      "date" : "2018-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 30,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2019
+    },
+    {
+      "date" : "2019-12-31",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 1,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 1,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-01-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 2,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-01-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 3,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-01-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 4,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-02-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 5,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-02-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 6,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-02-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 7,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-02-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 8,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-03-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 9,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-03-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 10,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-03-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 11,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-03-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 12,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-04-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 14,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-04-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 15,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-04-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 16,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-04-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 17,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-05-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 18,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-05-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 19,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-05-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 20,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-05-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 21,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-06-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 23,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-06-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 24,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-06-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 25,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-06-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 26,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-07-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 27,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-07-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 28,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-07-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 29,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-07-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 30,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-08-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 31,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-08-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 32,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-08-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 33,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-08-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 34,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-09-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 36,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-09-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 37,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-09-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 38,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-09-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 39,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-10-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 40,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-10-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 41,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-10-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 42,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-10-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 43,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-11-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 44,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-11-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 45,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-11-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 46,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-11-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 47,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-12-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 49,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-12-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 50,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-12-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 51,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-12-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 52,
+      "year" : 2020
+    },
+    {
+      "date" : "2020-12-31",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2020
+    },
+    {
+      "date" : "2021-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2020
+    },
+    {
+      "date" : "2021-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 30,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2021
+    },
+    {
+      "date" : "2021-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2021
+    },
+    {
+      "date" : "2022-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2021
+    },
+    {
+      "date" : "2022-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2022
+    },
+    {
+      "date" : "2022-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2022
+    },
+    {
+      "date" : "2023-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2022
+    },
+    {
+      "date" : "2023-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2023
+    },
+    {
+      "date" : "2023-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2023
+    },
+    {
+      "date" : "2024-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 30,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2024
+    },
+    {
+      "date" : "2024-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 30,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2025
+    },
+    {
+      "date" : "2025-12-31",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 1,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 1,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-01-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 2,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-01-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 3,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-01-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 4,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-02-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 5,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-02-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 6,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-02-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 7,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-02-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 8,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-03-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 9,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-03-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 10,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-03-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 11,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-03-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 12,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-04-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 14,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-04-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 15,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-04-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 16,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-04-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 17,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-05-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 18,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-05-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 19,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-05-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 20,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-05-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 21,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-06-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 23,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-06-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 24,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-06-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 25,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-06-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 26,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-07-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 27,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-07-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 28,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-07-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 29,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-07-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 30,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-08-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 31,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-08-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 32,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-08-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 33,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-08-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 34,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-09-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 36,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-09-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 37,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-09-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 38,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-09-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 39,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-10-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 40,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-10-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 41,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-10-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 42,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-10-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 43,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-11-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 44,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-11-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 45,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-11-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 46,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-11-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 47,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-12-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 49,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-12-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 50,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-12-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 51,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-12-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 52,
+      "year" : 2026
+    },
+    {
+      "date" : "2026-12-31",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2026
+    },
+    {
+      "date" : "2027-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2026
+    },
+    {
+      "date" : "2027-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 30,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2027
+    },
+    {
+      "date" : "2027-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2027
+    },
+    {
+      "date" : "2028-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2027
+    },
+    {
+      "date" : "2028-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2028
+    },
+    {
+      "date" : "2028-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2028
+    },
+    {
+      "date" : "2029-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2029
+    },
+    {
+      "date" : "2029-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 30,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2030
+    },
+    {
+      "date" : "2030-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 30,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2031
+    },
+    {
+      "date" : "2031-12-31",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 1,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 1,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-01-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 2,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-01-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 3,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-01-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 4,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-02-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 5,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-02-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 6,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-02-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 7,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-02-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 8,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-03-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 10,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-03-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 11,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-03-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 12,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-03-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 13,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-04-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 14,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-04-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 15,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-04-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 16,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-04-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 17,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-05-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 18,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-05-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 19,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-05-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 20,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-05-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 21,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-06-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 23,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-06-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 24,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-06-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 25,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-06-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 26,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-07-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 27,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-07-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 28,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-07-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 29,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-07-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 30,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-08-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 31,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-08-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 32,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-08-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 33,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-08-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 34,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-09-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 36,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-09-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 37,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-09-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 38,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-09-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 39,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-10-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 40,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-10-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 41,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-10-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 42,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-10-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 43,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-11-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 45,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-11-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 46,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-11-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 47,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-11-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 48,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-12-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 49,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-12-08",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 50,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-12-15",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 51,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-12-22",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 52,
+      "year" : 2032
+    },
+    {
+      "date" : "2032-12-31",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2032
+    },
+    {
+      "date" : "2033-01-01",
+      "state" : "current",
+      "totalWeeks" : 53,
+      "weekIndex" : 53,
+      "year" : 2032
+    },
+    {
+      "date" : "2033-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 17,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2033
+    },
+    {
+      "date" : "2033-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2033
+    },
+    {
+      "date" : "2034-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2033
+    },
+    {
+      "date" : "2034-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 39,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2034
+    },
+    {
+      "date" : "2034-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 52,
+      "year" : 2034
+    },
+    {
+      "date" : "2035-01-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-01-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 2,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-01-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 3,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-01-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 4,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-02-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 5,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-02-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 6,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-02-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 7,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-02-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 8,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-03-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 9,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-03-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 10,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-03-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 11,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-03-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 12,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-04-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 13,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-04-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 14,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-04-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 15,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-04-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 16,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-05-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 18,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-05-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 19,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-05-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 20,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-05-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 21,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-06-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 22,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-06-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 23,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-06-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 24,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-06-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 25,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-07-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 26,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-07-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 27,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-07-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 28,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-07-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 29,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-08-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 31,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-08-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 32,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-08-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 33,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-08-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 34,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-09-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 35,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-09-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 36,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-09-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 37,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-09-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 38,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-10-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 40,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-10-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 41,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-10-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 42,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-10-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 43,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-11-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 44,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-11-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 45,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-11-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 46,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-11-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 47,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-12-01",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 48,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-12-08",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 49,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-12-15",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 50,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-12-22",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 51,
+      "year" : 2035
+    },
+    {
+      "date" : "2035-12-31",
+      "state" : "current",
+      "totalWeeks" : 52,
+      "weekIndex" : 1,
+      "year" : 2036
+    }
+  ],
+  "rule" : "ISO 8601 (Monday first, minimumDaysInFirstWeek = 4)",
+  "timeZone" : "UTC",
+  "weekStart" : "monday",
+  "years" : [
+    {
+      "firstWeekStart" : "2014-12-29",
+      "lastWeekEnd" : "2016-01-03",
+      "lastWeekStart" : "2015-12-28",
+      "weeks" : 53,
+      "year" : 2015
+    },
+    {
+      "firstWeekStart" : "2016-01-04",
+      "lastWeekEnd" : "2017-01-01",
+      "lastWeekStart" : "2016-12-26",
+      "weeks" : 52,
+      "year" : 2016
+    },
+    {
+      "firstWeekStart" : "2017-01-02",
+      "lastWeekEnd" : "2017-12-31",
+      "lastWeekStart" : "2017-12-25",
+      "weeks" : 52,
+      "year" : 2017
+    },
+    {
+      "firstWeekStart" : "2018-01-01",
+      "lastWeekEnd" : "2018-12-30",
+      "lastWeekStart" : "2018-12-24",
+      "weeks" : 52,
+      "year" : 2018
+    },
+    {
+      "firstWeekStart" : "2018-12-31",
+      "lastWeekEnd" : "2019-12-29",
+      "lastWeekStart" : "2019-12-23",
+      "weeks" : 52,
+      "year" : 2019
+    },
+    {
+      "firstWeekStart" : "2019-12-30",
+      "lastWeekEnd" : "2021-01-03",
+      "lastWeekStart" : "2020-12-28",
+      "weeks" : 53,
+      "year" : 2020
+    },
+    {
+      "firstWeekStart" : "2021-01-04",
+      "lastWeekEnd" : "2022-01-02",
+      "lastWeekStart" : "2021-12-27",
+      "weeks" : 52,
+      "year" : 2021
+    },
+    {
+      "firstWeekStart" : "2022-01-03",
+      "lastWeekEnd" : "2023-01-01",
+      "lastWeekStart" : "2022-12-26",
+      "weeks" : 52,
+      "year" : 2022
+    },
+    {
+      "firstWeekStart" : "2023-01-02",
+      "lastWeekEnd" : "2023-12-31",
+      "lastWeekStart" : "2023-12-25",
+      "weeks" : 52,
+      "year" : 2023
+    },
+    {
+      "firstWeekStart" : "2024-01-01",
+      "lastWeekEnd" : "2024-12-29",
+      "lastWeekStart" : "2024-12-23",
+      "weeks" : 52,
+      "year" : 2024
+    },
+    {
+      "firstWeekStart" : "2024-12-30",
+      "lastWeekEnd" : "2025-12-28",
+      "lastWeekStart" : "2025-12-22",
+      "weeks" : 52,
+      "year" : 2025
+    },
+    {
+      "firstWeekStart" : "2025-12-29",
+      "lastWeekEnd" : "2027-01-03",
+      "lastWeekStart" : "2026-12-28",
+      "weeks" : 53,
+      "year" : 2026
+    },
+    {
+      "firstWeekStart" : "2027-01-04",
+      "lastWeekEnd" : "2028-01-02",
+      "lastWeekStart" : "2027-12-27",
+      "weeks" : 52,
+      "year" : 2027
+    },
+    {
+      "firstWeekStart" : "2028-01-03",
+      "lastWeekEnd" : "2028-12-31",
+      "lastWeekStart" : "2028-12-25",
+      "weeks" : 52,
+      "year" : 2028
+    },
+    {
+      "firstWeekStart" : "2029-01-01",
+      "lastWeekEnd" : "2029-12-30",
+      "lastWeekStart" : "2029-12-24",
+      "weeks" : 52,
+      "year" : 2029
+    },
+    {
+      "firstWeekStart" : "2029-12-31",
+      "lastWeekEnd" : "2030-12-29",
+      "lastWeekStart" : "2030-12-23",
+      "weeks" : 52,
+      "year" : 2030
+    },
+    {
+      "firstWeekStart" : "2030-12-30",
+      "lastWeekEnd" : "2031-12-28",
+      "lastWeekStart" : "2031-12-22",
+      "weeks" : 52,
+      "year" : 2031
+    },
+    {
+      "firstWeekStart" : "2031-12-29",
+      "lastWeekEnd" : "2033-01-02",
+      "lastWeekStart" : "2032-12-27",
+      "weeks" : 53,
+      "year" : 2032
+    },
+    {
+      "firstWeekStart" : "2033-01-03",
+      "lastWeekEnd" : "2034-01-01",
+      "lastWeekStart" : "2033-12-26",
+      "weeks" : 52,
+      "year" : 2033
+    },
+    {
+      "firstWeekStart" : "2034-01-02",
+      "lastWeekEnd" : "2034-12-31",
+      "lastWeekStart" : "2034-12-25",
+      "weeks" : 52,
+      "year" : 2034
+    },
+    {
+      "firstWeekStart" : "2035-01-01",
+      "lastWeekEnd" : "2035-12-30",
+      "lastWeekStart" : "2035-12-24",
+      "weeks" : 52,
+      "year" : 2035
+    }
+  ]
+}
