@@ -9,6 +9,12 @@
 |---|---|---|---|
 | ![2027](docs/preview-2027.png) | ![week1](docs/preview-week1.png) | ![graphite](docs/preview-graphite.png) | ![year-end](docs/preview-year-end.png) |
 
+系统小组件（medium / small）长这样：
+
+| 通知中心 medium（338×158） | 通知中心 small（158×158） |
+|---|---|
+| ![widget-medium](docs/preview-widget-medium.png) | ![widget-small](docs/preview-widget-small.png) |
+
 - 默认尺寸 **600×292**（比例 2.06，与参考图实测的 442×215 一致）。
 - 默认 **13 列**：52 周的年份正好 4×13 方阵；**53 周的年份自动换列**，避免最后一行只剩一个孤块。
 - 2026 年是 **53 周**（ISO 8601），2025 / 2027 是 52 周。
