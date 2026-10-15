@@ -1,5 +1,6 @@
 import Foundation
 import YearProgressCore
+import YearProgressUI
 
 /// 极简命令行解析：`--snapshot out.png --date 2026-10-15 --theme violet --size 600x292`
 struct CLIOptions {
@@ -11,6 +12,8 @@ struct CLIOptions {
     var margin: CGFloat = 36
     var weekStartMode: WeekStartMode = .monday
     var timeZone: TimeZone = .current
+    /// 导出时的渲染档位：app（大卡片，带圆角阴影）/ widget（系统小组件，无外框）
+    var chrome: CardChrome = .card
 
     static func parse(_ argv: [String]) -> CLIOptions {
         var o = CLIOptions()
@@ -40,6 +43,8 @@ struct CLIOptions {
                 if let v = next(), let m = Double(v) { o.margin = CGFloat(m); i += 1 }
             case "--timezone":
                 i += 1
+            case "--chrome":
+                if let v = next() { o.chrome = (v == "widget") ? .widget : .card; i += 1 }
             case "--week-start":
                 if let v = next(), let w = WeekStartMode(rawValue: v) { o.weekStartMode = w; i += 1 }
             case "--help", "-h":
@@ -69,6 +74,7 @@ struct CLIOptions {
       --margin <pt>         导出留白（露出阴影），默认 36
       --timezone <id>       例如 Asia/Shanghai
       --week-start monday|sunday|locale
+      --chrome card|widget   导出样式：card（App 大卡片）/ widget（系统小组件，无外框）
     """
 
     static func parseDate(_ s: String, timeZone: TimeZone) -> Date? {

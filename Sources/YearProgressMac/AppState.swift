@@ -1,5 +1,6 @@
 import SwiftUI
 import YearProgressCore
+import YearProgressUI
 
 /// 视图状态 + 刷新调度（跨零点、唤醒、时区变更）。
 @MainActor

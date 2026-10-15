@@ -1,6 +1,7 @@
 import AppKit
 import SwiftUI
 import YearProgressCore
+import YearProgressUI
 
 /// 离屏渲染：不需要打开窗口就能把卡片画成 PNG，用于自查视觉效果。
 enum SnapshotRunner {
@@ -9,7 +10,12 @@ enum SnapshotRunner {
         let progress = YearProgressCalculator.progress(for: options.date ?? Date(),
                                                       timeZone: options.timeZone,
                                                       weekStartMode: options.weekStartMode)
-        let card = YearProgressCardView(progress: progress, theme: options.theme, size: options.size)
+        let chrome: CardChrome = options.chrome == .widget ? .widget : .card
+        let card = YearProgressCardView(progress: progress,
+                                        theme: options.theme,
+                                        size: options.size,
+                                        profile: options.chrome == .widget ? .widget : .app,
+                                        chrome: chrome)
             .padding(options.margin)
             .background(Color.clear)
 

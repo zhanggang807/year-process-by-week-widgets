@@ -1,19 +1,57 @@
 import SwiftUI
 import YearProgressCore
 
-/// 卡片本体：左上「2026年 / 丙午年 · 第 42/53 周」，右上进度环，中间方块网格，底部一行统计。
-struct YearProgressCardView: View {
-    let progress: YearProgress
-    let theme: CardTheme
-    let size: CGSize
-    var preferredColumns: Int = 13
+/// 卡片的「外框」处理方式：
+/// - `.card`：App 自己的圆角卡片（描边 + 阴影）
+/// - `.widget`：系统小组件，圆角与背板由系统提供，不要再画一层
+public enum CardChrome: Sendable {
+    case card
+    case widget
+}
 
-    var body: some View {
-        let m = CardMetrics(size: size)
+/// 卡片本体：左上「2026年 / 丙午年 · 第 42/53 周」，右上进度环，中间方块网格，底部一行统计。
+/// App 与系统小组件共用同一份实现。
+public struct YearProgressCardView: View {
+    public let progress: YearProgress
+    public let theme: CardTheme
+    public let size: CGSize
+    public var profile: CardProfile
+    public var chrome: CardChrome
+    public var showsTooltips: Bool
+    public var preferredColumns: Int
+
+    public init(progress: YearProgress,
+                theme: CardTheme,
+                size: CGSize,
+                profile: CardProfile = .app,
+                chrome: CardChrome = .card,
+                showsTooltips: Bool = true,
+                preferredColumns: Int = 13) {
+        self.progress = progress
+        self.theme = theme
+        self.size = size
+        self.profile = profile
+        self.chrome = chrome
+        self.showsTooltips = showsTooltips
+        self.preferredColumns = preferredColumns
+    }
+
+    public var body: some View {
+        let m = CardMetrics(size: size, profile: profile)
         let layout = GridLayoutCalculator.compute(weekCount: progress.totalWeeks,
                                                  available: m.gridArea,
                                                  preferredColumns: preferredColumns)
 
+        content(m: m, layout: layout)
+            .padding(m.padding)
+            .frame(width: size.width, height: size.height, alignment: .topLeading)
+            .background(
+                LinearGradient(colors: theme.backgroundColors, startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .modifier(CardChromeModifier(chrome: chrome, cornerRadius: m.cornerRadius, theme: theme))
+    }
+
+    private func content(m: CardMetrics, layout: WeekGridLayout) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             header(m)
             Spacer().frame(height: m.headerGap)
@@ -22,32 +60,28 @@ struct YearProgressCardView: View {
             Text(progress.footerText)
                 .font(.system(size: m.footerFont, weight: .medium))
                 .foregroundStyle(theme.secondaryText)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
         }
-        .padding(m.padding)
-        .frame(width: size.width, height: size.height, alignment: .topLeading)
-        .background(
-            LinearGradient(colors: theme.backgroundColors, startPoint: .topLeading, endPoint: .bottomTrailing)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: m.cornerRadius, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: m.cornerRadius, style: .continuous)
-                .strokeBorder(theme.cardBorder, lineWidth: 1)
-        )
     }
 
     // MARK: 顶部
 
     private func header(_ m: CardMetrics) -> some View {
         HStack(alignment: .top, spacing: 0) {
-            VStack(alignment: .leading, spacing: 3 * m.scale) {
+            VStack(alignment: .leading, spacing: max(1, m.scale * 3)) {
                 Text(progress.yearTitle)
                     .font(.system(size: m.titleFont, weight: .semibold, design: .rounded))
                     .foregroundStyle(theme.primaryText)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
                 Text(progress.subtitle)
                     .font(.system(size: m.subtitleFont, weight: .medium))
                     .foregroundStyle(theme.secondaryText)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
             }
-            Spacer(minLength: 0)
+            Spacer(minLength: 4)
             ProgressRing(percent: progress.percent, size: m.ringSize, theme: theme)
         }
         .frame(height: m.headerHeight, alignment: .top)
@@ -67,7 +101,8 @@ struct YearProgressCardView: View {
                                           side: CGFloat(layout.cellSize),
                                           radius: radius,
                                           theme: theme,
-                                          timeZone: progress.timeZone)
+                                          timeZone: progress.timeZone,
+                                          showsTooltip: showsTooltips)
                         }
                     }
                 }
@@ -78,6 +113,30 @@ struct YearProgressCardView: View {
     }
 }
 
+/// 圆角 / 描边 / 阴影：App 卡片需要，系统小组件不需要（系统已给）。
+private struct CardChromeModifier: ViewModifier {
+    let chrome: CardChrome
+    let cornerRadius: CGFloat
+    let theme: CardTheme
+
+    func body(content: Content) -> some View {
+        switch chrome {
+        case .widget:
+            return AnyView(content)
+        case .card:
+            return AnyView(
+                content
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                            .strokeBorder(theme.cardBorder, lineWidth: 1)
+                    )
+                    .shadow(color: .black.opacity(0.28), radius: 18, y: 8)
+            )
+        }
+    }
+}
+
 /// 一个方块 = 一周。
 private struct WeekBlockView: View {
     let cell: WeekCell
@@ -85,6 +144,7 @@ private struct WeekBlockView: View {
     let radius: CGFloat
     let theme: CardTheme
     let timeZone: TimeZone
+    let showsTooltip: Bool
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -102,12 +162,12 @@ private struct WeekBlockView: View {
         .frame(width: side, height: side)
         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
         .overlay {
-            if let stroke = stroke {
+            if let stroke {
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
                     .strokeBorder(stroke.color, lineWidth: stroke.width)
             }
         }
-        .help(tooltip)
+        .modifier(TooltipModifier(text: tooltip, enabled: showsTooltip))
         .accessibilityLabel(tooltip)
     }
 
@@ -123,7 +183,7 @@ private struct WeekBlockView: View {
         switch cell.state {
         case .past: return nil
         case .future: return theme.futureStroke.map { ($0, 1) }
-        case .current: return (theme.currentStroke, max(1, side * 0.045))
+        case .current: return (theme.currentStroke, max(0.8, side * 0.045))
         }
     }
 
@@ -140,18 +200,38 @@ private struct WeekBlockView: View {
     }
 }
 
-/// 右上角的年度进度环。
-struct ProgressRing: View {
-    let percent: Double
-    let size: CGFloat
-    let theme: CardTheme
+/// `.help()` 只在 App 里有意义，小组件里不允许用。
+private struct TooltipModifier: ViewModifier {
+    let text: String
+    let enabled: Bool
 
-    var body: some View {
+    func body(content: Content) -> some View {
+        if enabled {
+            return AnyView(content.help(text))
+        } else {
+            return AnyView(content)
+        }
+    }
+}
+
+/// 右上角的年度进度环。
+public struct ProgressRing: View {
+    public let percent: Double
+    public let size: CGFloat
+    public let theme: CardTheme
+
+    public init(percent: Double, size: CGFloat, theme: CardTheme) {
+        self.percent = percent
+        self.size = size
+        self.theme = theme
+    }
+
+    public var body: some View {
         ZStack {
-            Circle().stroke(theme.ringTrack, lineWidth: max(2, size * 0.11))
+            Circle().stroke(theme.ringTrack, lineWidth: max(1.5, size * 0.11))
             Circle()
                 .trim(from: 0, to: max(0.001, min(1, percent / 100)))
-                .stroke(theme.ringProgress, style: StrokeStyle(lineWidth: max(2, size * 0.11), lineCap: .round))
+                .stroke(theme.ringProgress, style: StrokeStyle(lineWidth: max(1.5, size * 0.11), lineCap: .round))
                 .rotationEffect(.degrees(-90))
         }
         .frame(width: size, height: size)

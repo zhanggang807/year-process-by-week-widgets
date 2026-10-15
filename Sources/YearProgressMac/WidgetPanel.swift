@@ -1,3 +1,4 @@
+import YearProgressUI
 import AppKit
 import SwiftUI
 

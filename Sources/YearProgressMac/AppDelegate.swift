@@ -1,3 +1,4 @@
+import YearProgressUI
 import AppKit
 import SwiftUI
 
@@ -28,6 +29,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private static let shadowInset: CGFloat = 22
     private static let levelKey = "panelLevel"
     private static let frameKey = "panelFrame"
+    private static let panelVisibleKey = "panelVisible"
+    private static let didWelcomeKey = "didShowWelcome"
 
     private let cli: CLIOptions
     private var state: AppState!
@@ -39,7 +42,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         set { UserDefaults.standard.set(newValue.rawValue, forKey: Self.levelKey) }
     }
 
-    private var isVisible = true
+    private let welcome = WelcomeWindowController()
+
+    /// 桌面浮窗是可选项：默认关闭，使用说明才是主入口。
+    private var isVisible: Bool {
+        get { UserDefaults.standard.bool(forKey: Self.panelVisibleKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Self.panelVisibleKey) }
+    }
 
     init(cli: CLIOptions) {
         self.cli = cli
@@ -53,6 +62,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         setUpStatusItem()
         setUpPanel()
+
+        if !UserDefaults.standard.bool(forKey: Self.didWelcomeKey) {
+            UserDefaults.standard.set(true, forKey: Self.didWelcomeKey)
+            welcome.show()
+        }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
@@ -64,7 +78,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         panel.level = level.nsLevel
         panel.contentView = NSHostingView(rootView: PanelRootView(state: state))
         panel.setFrameOrigin(restoredOrigin() ?? defaultOrigin())
-        panel.orderFrontRegardless()
+        if isVisible { panel.orderFrontRegardless() }
         panel.delegate = self
     }
 
@@ -121,7 +135,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(title)
         menu.addItem(.separator())
 
-        let toggle = NSMenuItem(title: isVisible ? "隐藏小组件" : "显示小组件",
+        let guide = NSMenuItem(title: "添加系统小组件…", action: #selector(showWelcome), keyEquivalent: "?")
+        guide.target = self
+        menu.addItem(guide)
+
+        let toggle = NSMenuItem(title: isVisible ? "关闭桌面挂件" : "打开桌面挂件",
                                 action: #selector(togglePanel), keyEquivalent: "h")
         toggle.target = self
         menu.addItem(toggle)
@@ -173,6 +191,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(.separator())
         let quit = NSMenuItem(title: "退出", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         menu.addItem(quit)
+    }
+
+    @objc private func showWelcome() {
+        welcome.show()
     }
 
     @objc private func togglePanel() {

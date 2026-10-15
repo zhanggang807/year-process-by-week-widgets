@@ -18,16 +18,21 @@
 ## 快速开始
 
 ```bash
-make run        # 直接跑：菜单栏出现小图标 + 桌面出现卡片
+make install    # 【推荐】打包 + 组装 .appex + 签名 + 安装到 /Applications 并注册给系统
+make widget     # 同上，但只产出 build/YearProgress.app（不往 /Applications 拷）
+make uninstall  # 从 /Applications 卸载（想彻底移除就再 make widget-uninstall）
 make test       # 单元测试（17 个）
 make preview    # 导出几个典型日期的 PNG 到 docs/
-make app        # 打包 build/YearProgress.app（含 Info.plist + ad-hoc 签名）
-make open       # 打包并启动
+make app        # 只打包宿主 App（不含小组件扩展）
+make run        # 前台直接跑（开发用）
+make spec       # 重新生成 spec/year-weeks.json（跨平台真值表）
 ```
 
-启动后：桌面右上角出现卡片，菜单栏出现 4×4 小方块图标（**不占 Dock**）。
-菜单里可以切窗口层级（默认**贴到桌面**，即最底层挂件；也可改成置顶或普通）、主题（紫色 / 石墨）、尺寸（大 / 中 / 小），以及退出。
-卡片可以直接拖动，位置会被记住。
+安装后「怎么用」：**点菜单栏最右侧的日期时间 → 通知中心底部「编辑小组件…」→ 搜索「年进度」→ 选尺寸 → 添加**。
+（也可以在桌面右键 → 编辑小组件。）
+
+宿主 App 本身只有一个说明窗口 + 菜单栏小图标（4×4 小方块，不占 Dock）：
+菜单里可以打开可选的「桌面挂件」（贴桌面的浮窗版）、切换主题、尺寸、立即刷新，以及退出。
 
 ### 命令行参数
 
@@ -47,6 +52,35 @@ make open       # 打包并启动
 | `--week-start monday\|sunday\|locale` | 一周从哪天开始，默认周一（ISO 8601） |
 
 ---
+
+## 系统小组件（WidgetKit 扩展）
+
+真正的系统小组件是宿主 App 里的 `Contents/PlugIns/YearProgressWidget.appex`，`make widget` 会做四件事：
+
+1. `swift build` 出扩展可执行文件（WidgetKit 代码在 CLT SDK 下可以编译，这一点已实测）；
+2. 手工摆好 `.appex` 包结构 + `Support/Widget-Info.plist`（`NSExtensionPointIdentifier = com.apple.widgetkit-extension`）；
+3. 用 `codesign --sign -` 给扩展附上 `com.apple.security.app-sandbox` 权限并逐层签名（扩展先签、宿主后签）；
+4. `pluginkit -a` + `lsregister -f` 注册，再 `killall chronod` 让 WidgetKit 重新枚举。
+
+已经实测到的结果（`pluginkit` / `chronod` 日志 / 沙盒容器三处互证）：
+
+| 检查 | 结果 |
+|---|---|
+| `pluginkit -m -i com.local.yearprogress.widget` | ✅ 已登记，扩展点 `com.apple.widgetkit-extension` |
+| `chronod` 日志 | ✅ `WidgetExtension - identifier: com.local.yearprogress::com.local.yearprogress.widget, isApple: false`，并为其建立了 `Descriptors[...]` 状态 |
+| 沙盒容器 `~/Library/Containers/com.local.yearprogress.widget` | ✅ 已生成 → 说明扩展真的被系统拉起过（签名 + 沙盒 + 扩展点都通过了） |
+| 扩展二进制依赖 | ✅ 只依赖系统框架（Foundation / SwiftUI / WidgetKit），无 Xcode 私有依赖 |
+
+排错用的诊断日志（扩展被系统调用时写一行：预览 = `snapshot`、真正上桌面 = `timeline`）：
+
+```bash
+cat ~/Library/Containers/com.local.yearprogress.widget/Data/Library/Application\ Support/widget-activity.log
+pluginkit -m -v -p com.apple.widgetkit-extension | grep -i yearprogress
+```
+
+`widget` 视图与 App 大卡片共用同一份实现（`YearProgressUI/YearProgressCardView.swift`），差异只有两点：
+小组件档位字号有上下限（`CardProfile.widget`），以及去掉了 App 专属的圆角/描边/阴影和 tooltip
+（圆角背板由系统提供，用 `.containerBackground(for: .widget)` 声明）。
 
 ## 规则约定（都写进了测试）
 
@@ -71,9 +105,12 @@ Sources/
     YearProgress.swift       WeekCell / YearProgress / YearProgressCalculator
     Ganzhi.swift             天干地支生肖
     GridLayout.swift         列数、行数、方块边长、间距、每行几个
-  YearProgressMac/           macOS 外壳（AppKit + SwiftUI）
-    YearProgressCardView.swift 卡片视图（网格、进度环、方块）
-    CardTheme.swift / CardMetrics.swift   配色与尺寸推导
+  YearProgressUI/           App 与小组件共用的视图层（SwiftUI）
+    YearProgressCardView.swift 卡片视图（网格、进度环、方块），支持 app / widget 两种档位
+    CardTheme.swift / CardMetrics.swift   配色与尺寸推导（含字号上下限）
+  YearProgressWidget/        WidgetKit 扩展（TimelineProvider + Widget + WidgetBundle）
+  YearProgressMac/           macOS 宿主 App（AppKit + SwiftUI）
+    WelcomeWindow.swift       首启使用说明窗口
     AppState.swift            状态 + 零点刷新调度
     AppDelegate.swift         菜单栏图标与菜单、窗口层级
     WidgetPanel.swift         无边框、不抢焦点的面板
@@ -81,6 +118,7 @@ Sources/
     CLIOptions.swift / main.swift
   YearWeekSpecDump/          生成跨平台真值表
 Tests/YearProgressCoreTests/ 17 个测试
+Support/                     手写 Info.plist 与 entitlements（没有 Xcode，就自己摆包结构）
 spec/year-weeks.json         Swift 与 Kotlin 共用的真值表（2015–2035 + 1029 个探针日期，含 ISO 周年度）
 PLAN.md                      完整技术方案（含 iOS / Android 路线与里程碑）
 ```
@@ -96,7 +134,7 @@ PLAN.md                      完整技术方案（含 iOS / Android 路线与里
 | 编译运行 macOS 版本 | ✅ 可以，`swift build` / `make app` 都走通（AppKit + SwiftUI 链接正常） |
 | 离屏渲染 PNG 自查 | ✅ 可以，用 `ImageRenderer`，不需要窗口 |
 | 单元测试 | ⚠️ XCTest 模块缺失，用 **Swift Testing**；CLT 里带了 `Testing.framework` 但不参与默认链接，Makefile 已封装 `-F / -framework / -rpath` 参数（有 Xcode 时会自动去掉这些参数） |
-| 真·WidgetKit 小组件（.appex） | ⚠️ `import WidgetKit` 在 CLT SDK 下能编译，但没有 Xcode 时签名与宿主注册不保证成功 → 见 M3 |
+| 真·WidgetKit 小组件（.appex） | ✅ 已打通：手工组包 + ad-hoc 签名 + `pluginkit` 注册，`chronod` 已识别该 WidgetExtension（无 Xcode） |
 | iOS | ❌ 本机没有 iOS SDK / 模拟器，无法编译，代码先就位（见 PLAN.md §7） |
 | Android | ❌ 本机没有 Android SDK / Gradle，无法编译（见 PLAN.md §8） |
 

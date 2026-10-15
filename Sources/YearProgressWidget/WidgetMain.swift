@@ -1,0 +1,103 @@
+import SwiftUI
+import WidgetKit
+import YearProgressCore
+import YearProgressUI
+
+// 系统小组件（通知中心 / 桌面小组件的「编辑小组件」里添加的那种）。
+// 由手工组装的 .appex 承载，见 Makefile 的 widget 目标。
+
+struct YearProgressEntry: TimelineEntry {
+    let date: Date
+    let progress: YearProgress
+}
+
+/// 诊断用：系统只要调用过我们（画预览 / 取时间线），就往沙盒容器里记一行。
+/// 位置：~/Library/Containers/com.local.yearprogress.widget/Data/Library/Application Support/widget-activity.log
+enum WidgetActivityLog {
+    static func touch(_ what: String) {
+        guard let dir = try? FileManager.default.url(for: .applicationSupportDirectory,
+                                                     in: .userDomainMask,
+                                                     appropriateFor: nil,
+                                                     create: true) else { return }
+        let url = dir.appendingPathComponent("widget-activity.log")
+        let line = "\(ISO8601DateFormatter().string(from: Date()))  \(what)\n"
+        if let handle = try? FileHandle(forWritingTo: url) {
+            handle.seekToEndOfFile()
+            handle.write(Data(line.utf8))
+            try? handle.close()
+        } else {
+            try? line.write(to: url, atomically: true, encoding: .utf8)
+        }
+    }
+}
+
+struct YearProgressProvider: TimelineProvider {
+
+    private func makeEntry(for date: Date) -> YearProgressEntry {
+        YearProgressEntry(date: date,
+                          progress: YearProgressCalculator.progress(for: date,
+                                                                   timeZone: .current,
+                                                                   weekStartMode: .monday))
+    }
+
+    func placeholder(in context: Context) -> YearProgressEntry {
+        WidgetActivityLog.touch("placeholder")
+        return makeEntry(for: Date())
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (YearProgressEntry) -> Void) {
+        WidgetActivityLog.touch("snapshot")
+        completion(makeEntry(for: Date()))
+    }
+
+    /// 只排两个 entry：现在 + 下一个零点，之后由系统在零点后重新要时间线。
+    func getTimeline(in context: Context, completion: @escaping (Timeline<YearProgressEntry>) -> Void) {
+        WidgetActivityLog.touch("timeline")
+        let now = Date()
+        let calendar = WeekStartMode.monday.makeCalendar(timeZone: .current)
+        let next = YearWeekMath.nextMidnight(after: now, calendar: calendar)
+        let entries = [makeEntry(for: now), makeEntry(for: next)]
+        completion(Timeline(entries: entries, policy: .after(next)))
+    }
+}
+
+struct YearProgressWidgetView: View {
+    @Environment(\.widgetFamily) private var family
+    let entry: YearProgressEntry
+
+    var body: some View {
+        GeometryReader { geo in
+            YearProgressCardView(progress: entry.progress,
+                                 theme: .violet,
+                                 size: geo.size,
+                                 profile: .widget,
+                                 chrome: .widget,
+                                 showsTooltips: false)
+        }
+        // macOS 14 / iOS 17 起，小组件必须用 containerBackground 声明背板，否则系统显示占位提示。
+        .containerBackground(for: .widget) {
+            LinearGradient(colors: CardTheme.violet.backgroundColors,
+                           startPoint: .topLeading,
+                           endPoint: .bottomTrailing)
+        }
+    }
+}
+
+struct YearProgressWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "YearProgressWidget", provider: YearProgressProvider()) { entry in
+            YearProgressWidgetView(entry: entry)
+        }
+        .configurationDisplayName("年进度")
+        .description("一年里的每一周：已过的周是白块，未来的周是黑块，本周带进度条。")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .contentMarginsDisabled()
+    }
+}
+
+@main
+struct YearProgressWidgetBundle: WidgetBundle {
+    var body: some Widget {
+        YearProgressWidget()
+    }
+}

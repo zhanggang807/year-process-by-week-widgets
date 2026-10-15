@@ -6,6 +6,7 @@
 #   make test       跑单元测试
 #   make preview    用几个典型日期导出 PNG 到 docs/
 #   make spec       重新生成 spec/year-weeks.json（跨平台真值表）
+#   make widget     打包 + 组装 + 签名 .appex 并注册到系统（通知中心「编辑小组件」里可见）
 #   make clean
 
 SWIFT      ?= swift
@@ -13,7 +14,11 @@ CONFIG     ?= release
 BUILD_DIR  := build
 APP        := $(BUILD_DIR)/YearProgress.app
 BIN        := .build/$(CONFIG)/YearProgressMac
+BIN_WIDGET := .build/$(CONFIG)/YearProgressWidget
 BUNDLE_ID  := com.local.yearprogress
+WIDGET_ID  := com.local.yearprogress.widget
+APPEX      := $(APP)/Contents/PlugIns/YearProgressWidget.appex
+LSREGISTER := /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
 
 # 有 Xcode 时 swift test 直接可用；只有 CommandLineTools 时需要显式挂上
 # Testing.framework（CLT 里带了 Swift Testing 的模块和 dylib，但不参与默认链接）。
@@ -33,7 +38,7 @@ else
     -Xlinker -rpath -Xlinker $(CLT_LIB)
 endif
 
-.PHONY: all build test run preview spec app open clean help
+.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall clean help
 
 all: build
 
@@ -64,23 +69,59 @@ app: build
 	@rm -rf $(APP)
 	@mkdir -p $(APP)/Contents/MacOS $(APP)/Contents/Resources
 	@cp $(BIN) $(APP)/Contents/MacOS/YearProgress
-	@printf '%s\n' \
-	  '<?xml version="1.0" encoding="UTF-8"?>' \
+	@cp Support/App-Info.plist $(APP)/Contents/Info.plist
+	@codesign --force --sign - $(APP) >/dev/null 2>&1 || echo "  (签名跳过)"
+	@echo "已生成 $(APP)"
+
+# 组装宿主 App + WidgetKit 扩展（.appex），再注册到 LaunchServices / pluginkit。
+# 没有 Xcode 时也能做：swiftc 能编 WidgetKit 代码，剩下的就是手工摆包结构 + 签名。
+widget: app
+	@rm -rf $(APPEX)
+	@mkdir -p $(APPEX)/Contents/MacOS $(APPEX)/Contents/Resources
+	@cp $(BIN_WIDGET) $(APPEX)/Contents/MacOS/YearProgressWidget
+	@cp Support/Widget-Info.plist $(APPEX)/Contents/Info.plist
+	@printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>' \
 	  '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' \
 	  '<plist version="1.0"><dict>' \
-	  '  <key>CFBundleName</key><string>YearProgress</string>' \
-	  '  <key>CFBundleDisplayName</key><string>年进度</string>' \
-	  '  <key>CFBundleIdentifier</key><string>$(BUNDLE_ID)</string>' \
-	  '  <key>CFBundleExecutable</key><string>YearProgress</string>' \
-	  '  <key>CFBundlePackageType</key><string>APPL</string>' \
-	  '  <key>CFBundleShortVersionString</key><string>0.1.0</string>' \
-	  '  <key>CFBundleVersion</key><string>1</string>' \
-	  '  <key>LSMinimumSystemVersion</key><string>14.0</string>' \
-	  '  <key>NSHighResolutionCapable</key><true/>' \
-	  '  <key>LSUIElement</key><true/>' \
-	  '</dict></plist>' > $(APP)/Contents/Info.plist
-	@codesign --force --sign - --timestamp=none $(APP) >/dev/null 2>&1 || echo "  (签名跳过)"
-	@echo "已生成 $(APP)"
+	  '  <key>com.apple.security.app-sandbox</key><true/>' \
+	  '</dict></plist>' > $(BUILD_DIR)/widget.entitlements
+	@echo "签名扩展…"
+	@codesign --force --sign - --entitlements $(BUILD_DIR)/widget.entitlements --generate-entitlement-der $(APPEX) 2>&1 | sed 's/^/  /' || true
+	@codesign --force --sign - --generate-entitlement-der $(APP) 2>&1 | sed 's/^/  /' || true
+	@$(MAKE) -s register
+	@echo ""
+	@echo "下一步：点击菜单栏最右侧的时间 → 通知中心底部「编辑小组件…」→ 搜索「年进度」。"
+	@echo "（若看不到，先在 Finder 里双击打开 $(APP) 一次，或执行 make register）"
+
+# 把扩展与宿主 App 注册给系统（widget 库靠这两步发现我们）
+register:
+	@pluginkit -a $(APPEX) 2>&1 | sed 's/^/  /' || echo "  (pluginkit 注册返回非零，可能已注册)"
+	@$(LSREGISTER) -f $(APP) >/dev/null 2>&1 || true
+	@killall chronod 2>/dev/null || true
+	@sleep 1
+	@echo "已注册：$$(pluginkit -m -i $(WIDGET_ID) 2>/dev/null | head -1 || echo 'pluginkit 未列出')"
+
+# 把宿主 App 装到 /Applications（系统小组件库对这里的 App 最友好）
+INSTALL_PATH := /Applications/YearProgress.app
+
+install: widget
+	@rm -rf "$(INSTALL_PATH)"
+	@cp -R $(APP) "$(INSTALL_PATH)"
+	@pluginkit -a "$(INSTALL_PATH)/Contents/PlugIns/YearProgressWidget.appex" 2>/dev/null || true
+	@$(LSREGISTER) -f "$(INSTALL_PATH)" >/dev/null 2>&1 || true
+	@killall chronod 2>/dev/null || true
+	@echo "已安装到 $(INSTALL_PATH) 并重新注册"
+
+uninstall:
+	@pluginkit -r "$(INSTALL_PATH)/Contents/PlugIns/YearProgressWidget.appex" 2>/dev/null || true
+	@rm -rf "$(INSTALL_PATH)"
+	@killall chronod 2>/dev/null || true
+	@echo "已卸载 $(INSTALL_PATH)"
+
+widget-uninstall:
+	@pluginkit -r $(APPEX) 2>/dev/null || true
+	@killall chronod 2>/dev/null || true
+	@echo "已移除注册"
 
 open: app
 	open $(APP)
