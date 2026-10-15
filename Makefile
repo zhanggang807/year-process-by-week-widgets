@@ -55,6 +55,7 @@ preview:
 	$(SWIFT) run YearProgressMac --snapshot docs/preview-2027.png --date 2027-06-01
 	$(SWIFT) run YearProgressMac --snapshot docs/preview-week1.png --date 2026-01-02
 	$(SWIFT) run YearProgressMac --snapshot docs/preview-graphite.png --date 2026-10-15 --theme graphite
+	$(SWIFT) run YearProgressMac --snapshot docs/preview-year-end.png --date 2025-12-30
 
 spec:
 	$(SWIFT) run year-weeks-dump spec/year-weeks.json

@@ -14,10 +14,12 @@ struct YearEntry: Codable {
 
 struct ProbeEntry: Codable {
     let date: String
-    let year: Int
-    let weekIndex: Int
+    let year: Int              // 展示年份 = 当前公历年
+    let weekIndex: Int         // 第几周；0 表示本周不在该网格内（跨年周）
     let totalWeeks: Int
-    let state: String
+    let state: String          // current / none（跨年周）
+    let isoWeekYear: Int       // 真正所属的周年度
+    let isoWeekIndex: Int      // 真正属于第几周
 }
 
 struct Fixture: Codable {
@@ -66,17 +68,21 @@ for year in yearRange {
                                      year: p.year,
                                      weekIndex: p.currentWeek?.index ?? 0,
                                      totalWeeks: p.totalWeeks,
-                                     state: p.currentWeek?.state.rawValue ?? "none"))
+                                     state: p.currentWeek?.state.rawValue ?? "none",
+                                     isoWeekYear: calendar.component(.yearForWeekOfYear, from: d),
+                                     isoWeekIndex: calendar.component(.weekOfYear, from: d)))
         }
     }
     comps.year = year; comps.month = 12; comps.day = 31; comps.hour = 12
     if let d = calendar.date(from: comps) {
         let p = YearProgressCalculator.progress(for: d, calendar: calendar, timeZone: tz, weekStartMode: .monday)
-        probes.append(ProbeEntry(date: dayFormat.string(from: d),
-                                 year: p.year,
-                                 weekIndex: p.currentWeek?.index ?? 0,
-                                 totalWeeks: p.totalWeeks,
-                                 state: p.currentWeek?.state.rawValue ?? "none"))
+            probes.append(ProbeEntry(date: dayFormat.string(from: d),
+                                     year: p.year,
+                                     weekIndex: p.currentWeek?.index ?? 0,
+                                     totalWeeks: p.totalWeeks,
+                                     state: p.currentWeek?.state.rawValue ?? "none",
+                                     isoWeekYear: calendar.component(.yearForWeekOfYear, from: d),
+                                     isoWeekIndex: calendar.component(.weekOfYear, from: d)))
     }
 }
 
