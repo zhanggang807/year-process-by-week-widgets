@@ -35,7 +35,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
 
     private var level: PanelLevel {
-        get { PanelLevel(rawValue: UserDefaults.standard.string(forKey: Self.levelKey) ?? "") ?? .normal }
+        get { PanelLevel(rawValue: UserDefaults.standard.string(forKey: Self.levelKey) ?? "") ?? .desktop }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: Self.levelKey) }
     }
 
