@@ -49,7 +49,7 @@ public struct YearProgressCardView: View {
                                                  forcedColumns: fixedColumns)
 
         content(m: m, layout: layout, note: note)
-            .padding(m.padding)
+            .padding(.horizontal, m.padding)
             .frame(width: size.width, height: size.height, alignment: .top)
             .background(
                 LinearGradient(colors: theme.backgroundColors, startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -58,30 +58,41 @@ public struct YearProgressCardView: View {
     }
 
     private func content(m: CardMetrics, layout: WeekGridLayout, note: String?) -> some View {
-        VStack(spacing: 0) {
-            // 年份 + 干支 + 周计数 + 百分比，合并成顶部一行居中
-            Text(progress.headerText(compact: m.usesCompactHeader))
-                .font(.system(size: m.headerFont, weight: .semibold, design: .rounded))
-                .foregroundStyle(theme.primaryText)
-                .lineLimit(1)
-                .minimumScaleFactor(0.65)
-                .frame(maxWidth: .infinity, alignment: .center)
+        // 网格在剩余空间里居中后，上方会留出 slack/2 的余量；
+        // 顶部文字要在这段「卡片上边缘 → 网格顶部」的区域里垂直居中。
+        let area = m.gridArea(noteVisible: note != nil)
+        let slack = max(0, CGFloat(area.height) - CGFloat(layout.gridHeight))
+        let headerBlock = m.headerHeight + (note == nil ? 0 : m.noteGap + m.noteHeight)
+        let topRegion = m.padding + headerBlock + m.headerGap + slack / 2
 
-            // 只有年初/年末那 1–3 天（跨年周）才补一行小字
-            if let note {
-                Text(note)
-                    .font(.system(size: m.noteFont, weight: .medium))
-                    .foregroundStyle(theme.secondaryText)
+        return VStack(spacing: 0) {
+            VStack(spacing: 0) {
+                // 年份 + 干支 + 周计数 + 百分比，合并成顶部一行居中
+                Text(progress.headerText(compact: m.usesCompactHeader))
+                    .font(.system(size: m.headerFont, weight: .semibold, design: .rounded))
+                    .foregroundStyle(theme.primaryText)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                    .padding(.top, m.noteGap)
+                    .minimumScaleFactor(0.65)
                     .frame(maxWidth: .infinity, alignment: .center)
-            }
 
-            // 网格在「头部以下的剩余空间」里垂直居中（不随尺寸变化而偏上/偏下）
+                // 只有年初/年末那 1–3 天（跨年周）才补一行小字
+                if let note {
+                    Text(note)
+                        .font(.system(size: m.noteFont, weight: .medium))
+                        .foregroundStyle(theme.secondaryText)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .padding(.top, m.noteGap)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: topRegion, alignment: .center)   // 在顶边与网格之间垂直居中
+
             grid(layout, metrics: m)
-                .padding(.top, m.headerGap)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .frame(height: CGFloat(layout.gridHeight), alignment: .top)
+
+            Spacer(minLength: 0)
         }
     }
 
