@@ -1,6 +1,7 @@
 import YearProgressUI
 import AppKit
 import SwiftUI
+import YearProgressCore
 
 enum PanelLevel: String, CaseIterable {
     case normal, floating, desktop
@@ -29,9 +30,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private static let shadowInset: CGFloat = 22
     /// 卡片可见边缘到屏幕右上角的间距（固定，不随尺寸/开关漂移）
     private static let cardMargin: CGFloat = 24
-    private static let levelKey = "panelLevel"
-    private static let panelVisibleKey = "panelVisible"
-    private static let didWelcomeKey = "didShowWelcome"
+    private static let levelKey = AppDefaults.Key.panelLevel
+    private static let panelVisibleKey = AppDefaults.Key.panelVisible
+    private static let didWelcomeKey = AppDefaults.Key.didShowWelcome
 
     private let cli: CLIOptions
     private var state: AppState!

@@ -2,12 +2,6 @@ import SwiftUI
 import YearProgressCore
 import YearProgressUI
 
-/// 固定偏好域：`.app` 与 `swift run`（进程名不同）共用同一份配置。
-enum AppDefaults {
-    static let suite = "com.local.yearprogress"
-    static let store = UserDefaults(suiteName: suite) ?? .standard
-}
-
 /// 视图状态 + 刷新调度（跨零点、唤醒、时区变更）。
 @MainActor
 final class AppState: ObservableObject {
@@ -21,8 +15,8 @@ final class AppState: ObservableObject {
     /// 调试用：把「今天」固定成某一天（`--date`）。
     private let dateOverride: Date?
     private let defaults = AppDefaults.store
-    private static let themeKey = "theme"
-    private static let sizeKey = "cardSize"
+    private static let themeKey = AppDefaults.Key.theme
+    private static let sizeKey = AppDefaults.Key.cardSize
     private var timer: Timer?
 
     static let sizePresets: [(name: String, size: CGSize)] = [
@@ -55,10 +49,10 @@ final class AppState: ObservableObject {
     private static let settingsVersion = 2
     private static func migratePreferencesIfNeeded() {
         let defaults = AppDefaults.store
-        guard defaults.integer(forKey: "settingsVersion") < settingsVersion else { return }
+        guard defaults.integer(forKey: AppDefaults.Key.settingsVersion) < settingsVersion else { return }
         defaults.removeObject(forKey: themeKey)
         defaults.removeObject(forKey: sizeKey)
-        defaults.set(settingsVersion, forKey: "settingsVersion")
+        defaults.set(settingsVersion, forKey: AppDefaults.Key.settingsVersion)
     }
 
     func refresh() {

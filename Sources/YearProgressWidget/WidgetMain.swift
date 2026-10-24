@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 import WidgetKit
 import YearProgressCore
 import YearProgressUI
@@ -67,8 +68,9 @@ struct YearProgressWidgetView: View {
 
     var body: some View {
         GeometryReader { geo in
+            // 菜单栏里的主题/尺寸只作用于桌面挂件；小组件固定用 macOS 系统配色
             YearProgressCardView(progress: entry.progress,
-                                 theme: .violet,
+                                 theme: .system,
                                  size: geo.size,
                                  profile: .widget,
                                  chrome: .widget,
@@ -76,9 +78,7 @@ struct YearProgressWidgetView: View {
         }
         // macOS 14 / iOS 17 起，小组件必须用 containerBackground 声明背板，否则系统显示占位提示。
         .containerBackground(for: .widget) {
-            LinearGradient(colors: CardTheme.violet.backgroundColors,
-                           startPoint: .topLeading,
-                           endPoint: .bottomTrailing)
+            Color(nsColor: .windowBackgroundColor)      // 跟随浅色/深色与系统材质
         }
     }
 }
