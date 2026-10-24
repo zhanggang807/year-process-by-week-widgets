@@ -37,7 +37,7 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
     public var pastFill: Color {
         switch self {
         case .violet: return Color(red: 0.184, green: 0.118, blue: 0.341)   // #2F1E57 深梅子
-        case .graphite: return Color(red: 0.239, green: 0.239, blue: 0.263) // #3D3D43 深灰
+        case .graphite: return Color(red: 0.200, green: 0.275, blue: 0.361) // #33465C 深石板蓝
         }
     }
 
@@ -45,7 +45,7 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
     public var futureFill: Color {
         switch self {
         case .violet: return Color(red: 0.812, green: 0.749, blue: 0.973)   // #CFBFF8 浅薰衣草
-        case .graphite: return Color(red: 0.796, green: 0.796, blue: 0.831) // #CBCBD4 浅灰
+        case .graphite: return Color(red: 0.686, green: 0.784, blue: 0.871) // #AFC8DE 浅冰蓝
         }
     }
 
