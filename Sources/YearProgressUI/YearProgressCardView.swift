@@ -157,7 +157,8 @@ private struct WeekBlockView: View {
         ZStack(alignment: .bottom) {
             RoundedRectangle(cornerRadius: radius, style: .continuous).fill(fill)
             if cell.state == .current {
-                ZStack(alignment: .bottom) {
+                // 本周：已过部分从顶部向下增长，剩余部分留在底部
+                ZStack(alignment: .top) {
                     Color.clear
                     Rectangle()
                         .fill(theme.currentProgressFill)
@@ -165,13 +166,7 @@ private struct WeekBlockView: View {
                 }
             }
             // 第几周：水平 + 垂直居中
-            Text("\(cell.index)")
-                .font(.system(size: max(5.5, side * 0.40), weight: .semibold, design: .rounded).monospacedDigit())
-                .foregroundStyle(labelColor)
-                .lineLimit(1)
-                .minimumScaleFactor(0.55)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                .allowsHitTesting(false)
+            number
         }
         .frame(width: side, height: side)
         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
@@ -193,12 +188,30 @@ private struct WeekBlockView: View {
         }
     }
 
-    /// 文字压在当前周的进度条上时，按进度条是否盖住中心切换前景色
-    private var labelColor: Color {
+    /// 本周方块跨在「已过 / 未过」分界线上时，数字按分界线切成两种颜色，
+    /// 保证压在深色段和浅色段的部分都清楚。
+    @ViewBuilder
+    private var number: some View {
+        let base = Text("\(cell.index)")
+            .font(.system(size: max(6, side * 0.46), weight: .semibold, design: .rounded).monospacedDigit())
+            .lineLimit(1)
+            .minimumScaleFactor(0.55)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .allowsHitTesting(false)
+
         switch cell.state {
-        case .past: return theme.pastLabel
-        case .future: return theme.futureLabel
-        case .current: return cell.fraction > 0.5 ? theme.pastLabel : theme.futureLabel
+        case .past:
+            base.foregroundStyle(theme.pastLabel)
+        case .future:
+            base.foregroundStyle(theme.futureLabel)
+        case .current:
+            let f = CGFloat(min(1, max(0, cell.fraction)))
+            ZStack {
+                base.foregroundStyle(theme.pastLabel)
+                    .mask(alignment: .top) { Rectangle().frame(height: f * side) }
+                base.foregroundStyle(theme.futureLabel)
+                    .mask(alignment: .bottom) { Rectangle().frame(height: (1 - f) * side) }
+            }
         }
     }
 
