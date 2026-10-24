@@ -2,7 +2,7 @@ import SwiftUI
 import YearProgressCore
 
 /// 卡片的「外框」处理方式：
-/// - `.card`：App 自己的圆角卡片（描边 + 阴影）
+/// - `.card`：App 自己的圆角卡片（无描边、无阴影）
 /// - `.widget`：系统小组件，圆角与背板由系统提供，不要再画一层
 public enum CardChrome: Sendable {
     case card
@@ -111,7 +111,7 @@ public struct YearProgressCardView: View {
     }
 }
 
-/// 圆角 / 描边 / 阴影：App 卡片需要，系统小组件不需要（系统已给）。
+/// 圆角：App 卡片只在本地裁圆角，系统小组件由系统裁。
 private struct CardChromeModifier: ViewModifier {
     let chrome: CardChrome
     let cornerRadius: CGFloat
@@ -124,7 +124,6 @@ private struct CardChromeModifier: ViewModifier {
             return AnyView(
                 content
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-                    .shadow(color: .black.opacity(0.28), radius: 18, y: 8)
             )
         }
     }

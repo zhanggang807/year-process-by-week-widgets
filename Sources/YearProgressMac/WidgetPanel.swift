@@ -12,7 +12,7 @@ final class WidgetPanel: NSPanel {
         isFloatingPanel = true
         backgroundColor = .clear
         isOpaque = false
-        hasShadow = false            // 阴影由 SwiftUI 侧绘制，跟圆角一致
+        hasShadow = false            // 不要系统窗口阴影
         isMovableByWindowBackground = true
         hidesOnDeactivate = false
         becomesKeyOnlyIfNeeded = true
@@ -35,6 +35,6 @@ struct PanelRootView: View {
                             size: state.cardSize,
                             fixedColumns: WidgetGridReference.columns(weekCount: state.progress.totalWeeks))
             .shadow(color: .black.opacity(0.28), radius: 18, y: 8)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)  // 卡片居中，四周留给阴影
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }

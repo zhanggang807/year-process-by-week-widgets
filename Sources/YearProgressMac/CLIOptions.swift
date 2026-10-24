@@ -15,7 +15,7 @@ struct CLIOptions {
     var margin: CGFloat = 36
     var weekStartMode: WeekStartMode = .monday
     var timeZone: TimeZone = .current
-    /// 导出时的渲染档位：app（大卡片，带圆角阴影）/ widget（系统小组件，无外框）
+    /// 导出时的渲染档位：app（圆角卡片，无描边/阴影）/ widget（系统小组件，无外框）
     var chrome: CardChrome = .card
     /// 导出时强制列数（调试用，便于对比面板/小组件布局）
     var columns: Int?
@@ -78,7 +78,7 @@ struct CLIOptions {
       --theme violet|graphite
       --size <W>x<H>        默认 600x292
       --scale <n>           导出倍率，默认 2
-      --margin <pt>         导出留白（露出阴影），默认 36
+      --margin <pt>         导出留白，默认 36
       --timezone <id>       例如 Asia/Shanghai
       --week-start monday|sunday|locale
       --chrome card|widget   导出样式：card（App 大卡片）/ widget（系统小组件，无外框）

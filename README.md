@@ -68,7 +68,7 @@ make spec       # 重新生成 spec/year-weeks.json（跨平台真值表）
 | `--date <yyyy-MM-dd>` | 把「今天」固定成某一天，方便验证任意日期 |
 | `--theme violet\|graphite` | 卡片配色，默认紫色 |
 | `--size <W>x<H>` | 卡片尺寸，默认 600x292 |
-| `--scale <n>` / `--margin <pt>` | 导出倍率（默认 2）与留白（默认 36，用于露出阴影） |
+| `--scale <n>` / `--margin <pt>` | 导出倍率（默认 2）与留白（默认 36） |
 | `--timezone <id>` | 例如 `Asia/Shanghai` |
 | `--week-start monday\|sunday\|locale` | 一周从哪天开始，默认周一（ISO 8601） |
 
@@ -106,7 +106,7 @@ pluginkit -m -v -p com.apple.widgetkit-extension | grep -i yearprogress
 ```
 
 `widget` 视图与 App 大卡片共用同一份实现（`YearProgressUI/YearProgressCardView.swift`），差异只有两点：
-小组件档位字号有上下限（`CardProfile.widget`），以及去掉了 App 专属的圆角/描边/阴影和 tooltip
+小组件档位字号有上下限（`CardProfile.widget`），以及去掉了 App 专属的圆角和 tooltip
 （圆角背板由系统提供，用 `.containerBackground(for: .widget)` 声明）。
 
 ## 规则约定（都写进了测试）

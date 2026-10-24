@@ -26,9 +26,7 @@ enum PanelLevel: String, CaseIterable {
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-    /// 窗口比卡片大一圈，好让 SwiftUI 画的阴影不被裁掉。
-    private static let shadowInset: CGFloat = 22
-    /// 卡片可见边缘到屏幕右上角的间距（固定，不随尺寸/开关漂移）
+    /// 卡片到屏幕右上角的间距（固定，不随尺寸/开关漂移）
     private static let cardMargin: CGFloat = 24
     private static let levelKey = AppDefaults.Key.panelLevel
     private static let panelVisibleKey = AppDefaults.Key.panelVisible
@@ -77,7 +75,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: 面板
 
     private func setUpPanel() {
-        panel = WidgetPanel(size: windowSize(for: state.cardSize))
+        panel = WidgetPanel(size: state.cardSize)
         panel.level = level.nsLevel
         panel.contentView = NSHostingView(rootView: PanelRootView(state: state))
         anchorTopRight()
@@ -90,29 +88,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                                                object: nil)
     }
 
-    /// 永远贴住主屏可视区域的右上角。
-    /// 窗口比卡片大一圈（留给阴影），所以窗口边缘要比卡片多让出 shadowInset。
+    /// 永远贴住主屏可视区域的右上角（窗口与卡片等大）。
     private func anchorTopRight() {
         guard let screen = NSScreen.screens.first ?? NSScreen.main else { return }
         let f = screen.visibleFrame
         let size = panel.frame.size
-        let overhang = Self.cardMargin - Self.shadowInset   // 窗口可以贴得比卡片更靠外
-        panel.setFrameOrigin(CGPoint(x: f.maxX - size.width - overhang,
-                                     y: f.maxY - size.height - overhang))
+        panel.setFrameOrigin(CGPoint(x: f.maxX - size.width - Self.cardMargin,
+                                     y: f.maxY - size.height - Self.cardMargin))
     }
 
     @objc private func screenParametersChanged() {
         anchorTopRight()
     }
 
-    private func windowSize(for card: CGSize) -> CGSize {
-        CGSize(width: card.width + Self.shadowInset * 2, height: card.height + Self.shadowInset * 2)
-    }
-
     private func applyCardSize(_ size: CGSize) {
         state.cardSize = size
         var frame = panel.frame
-        frame.size = windowSize(for: size)
+        frame.size = size
         panel.setFrame(frame, display: true, animate: false)
         anchorTopRight()        // 改尺寸后重新贴回右上角，而不是按旧坐标漂移
     }
