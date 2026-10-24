@@ -47,7 +47,7 @@ public struct CardMetrics {
     public var headerGap: CGFloat { max(6, size.width * profile.headerGapRatio) }
     public var noteGap: CGFloat { max(2, size.width * profile.noteGapRatio) }
 
-    public var headerFont: CGFloat { clamp(size.width * profile.headerRatio, profile.headerRange) + 1 }
+    public var headerFont: CGFloat { clamp(size.width * profile.headerRatio, profile.headerRange) + 2 }
     public var noteFont: CGFloat { clamp(size.width * profile.noteRatio, profile.noteRange) }
 
     public var headerHeight: CGFloat { headerFont * 1.35 }
