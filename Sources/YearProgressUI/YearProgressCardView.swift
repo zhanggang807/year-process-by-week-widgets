@@ -54,7 +54,7 @@ public struct YearProgressCardView: View {
             .background(
                 LinearGradient(colors: theme.backgroundColors, startPoint: .topLeading, endPoint: .bottomTrailing)
             )
-            .modifier(CardChromeModifier(chrome: chrome, cornerRadius: m.cornerRadius, theme: theme))
+            .modifier(CardChromeModifier(chrome: chrome, cornerRadius: m.cornerRadius))
     }
 
     private func content(m: CardMetrics, layout: WeekGridLayout, note: String?) -> some View {
@@ -115,7 +115,6 @@ public struct YearProgressCardView: View {
 private struct CardChromeModifier: ViewModifier {
     let chrome: CardChrome
     let cornerRadius: CGFloat
-    let theme: CardTheme
 
     func body(content: Content) -> some View {
         switch chrome {
@@ -125,10 +124,6 @@ private struct CardChromeModifier: ViewModifier {
             return AnyView(
                 content
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                            .strokeBorder(theme.cardBorder, lineWidth: 1)
-                    )
                     .shadow(color: .black.opacity(0.28), radius: 18, y: 8)
             )
         }

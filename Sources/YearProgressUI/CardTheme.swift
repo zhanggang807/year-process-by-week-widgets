@@ -35,7 +35,6 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
 
     public var primaryText: Color { self == .system ? .primary : .white }
     public var secondaryText: Color { self == .system ? .secondary : Color.white.opacity(0.72) }
-    public var cardBorder: Color { self == .system ? Color.primary.opacity(0.12) : Color.white.opacity(0.16) }
     public var ringTrack: Color { self == .system ? Color.primary.opacity(0.14) : Color.white.opacity(0.24) }
     public var ringProgress: Color { self == .system ? .primary : .white }
 
