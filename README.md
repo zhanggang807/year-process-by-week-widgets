@@ -16,9 +16,9 @@
 
 系统小组件（medium / small）长这样：
 
-| 通知中心 medium（338×158） | 通知中心 small（158×158） |
+| 通知中心 medium（系统配色） | 通知中心 small（系统配色） |
 |---|---|
-| ![widget-medium](docs/preview-widget-medium.png) | ![widget-small](docs/preview-widget-small.png) |
+| ![widget-system](docs/preview-widget-system.png) | ![widget-small](docs/preview-widget-small.png) |
 
 - 默认尺寸 **600×292**（比例 2.06，与参考图实测的 442×215 一致）。
 - 默认 **13 列**：52 周的年份正好 4×13 方阵；**53 周的年份自动换列**，避免最后一行只剩一个孤块。

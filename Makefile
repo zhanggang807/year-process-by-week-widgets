@@ -64,6 +64,7 @@ preview:
 	$(SWIFT) run YearProgressMac --snapshot docs/preview-panel-small.png --date 2026-10-15 --theme graphite --size 330x161 --margin 0 --scale 3
 	$(SWIFT) run YearProgressMac --snapshot docs/preview-widget-medium.png --date 2026-10-15 --size 338x158 --chrome widget --margin 0 --scale 3
 	$(SWIFT) run YearProgressMac --snapshot docs/preview-widget-small.png --date 2026-10-15 --size 158x158 --chrome widget --margin 0 --scale 4
+	$(SWIFT) run YearProgressMac --snapshot docs/preview-widget-system.png --date 2026-10-15 --theme system --size 338x158 --chrome widget --margin 0 --scale 3
 
 spec:
 	$(SWIFT) run year-weeks-dump spec/year-weeks.json
