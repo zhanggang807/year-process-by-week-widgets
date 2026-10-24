@@ -150,6 +150,14 @@ private struct WeekBlockView: View {
                         .frame(height: max(0, min(1, cell.fraction)) * side)
                 }
             }
+            // 第几周：水平 + 垂直居中
+            Text("\(cell.index)")
+                .font(.system(size: max(5.5, side * 0.40), weight: .semibold, design: .rounded).monospacedDigit())
+                .foregroundStyle(labelColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.55)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .allowsHitTesting(false)
         }
         .frame(width: side, height: side)
         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
@@ -168,6 +176,15 @@ private struct WeekBlockView: View {
         case .past: return theme.pastFill
         case .future: return theme.futureFill
         case .current: return theme.currentFill
+        }
+    }
+
+    /// 文字压在当前周的进度条上时，按进度条是否盖住中心切换前景色
+    private var labelColor: Color {
+        switch cell.state {
+        case .past: return theme.pastLabel
+        case .future: return theme.futureLabel
+        case .current: return cell.fraction > 0.5 ? theme.pastLabel : theme.futureLabel
         }
     }
 

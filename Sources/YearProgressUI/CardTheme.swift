@@ -78,6 +78,22 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// 方块里周数字的颜色（深块用浅字、浅块用深字）
+    public var pastLabel: Color {
+        switch self {
+        case .violet: return .white
+        case .graphite, .slate: return Color.white.opacity(0.92)
+        case .system: return Color(nsColor: .windowBackgroundColor)   // 与 .primary 相反
+        }
+    }
+    public var futureLabel: Color {
+        switch self {
+        case .violet: return Color(red: 0.227, green: 0.161, blue: 0.376)   // #3A2960
+        case .graphite, .slate: return Color(red: 0.118, green: 0.169, blue: 0.227) // #1E2B3A
+        case .system: return .primary
+        }
+    }
+
     /// 本周：浅色底（还没过）+ 从底部升起的深色进度条（已过）。
     public var currentFill: Color { futureFill }
     public var currentProgressFill: Color { pastFill }
