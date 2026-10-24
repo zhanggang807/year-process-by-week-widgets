@@ -26,9 +26,10 @@ enum PanelLevel: String, CaseIterable {
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-    /// 与系统桌面小组件对齐：距屏幕右边缘 32pt、距菜单栏底边 4pt
-    private static let cardMarginRight: CGFloat = 32
-    private static let cardMarginTop: CGFloat = 4
+    /// 与系统桌面小组件对齐（实测 2x 截图：距右 30–34px、距菜单栏底边 37px）
+    /// → 16pt / 18pt
+    private static let cardMarginRight: CGFloat = 16
+    private static let cardMarginTop: CGFloat = 18
     private static let levelKey = AppDefaults.Key.panelLevel
     private static let panelVisibleKey = AppDefaults.Key.panelVisible
     private static let didWelcomeKey = AppDefaults.Key.didShowWelcome
