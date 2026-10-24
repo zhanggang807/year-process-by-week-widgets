@@ -2,6 +2,12 @@ import SwiftUI
 import YearProgressCore
 import YearProgressUI
 
+/// 固定偏好域：`.app` 与 `swift run`（进程名不同）共用同一份配置。
+enum AppDefaults {
+    static let suite = "com.local.yearprogress"
+    static let store = UserDefaults(suiteName: suite) ?? .standard
+}
+
 /// 视图状态 + 刷新调度（跨零点、唤醒、时区变更）。
 @MainActor
 final class AppState: ObservableObject {
@@ -14,7 +20,7 @@ final class AppState: ObservableObject {
 
     /// 调试用：把「今天」固定成某一天（`--date`）。
     private let dateOverride: Date?
-    private let defaults = UserDefaults.standard
+    private let defaults = AppDefaults.store
     private static let themeKey = "theme"
     private static let sizeKey = "cardSize"
     private var timer: Timer?
@@ -30,9 +36,9 @@ final class AppState: ObservableObject {
     init(dateOverride: Date? = nil) {
         self.dateOverride = dateOverride
         Self.migratePreferencesIfNeeded()
-        let savedTheme = UserDefaults.standard.string(forKey: Self.themeKey).flatMap(CardTheme.init(rawValue:))
+        let savedTheme = AppDefaults.store.string(forKey: Self.themeKey).flatMap(CardTheme.init(rawValue:))
         self.theme = savedTheme ?? .graphite          // 默认石墨
-        if let s = UserDefaults.standard.string(forKey: Self.sizeKey) {
+        if let s = AppDefaults.store.string(forKey: Self.sizeKey) {
             let parsed = NSSizeFromString(s)
             self.cardSize = parsed.width > 100 ? parsed : Self.defaultSize
         } else {
@@ -48,7 +54,7 @@ final class AppState: ObservableObject {
     /// 默认值变化时清掉旧偏好（旧版本写过 theme/size），只迁移一次。
     private static let settingsVersion = 2
     private static func migratePreferencesIfNeeded() {
-        let defaults = UserDefaults.standard
+        let defaults = AppDefaults.store
         guard defaults.integer(forKey: "settingsVersion") < settingsVersion else { return }
         defaults.removeObject(forKey: themeKey)
         defaults.removeObject(forKey: sizeKey)

@@ -39,16 +39,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
 
     private var level: PanelLevel {
-        get { PanelLevel(rawValue: UserDefaults.standard.string(forKey: Self.levelKey) ?? "") ?? .desktop }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: Self.levelKey) }
+        get { PanelLevel(rawValue: AppDefaults.store.string(forKey: Self.levelKey) ?? "") ?? .desktop }
+        set { AppDefaults.store.set(newValue.rawValue, forKey: Self.levelKey) }
     }
 
     private let welcome = WelcomeWindowController()
 
     /// 桌面浮窗是可选项：默认关闭，使用说明才是主入口。
     private var isVisible: Bool {
-        get { UserDefaults.standard.bool(forKey: Self.panelVisibleKey) }
-        set { UserDefaults.standard.set(newValue, forKey: Self.panelVisibleKey) }
+        get { AppDefaults.store.bool(forKey: Self.panelVisibleKey) }
+        set { AppDefaults.store.set(newValue, forKey: Self.panelVisibleKey) }
     }
 
     init(cli: CLIOptions) {
@@ -65,8 +65,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         setUpStatusItem()
         setUpPanel()
 
-        if !UserDefaults.standard.bool(forKey: Self.didWelcomeKey) {
-            UserDefaults.standard.set(true, forKey: Self.didWelcomeKey)
+        if !AppDefaults.store.bool(forKey: Self.didWelcomeKey) {
+            AppDefaults.store.set(true, forKey: Self.didWelcomeKey)
             welcome.show()
         }
     }
