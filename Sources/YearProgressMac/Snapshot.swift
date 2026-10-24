@@ -15,7 +15,8 @@ enum SnapshotRunner {
                                         theme: options.theme,
                                         size: options.size,
                                         profile: options.chrome == .widget ? .widget : .app,
-                                        chrome: chrome)
+                                        chrome: chrome,
+                                        fixedColumns: options.columns ?? (chrome == .card ? WidgetGridReference.columns(weekCount: progress.totalWeeks) : nil))
             .padding(options.margin)
             .background(Color.clear)
 
@@ -34,7 +35,8 @@ enum SnapshotRunner {
         let profile: CardProfile = options.chrome == .widget ? .widget : .app
         let metrics = CardMetrics(size: options.size, profile: profile)
         let layout = GridLayoutCalculator.compute(weekCount: progress.totalWeeks,
-                                                 available: metrics.gridArea(noteVisible: progress.boundaryNote != nil))
+                                                 available: metrics.gridArea(noteVisible: progress.boundaryNote != nil),
+                                                 forcedColumns: options.columns)
         print("  布局: \(layout.columns) 列 × \(layout.rows) 行 · 方块 \(String(format: "%.1f", layout.cellSize))pt · 末行 \(layout.lastRowCount(weekCount: progress.totalWeeks)) 块")
 
         let url = URL(fileURLWithPath: outputPath)

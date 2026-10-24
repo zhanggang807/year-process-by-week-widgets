@@ -19,6 +19,8 @@ public struct YearProgressCardView: View {
     public var chrome: CardChrome
     public var showsTooltips: Bool
     public var preferredColumns: Int
+    /// 非 nil 时使用固定列数（桌面挂件用它对齐小组件的行列）
+    public var fixedColumns: Int?
 
     public init(progress: YearProgress,
                 theme: CardTheme,
@@ -26,7 +28,8 @@ public struct YearProgressCardView: View {
                 profile: CardProfile = .app,
                 chrome: CardChrome = .card,
                 showsTooltips: Bool = true,
-                preferredColumns: Int = 13) {
+                preferredColumns: Int = 13,
+                fixedColumns: Int? = nil) {
         self.progress = progress
         self.theme = theme
         self.size = size
@@ -34,6 +37,7 @@ public struct YearProgressCardView: View {
         self.chrome = chrome
         self.showsTooltips = showsTooltips
         self.preferredColumns = preferredColumns
+        self.fixedColumns = fixedColumns
     }
 
     public var body: some View {
@@ -41,7 +45,8 @@ public struct YearProgressCardView: View {
         let note = progress.boundaryNote
         let layout = GridLayoutCalculator.compute(weekCount: progress.totalWeeks,
                                                  available: m.gridArea(noteVisible: note != nil),
-                                                 preferredColumns: preferredColumns)
+                                                 preferredColumns: preferredColumns,
+                                                 forcedColumns: fixedColumns)
 
         content(m: m, layout: layout, note: note)
             .padding(m.padding)

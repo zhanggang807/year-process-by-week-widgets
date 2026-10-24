@@ -17,6 +17,8 @@ struct CLIOptions {
     var timeZone: TimeZone = .current
     /// 导出时的渲染档位：app（大卡片，带圆角阴影）/ widget（系统小组件，无外框）
     var chrome: CardChrome = .card
+    /// 导出时强制列数（调试用，便于对比面板/小组件布局）
+    var columns: Int?
 
     static func parse(_ argv: [String]) -> CLIOptions {
         var o = CLIOptions()
@@ -46,6 +48,8 @@ struct CLIOptions {
                 if let v = next(), let m = Double(v) { o.margin = CGFloat(m); i += 1 }
             case "--timezone":
                 i += 1
+            case "--columns":
+                if let v = next(), let n = Int(v) { o.columns = n; i += 1 }
             case "--chrome":
                 if let v = next() { o.chrome = (v == "widget") ? .widget : .card; i += 1 }
             case "--week-start":

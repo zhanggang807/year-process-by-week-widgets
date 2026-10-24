@@ -43,13 +43,14 @@ public enum GridLayoutCalculator {
                                available: (width: Double, height: Double),
                                preferredColumns: Int = 13,
                                autoColumns: Bool = true,
+                               forcedColumns: Int? = nil,
                                candidates: [Int] = [7, 8, 9, 10, 11, 12, 13, 14, 16, 18, 26]) -> WeekGridLayout {
         let n = max(1, weekCount)
         let targetAspect = available.height > 0 ? available.width / available.height : 1
 
-        var columns = max(1, preferredColumns)
+        var columns = max(1, forcedColumns ?? preferredColumns)
         var auto = false
-        if autoColumns && n % columns != 0 {
+        if forcedColumns == nil, autoColumns && n % columns != 0 {
             columns = bestColumns(weekCount: n, targetAspect: targetAspect, candidates: candidates) ?? columns
             auto = columns != preferredColumns
         }

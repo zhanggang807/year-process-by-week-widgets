@@ -26,7 +26,7 @@ let package = Package(
             ]
         ),
         .executableTarget(name: "YearWeekSpecDump", dependencies: ["YearProgressCore"]),
-        .testTarget(name: "YearProgressCoreTests", dependencies: ["YearProgressCore"]),
+        .testTarget(name: "YearProgressCoreTests", dependencies: ["YearProgressCore", "YearProgressUI"]),
     ],
     swiftLanguageModes: [.v5]
 )
