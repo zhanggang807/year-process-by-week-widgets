@@ -76,7 +76,11 @@ public enum GridLayoutCalculator {
             let waste = (Double(c * r) - Double(n)) / Double(c * r)          // 空位占比
             let aspect = (Double(c) + gapRatio * Double(c - 1)) / (Double(r) + gapRatio * Double(r - 1))
             let aspectPenalty = abs(log(aspect / max(0.01, targetAspect)))   // 比例偏差
-            let score = waste + 1.2 * aspectPenalty
+            // 末行只剩寥寥几块很难看（例：53 周用 13 列 → 最后一行只有 1 块），重罚
+            let lastRow = n - (r - 1) * c
+            let fill = Double(lastRow) / Double(c)
+            let sparsePenalty = fill < 0.5 ? 1.2 * (0.5 - fill) / 0.5 : 0
+            let score = waste + 1.2 * aspectPenalty + sparsePenalty
             if best == nil || score < best!.score - 1e-9 { best = (c, score) }
         }
         return best?.columns

@@ -8,6 +8,9 @@ struct CLIOptions {
     var date: Date?
     var theme: CardTheme = .violet
     var size = CGSize(width: CardMetrics.referenceWidth, height: CardMetrics.referenceHeight)
+    /// 只有命令行显式传了 --theme / --size 才覆盖 App 里的设置（否则每次启动都会把用户偏好写回默认值）
+    var themeOverride: CardTheme?
+    var sizeOverride: CGSize?
     var scale: CGFloat = 2
     var margin: CGFloat = 36
     var weekStartMode: WeekStartMode = .monday
@@ -34,9 +37,9 @@ struct CLIOptions {
             case "--date":
                 if let v = next() { o.date = parseDate(v, timeZone: o.timeZone); i += 1 }
             case "--theme":
-                if let v = next(), let t = CardTheme(rawValue: v) { o.theme = t; i += 1 }
+                if let v = next(), let t = CardTheme(rawValue: v) { o.theme = t; o.themeOverride = t; i += 1 }
             case "--size":
-                if let v = next(), let s = parseSize(v) { o.size = s; i += 1 }
+                if let v = next(), let s = parseSize(v) { o.size = s; o.sizeOverride = s; i += 1 }
             case "--scale":
                 if let v = next(), let s = Double(v) { o.scale = CGFloat(s); i += 1 }
             case "--margin":

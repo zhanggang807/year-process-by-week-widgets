@@ -27,8 +27,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// 窗口比卡片大一圈，好让 SwiftUI 画的阴影不被裁掉。
     private static let shadowInset: CGFloat = 22
+    /// 卡片可见边缘到屏幕右上角的间距（固定，不随尺寸/开关漂移）
+    private static let cardMargin: CGFloat = 24
     private static let levelKey = "panelLevel"
-    private static let frameKey = "panelFrame"
     private static let panelVisibleKey = "panelVisible"
     private static let didWelcomeKey = "didShowWelcome"
 
@@ -57,8 +58,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         state = AppState(dateOverride: cli.date)
-        state.theme = cli.theme
-        state.cardSize = cli.size
+        // 只有命令行显式传了 --theme/--size 才覆盖，否则沿用（或迁移后的）默认设置
+        if let theme = cli.themeOverride { state.theme = theme }
+        if let size = cli.sizeOverride { state.cardSize = size }
 
         setUpStatusItem()
         setUpPanel()
@@ -77,37 +79,41 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         panel = WidgetPanel(size: windowSize(for: state.cardSize))
         panel.level = level.nsLevel
         panel.contentView = NSHostingView(rootView: PanelRootView(state: state))
-        panel.setFrameOrigin(restoredOrigin() ?? defaultOrigin())
+        anchorTopRight()
         if isVisible { panel.orderFrontRegardless() }
-        panel.delegate = self
+
+        // 换屏幕 / 改分辨率后也要回到右上角
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(screenParametersChanged),
+                                               name: NSApplication.didChangeScreenParametersNotification,
+                                               object: nil)
+    }
+
+    /// 永远贴住主屏可视区域的右上角。
+    /// 窗口比卡片大一圈（留给阴影），所以窗口边缘要比卡片多让出 shadowInset。
+    private func anchorTopRight() {
+        guard let screen = NSScreen.screens.first ?? NSScreen.main else { return }
+        let f = screen.visibleFrame
+        let size = panel.frame.size
+        let overhang = Self.cardMargin - Self.shadowInset   // 窗口可以贴得比卡片更靠外
+        panel.setFrameOrigin(CGPoint(x: f.maxX - size.width - overhang,
+                                     y: f.maxY - size.height - overhang))
+    }
+
+    @objc private func screenParametersChanged() {
+        anchorTopRight()
     }
 
     private func windowSize(for card: CGSize) -> CGSize {
         CGSize(width: card.width + Self.shadowInset * 2, height: card.height + Self.shadowInset * 2)
     }
 
-    private func defaultOrigin() -> CGPoint {
-        guard let screen = NSScreen.main else { return .zero }
-        let f = screen.visibleFrame
-        let size = panel.frame.size
-        return CGPoint(x: f.maxX - size.width - 24, y: f.maxY - size.height - 24)
-    }
-
-    private func restoredOrigin() -> CGPoint? {
-        guard let s = UserDefaults.standard.string(forKey: Self.frameKey) else { return nil }
-        let origin = NSPointFromString(s)
-        guard origin.x.isFinite, origin.y.isFinite else { return nil }
-        let onScreen = NSScreen.screens.contains { $0.visibleFrame.intersects(CGRect(origin: origin, size: panel.frame.size)) }
-        return onScreen ? origin : nil
-    }
-
     private func applyCardSize(_ size: CGSize) {
         state.cardSize = size
-        let window = windowSize(for: size)
         var frame = panel.frame
-        frame.origin.y += frame.height - window.height     // 保持顶部不动
-        frame.size = window
+        frame.size = windowSize(for: size)
         panel.setFrame(frame, display: true, animate: false)
+        anchorTopRight()        // 改尺寸后重新贴回右上角，而不是按旧坐标漂移
     }
 
     // MARK: 菜单栏
@@ -199,7 +205,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func togglePanel() {
         isVisible.toggle()
-        if isVisible { panel.orderFrontRegardless() } else { panel.orderOut(nil) }
+        if isVisible {
+            anchorTopRight()    // 每次打开都重新贴右上角
+            panel.orderFrontRegardless()
+        } else {
+            panel.orderOut(nil)
+        }
         rebuildMenu()
     }
 
@@ -254,11 +265,4 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) { rebuildMenu() }
-}
-
-extension AppDelegate: NSWindowDelegate {
-    func windowDidMove(_ notification: Notification) {
-        guard let window = notification.object as? NSWindow else { return }
-        UserDefaults.standard.set(NSStringFromPoint(window.frame.origin), forKey: Self.frameKey)
-    }
 }

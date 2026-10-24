@@ -32,5 +32,6 @@ struct PanelRootView: View {
     var body: some View {
         YearProgressCardView(progress: state.progress, theme: state.theme, size: state.cardSize)
             .shadow(color: .black.opacity(0.28), radius: 18, y: 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)  // 卡片居中，四周留给阴影
     }
 }

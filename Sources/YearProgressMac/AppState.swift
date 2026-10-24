@@ -24,22 +24,35 @@ final class AppState: ObservableObject {
         ("中（450×219）", CGSize(width: 450, height: 219)),
         ("小（330×161）", CGSize(width: 330, height: 161)),
     ]
+    /// 桌面挂件默认小尺寸。
+    static let defaultSize = CGSize(width: 330, height: 161)
 
     init(dateOverride: Date? = nil) {
         self.dateOverride = dateOverride
+        Self.migratePreferencesIfNeeded()
         let savedTheme = UserDefaults.standard.string(forKey: Self.themeKey).flatMap(CardTheme.init(rawValue:))
-        self.theme = savedTheme ?? .violet
+        self.theme = savedTheme ?? .graphite          // 默认石墨
         if let s = UserDefaults.standard.string(forKey: Self.sizeKey) {
             let parsed = NSSizeFromString(s)
-            self.cardSize = parsed.width > 100 ? parsed : Self.sizePresets[0].size
+            self.cardSize = parsed.width > 100 ? parsed : Self.defaultSize
         } else {
-            self.cardSize = Self.sizePresets[0].size
+            self.cardSize = Self.defaultSize          // 默认小尺寸
         }
         self.progress = YearProgressCalculator.progress(for: dateOverride ?? Date(),
                                                         timeZone: .current,
                                                         weekStartMode: .monday)
         observeEnvironment()
         scheduleMidnightRefresh()
+    }
+
+    /// 默认值变化时清掉旧偏好（旧版本写过 theme/size），只迁移一次。
+    private static let settingsVersion = 2
+    private static func migratePreferencesIfNeeded() {
+        let defaults = UserDefaults.standard
+        guard defaults.integer(forKey: "settingsVersion") < settingsVersion else { return }
+        defaults.removeObject(forKey: themeKey)
+        defaults.removeObject(forKey: sizeKey)
+        defaults.set(settingsVersion, forKey: "settingsVersion")
     }
 
     func refresh() {

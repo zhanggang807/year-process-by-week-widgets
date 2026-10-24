@@ -30,6 +30,16 @@ struct GridLayoutTests {
         #expect(l.gridHeight <= area.height + 0.001)
     }
 
+    @Test("53 周不应出现「最后一行只有 1 块」的孤格（小尺寸也适用）")
+    func avoidsOrphanLastRow() {
+        // 330×161 桌面挂件里留给网格的空间
+        for area in [(306.0, 115.0), (417.0, 162.0), (552.0, 197.0)] {
+            let l = GridLayoutCalculator.compute(weekCount: 53, available: area)
+            let last = l.lastRowCount(weekCount: 53)
+            #expect(Double(last) / Double(l.columns) >= 0.5, "\(area) 选成了 \(l.columns) 列，末行只有 \(last) 块")
+        }
+    }
+
     @Test("方块始终是正方形且放得下（多种容器）")
     func fitsEveryContainer() {
         for size in [(200.0, 90.0), (552.0, 146.0), (900.0, 700.0), (80.0, 80.0)] {
