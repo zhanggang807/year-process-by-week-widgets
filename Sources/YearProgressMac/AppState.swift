@@ -22,10 +22,10 @@ final class AppState: ObservableObject {
     static let sizePresets: [(name: String, size: CGSize)] = [
         ("大（600×292）", CGSize(width: 600, height: 292)),
         ("中（450×219）", CGSize(width: 450, height: 219)),
-        ("小（330×161）", CGSize(width: 330, height: 161)),
+        ("小（338×158 · 同系统中号小组件）", CGSize(width: 338, height: 158)),
     ]
-    /// 桌面挂件默认小尺寸。
-    static let defaultSize = CGSize(width: 330, height: 161)
+    /// 桌面挂件默认尺寸 = macOS 中号小组件。
+    static let defaultSize = CGSize(width: 338, height: 158)
 
     init(dateOverride: Date? = nil) {
         self.dateOverride = dateOverride
@@ -46,7 +46,7 @@ final class AppState: ObservableObject {
     }
 
     /// 默认值变化时清掉旧偏好（旧版本写过 theme/size），只迁移一次。
-    private static let settingsVersion = 2
+    private static let settingsVersion = 3
     private static func migratePreferencesIfNeeded() {
         let defaults = AppDefaults.store
         guard defaults.integer(forKey: AppDefaults.Key.settingsVersion) < settingsVersion else { return }

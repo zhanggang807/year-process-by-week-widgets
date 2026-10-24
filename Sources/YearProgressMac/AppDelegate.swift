@@ -26,8 +26,9 @@ enum PanelLevel: String, CaseIterable {
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-    /// 卡片到屏幕右上角的间距（固定，不随尺寸/开关漂移）
-    private static let cardMargin: CGFloat = 24
+    /// 与系统桌面小组件对齐：距屏幕右边缘 32pt、距菜单栏底边 4pt
+    private static let cardMarginRight: CGFloat = 32
+    private static let cardMarginTop: CGFloat = 4
     private static let levelKey = AppDefaults.Key.panelLevel
     private static let panelVisibleKey = AppDefaults.Key.panelVisible
     private static let didWelcomeKey = AppDefaults.Key.didShowWelcome
@@ -93,8 +94,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let screen = NSScreen.screens.first ?? NSScreen.main else { return }
         let f = screen.visibleFrame
         let size = panel.frame.size
-        panel.setFrameOrigin(CGPoint(x: f.maxX - size.width - Self.cardMargin,
-                                     y: f.maxY - size.height - Self.cardMargin))
+        panel.setFrameOrigin(CGPoint(x: f.maxX - size.width - Self.cardMarginRight,
+                                     y: f.maxY - size.height - Self.cardMarginTop))
     }
 
     @objc private func screenParametersChanged() {
