@@ -134,8 +134,8 @@ diagnose:
 	@echo "== 入口点（应为 _NSExtensionMain 的桩）=="
 	@otool -l "$(APP)/Contents/PlugIns/YearProgressWidget.appex/Contents/MacOS/YearProgressWidget" 2>/dev/null | awk '/cmd LC_MAIN/{f=1} f{print} f&&/entryoff/{f=0}' | grep entryoff || true
 	@otool -IV "$(APP)/Contents/PlugIns/YearProgressWidget.appex/Contents/MacOS/YearProgressWidget" 2>/dev/null | grep -i NSExtensionMain | head -1 || echo "  缺少 _NSExtensionMain（入口点未修好）"
-	@echo "== 最近崩溃（应无输出）=="
-	@ls -t ~/Library/Logs/DiagnosticReports/YearProgressWidget-*.ips 2>/dev/null | head -3 || true
+	@echo "== 最近 1 小时崩溃（应无输出）=="
+	@find ~/Library/Logs/DiagnosticReports -name "YearProgressWidget-*.ips" -mmin -60 2>/dev/null | head -3 || true
 	@echo "== 扩展最近一次被调用 =="
 	@log show --last 30m --style compact --predicate 'process == "YearProgressWidget"' 2>/dev/null | grep -E "main \[WidgetBundle\]|WidgetHost" | tail -3 || echo "  还没被系统调用过（去「编辑小组件」里打开一次）"
 
