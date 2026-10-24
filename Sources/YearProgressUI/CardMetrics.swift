@@ -6,20 +6,21 @@ public enum CardProfile: Sendable {
     case app
     case widget
 
-    var titleRatio: Double { self == .app ? 0.045 : 0.055 }
-    var subtitleRatio: Double { self == .app ? 0.020 : 0.029 }
-    var footerRatio: Double { self == .app ? 0.0192 : 0.026 }
+    /// 顶部单行（年份 · 干支 · 周计数 · 百分比）
+    var headerRatio: Double { self == .app ? 0.0235 : 0.031 }
+    var headerRange: ClosedRange<CGFloat> { self == .app ? 11...26 : 9.5...14 }
+    /// 跨年周才出现的第二行小字
+    var noteRatio: Double { self == .app ? 0.0180 : 0.023 }
+    var noteRange: ClosedRange<CGFloat> { self == .app ? 8...17 : 7.5...10.5 }
 
-    var titleRange: ClosedRange<CGFloat> { self == .app ? 15...48 : 11...26 }
-    var subtitleRange: ClosedRange<CGFloat> { self == .app ? 7...22 : 8...13 }
-    var footerRange: ClosedRange<CGFloat> { self == .app ? 7...20 : 7.5...12 }
-
-    var paddingRatio: Double { self == .app ? 0.040 : 0.055 }
-    var paddingRange: ClosedRange<CGFloat> { self == .app ? 14...44 : 9...22 }
-    var headerGapRatio: Double { self == .app ? 0.027 : 0.035 }
-    var footerGapRatio: Double { self == .app ? 0.020 : 0.022 }
-    var ringRatio: Double { self == .app ? 0.043 : 0.070 }
+    var paddingRatio: Double { self == .app ? 0.036 : 0.050 }
+    var paddingRange: ClosedRange<CGFloat> { self == .app ? 12...40 : 8...20 }
+    var headerGapRatio: Double { self == .app ? 0.022 : 0.028 }
+    var noteGapRatio: Double { self == .app ? 0.006 : 0.008 }
     var cornerRatio: Double { self == .app ? 0.033 : 0.0 }
+
+    /// 小于这个宽度就用紧凑文案（small 小组件）
+    var compactWidthThreshold: CGFloat { self == .app ? 300 : 250 }
 }
 
 /// 所有尺寸由卡片宽度按比例推导，配合上下限，因此在 158pt 的小组件与 600pt 的大卡片上都成立。
@@ -44,20 +45,21 @@ public struct CardMetrics {
     public var padding: CGFloat { clamp(size.width * profile.paddingRatio, profile.paddingRange) }
     public var cornerRadius: CGFloat { size.width * profile.cornerRatio }
     public var headerGap: CGFloat { max(6, size.width * profile.headerGapRatio) }
-    public var footerGap: CGFloat { max(4, size.width * profile.footerGapRatio) }
+    public var noteGap: CGFloat { max(2, size.width * profile.noteGapRatio) }
 
-    public var titleFont: CGFloat { clamp(size.width * profile.titleRatio, profile.titleRange) }
-    public var subtitleFont: CGFloat { clamp(size.width * profile.subtitleRatio, profile.subtitleRange) }
-    public var footerFont: CGFloat { clamp(size.width * profile.footerRatio, profile.footerRange) }
-    public var ringSize: CGFloat { max(12, size.width * profile.ringRatio) }
+    public var headerFont: CGFloat { clamp(size.width * profile.headerRatio, profile.headerRange) }
+    public var noteFont: CGFloat { clamp(size.width * profile.noteRatio, profile.noteRange) }
 
-    public var headerHeight: CGFloat { titleFont * 1.16 + max(2, scale * 3) + subtitleFont * 1.30 }
-    public var footerHeight: CGFloat { footerFont * 1.32 }
+    public var headerHeight: CGFloat { headerFont * 1.35 }
+    public var noteHeight: CGFloat { noteFont * 1.32 }
 
-    /// 留给方块网格的空间。
-    public var gridArea: (width: Double, height: Double) {
+    public var usesCompactHeader: Bool { size.width < profile.compactWidthThreshold }
+
+    /// 留给方块网格的空间（不再是固定高度，底部/环去掉后网格能变大）。
+    public func gridArea(noteVisible: Bool) -> (width: Double, height: Double) {
+        var height = size.height - padding * 2 - headerHeight - headerGap
+        if noteVisible { height -= noteHeight + noteGap }
         let width = size.width - padding * 2
-        let height = size.height - padding * 2 - headerHeight - headerGap - footerGap - footerHeight
         return (Double(max(24, width)), Double(max(24, height)))
     }
 }

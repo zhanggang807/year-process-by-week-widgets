@@ -9,7 +9,7 @@ public enum CardChrome: Sendable {
     case widget
 }
 
-/// 卡片本体：左上「2026年 / 丙午年 · 第 42/53 周」，右上进度环，中间方块网格，底部一行统计。
+/// 卡片本体：顶部一行居中「2026年 · 丙午年 · 第 42/53 周 · 已过 78%」，下面是方块网格。
 /// App 与系统小组件共用同一份实现。
 public struct YearProgressCardView: View {
     public let progress: YearProgress
@@ -38,53 +38,46 @@ public struct YearProgressCardView: View {
 
     public var body: some View {
         let m = CardMetrics(size: size, profile: profile)
+        let note = progress.boundaryNote
         let layout = GridLayoutCalculator.compute(weekCount: progress.totalWeeks,
-                                                 available: m.gridArea,
+                                                 available: m.gridArea(noteVisible: note != nil),
                                                  preferredColumns: preferredColumns)
 
-        content(m: m, layout: layout)
+        content(m: m, layout: layout, note: note)
             .padding(m.padding)
-            .frame(width: size.width, height: size.height, alignment: .topLeading)
+            .frame(width: size.width, height: size.height, alignment: .top)
             .background(
                 LinearGradient(colors: theme.backgroundColors, startPoint: .topLeading, endPoint: .bottomTrailing)
             )
             .modifier(CardChromeModifier(chrome: chrome, cornerRadius: m.cornerRadius, theme: theme))
     }
 
-    private func content(m: CardMetrics, layout: WeekGridLayout) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            header(m)
-            Spacer().frame(height: m.headerGap)
-            grid(layout, metrics: m)
-            Spacer(minLength: 0)
-            Text(progress.footerText)
-                .font(.system(size: m.footerFont, weight: .medium))
-                .foregroundStyle(theme.secondaryText)
+    private func content(m: CardMetrics, layout: WeekGridLayout, note: String?) -> some View {
+        VStack(spacing: 0) {
+            // 年份 + 干支 + 周计数 + 百分比，合并成顶部一行居中
+            Text(progress.headerText(compact: m.usesCompactHeader))
+                .font(.system(size: m.headerFont, weight: .semibold, design: .rounded))
+                .foregroundStyle(theme.primaryText)
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
-        }
-    }
+                .minimumScaleFactor(0.65)
+                .frame(maxWidth: .infinity, alignment: .center)
 
-    // MARK: 顶部
-
-    private func header(_ m: CardMetrics) -> some View {
-        HStack(alignment: .top, spacing: 0) {
-            VStack(alignment: .leading, spacing: max(1, m.scale * 3)) {
-                Text(progress.yearTitle)
-                    .font(.system(size: m.titleFont, weight: .semibold, design: .rounded))
-                    .foregroundStyle(theme.primaryText)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.6)
-                Text(progress.subtitle)
-                    .font(.system(size: m.subtitleFont, weight: .medium))
+            // 只有年初/年末那 1–3 天（跨年周）才补一行小字
+            if let note {
+                Text(note)
+                    .font(.system(size: m.noteFont, weight: .medium))
                     .foregroundStyle(theme.secondaryText)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.6)
+                    .minimumScaleFactor(0.7)
+                    .padding(.top, m.noteGap)
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
-            Spacer(minLength: 4)
-            ProgressRing(percent: progress.percent, size: m.ringSize, theme: theme)
+
+            // 网格在「头部以下的剩余空间」里垂直居中（不随尺寸变化而偏上/偏下）
+            grid(layout, metrics: m)
+                .padding(.top, m.headerGap)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
-        .frame(height: m.headerHeight, alignment: .top)
     }
 
     // MARK: 网格
@@ -137,7 +130,7 @@ private struct CardChromeModifier: ViewModifier {
     }
 }
 
-/// 一个方块 = 一周。
+/// 一个方块 = 一周。已过 = 黑块，未来 = 白块，本周 = 白底 + 从底部升起的黑色进度条。
 private struct WeekBlockView: View {
     let cell: WeekCell
     let side: CGFloat
@@ -150,7 +143,6 @@ private struct WeekBlockView: View {
         ZStack(alignment: .bottom) {
             RoundedRectangle(cornerRadius: radius, style: .continuous).fill(fill)
             if cell.state == .current {
-                // 本周：白色部分是「还没过完的」，从底部升起的黑色部分 = 本周已过的比例。
                 ZStack(alignment: .bottom) {
                     Color.clear
                     Rectangle()
@@ -180,10 +172,11 @@ private struct WeekBlockView: View {
     }
 
     private var stroke: (color: Color, width: CGFloat)? {
+        let width = max(0.8, side * 0.030)
         switch cell.state {
-        case .past: return nil
-        case .future: return theme.futureStroke.map { ($0, 1) }
-        case .current: return (theme.currentStroke, max(0.8, side * 0.045))
+        case .past: return theme.pastStroke.map { ($0, width) }
+        case .future: return theme.futureStroke.map { ($0, width) }
+        case .current: return nil
         }
     }
 
@@ -214,7 +207,7 @@ private struct TooltipModifier: ViewModifier {
     }
 }
 
-/// 右上角的年度进度环。
+/// 年度进度环（首页说明窗口还在用）。
 public struct ProgressRing: View {
     public let percent: Double
     public let size: CGFloat

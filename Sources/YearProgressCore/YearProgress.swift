@@ -61,6 +61,25 @@ public struct YearProgress: Sendable {
         return "\(ganzhi.yearName) · 第 \(currentWeek?.index ?? totalWeeks)/\(totalWeeks) 周"
     }
 
+    /// 顶部单行（完整版）："2026年 · 丙午年 · 第 42/53 周 · 已过 78%"
+    public func headerText(compact: Bool = false) -> String {
+        let p = Int(percent.rounded())
+        if compact {
+            if outOfGridWeek != nil { return "\(year) · \(ganzhi.name) · \(totalWeeks) 周 · \(p)%" }
+            return "\(year) · \(ganzhi.name) · \(currentWeek?.index ?? totalWeeks)/\(totalWeeks) · \(p)%"
+        }
+        if outOfGridWeek != nil {
+            return "\(yearTitle) · \(ganzhi.yearName) · 共 \(totalWeeks) 周 · 已过 \(p)%"
+        }
+        return "\(yearTitle) · \(ganzhi.yearName) · 第 \(currentWeek?.index ?? totalWeeks)/\(totalWeeks) 周 · 已过 \(p)%"
+    }
+
+    /// 只有「跨年周」那 1–3 天才出现的第二行小字。
+    public var boundaryNote: String? {
+        guard let outside = outOfGridWeek else { return nil }
+        return "本周属于 \(outside.year) 年第 \(outside.index) 周"
+    }
+
     /// "已过 78% · 剩余 11 周"；跨年周时说明本周到底属于哪一年。
     public var footerText: String {
         let p = Int(percent.rounded())

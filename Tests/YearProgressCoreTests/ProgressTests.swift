@@ -35,6 +35,22 @@ struct ProgressTests {
         #expect(p.outOfGridWeek == nil)
     }
 
+    @Test("顶部单行：年份 · 干支 · 周计数 · 百分比（含紧凑版）")
+    func headerTextFormat() {
+        let p = progress("2026-10-15 12:00")
+        #expect(p.headerText() == "2026年 · 丙午年 · 第 42/53 周 · 已过 78%")
+        #expect(p.headerText(compact: true) == "2026 · 丙午 · 42/53 · 78%")
+        #expect(p.boundaryNote == nil)
+
+        let q = progress("2025-12-30 12:00")
+        #expect(q.headerText() == "2025年 · 乙巳年 · 共 52 周 · 已过 100%")
+        #expect(q.boundaryNote == "本周属于 2026 年第 1 周")
+
+        let r = progress("2027-01-01 12:00")
+        #expect(r.headerText() == "2027年 · 丁未年 · 共 52 周 · 已过 0%")
+        #expect(r.boundaryNote == "本周属于 2026 年第 53 周")
+    }
+
     @Test("网格连续、无空洞，且覆盖整年")
     func cellsAreContiguous() {
         let p = progress("2026-06-01 12:00")
