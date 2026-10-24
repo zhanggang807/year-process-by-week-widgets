@@ -48,7 +48,7 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         case .violet: return Color(red: 0.184, green: 0.118, blue: 0.341)   // #2F1E57 深梅子
         case .graphite: return Color(red: 0.200, green: 0.275, blue: 0.361) // #33465C 深石板蓝
         case .system: return .primary                                        // 深色模式下自动变白
-        case .slate: return Color(red: 0.906, green: 0.914, blue: 0.929)     // #E7E9ED 岩灰白
+        case .slate: return Color(red: 0.200, green: 0.275, blue: 0.361)     // #33465C 深石板蓝（同面板）
         }
     }
 
@@ -58,7 +58,7 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         case .violet: return Color(red: 0.812, green: 0.749, blue: 0.973)   // #CFBFF8 浅薰衣草
         case .graphite: return Color(red: 0.686, green: 0.784, blue: 0.871) // #AFC8DE 浅冰蓝
         case .system: return Color.primary.opacity(0.12)                     // 系统填充色
-        case .slate: return Color.white.opacity(0.12)                        // 暗底上的浅色填充
+        case .slate: return Color(red: 0.686, green: 0.784, blue: 0.871)     // #AFC8DE 浅冰蓝（同面板）
         }
     }
 
@@ -66,16 +66,15 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
     public var pastStroke: Color? {
         switch self {
         case .violet: return nil
-        case .graphite: return Color.white.opacity(0.16)
-        case .system, .slate: return nil
+        case .graphite, .slate: return Color.white.opacity(0.16)
+        case .system: return nil
         }
     }
     /// 浅色块不需要描边（同色系之后不再「发胀」）。
     public var futureStroke: Color? {
         switch self {
         case .system: return Color.primary.opacity(0.14)
-        case .slate: return Color.white.opacity(0.10)
-        default: return nil
+        default: return nil        // graphite / slate：浅色块本身够亮，不需要描边
         }
     }
 
