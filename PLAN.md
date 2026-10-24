@@ -17,7 +17,7 @@
 | 测试 | 17 个 Swift Testing 用例全绿（52/53 判定 × 独立规则交叉校验、跨年归属、4 时区、2019–2030 每天、布局、干支） |
 | 构建 | 无 Xcode 可 `swift build` / `make app` / `make open`；GUI 启动冒烟通过 |
 | 自查 | `make preview` 离屏渲染 PNG，无需屏幕录制权限 |
-| **M3（提前做了）** | 真 WidgetKit 扩展已打通：手工组 `.appex` + ad-hoc 签名（app-sandbox）+ `pluginkit -a`/`lsregister` + `killall chronod`；`chronod` 已把 `com.local.yearprogress.widget` 识别为 WidgetExtension 并建立 descriptor 状态，沙盒容器已生成 = 扩展真的被系统拉起过 |
+| **M3（提前做了）** | 手工组 `.appex` + ad-hoc 签名（app-sandbox）+ `pluginkit -a`/`lsregister` + `killall chronod`。**踩坑**：漏了 app extension 的入口点（应为 `-e _NSExtensionMain`），导致扩展启动即 `EXC_BREAKPOINT`（`ExtensionFoundation` 的 `MainActor.assumeIsolated`），注册正常但小组件库看不到。已补到 `Package.swift` 的 `linkerSettings`，`make diagnose` 可体检 |
 
 与下文方案的差异：M1 落地为「**菜单栏 App + 桌面挂件窗口**」（§5.1 的 A+B 合并形态），
 真 WidgetKit `.appex` 仍按计划留到 M3；卡片尺寸由 600×360 改为按参考图实测的 600×292。

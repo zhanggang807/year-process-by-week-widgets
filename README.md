@@ -73,6 +73,12 @@ make spec       # 重新生成 spec/year-weeks.json（跨平台真值表）
 3. 用 `codesign --sign -` 给扩展附上 `com.apple.security.app-sandbox` 权限并逐层签名（扩展先签、宿主后签）；
 4. `pluginkit -a` + `lsregister -f` 注册，再 `killall chronod` 让 WidgetKit 重新枚举。
 
+> **入口点（踩过的坑）**：`.appex` 可执行文件必须链接成 `-e _NSExtensionMain`（Xcode 的 `LD_ENTRY_POINT`），
+> 由扩展运行时接管后再回调 SwiftUI 的 `WidgetBundle.main()`。少了它，进程会直接跑 `WidgetBundle.main()`，
+> `ExtensionFoundation` 初始化时 `MainActor.assumeIsolated` 断言失败 → `EXC_BREAKPOINT`，
+> 表现就是"已经注册但小组件库里找不到"（`~/Library/Logs/DiagnosticReports/YearProgressWidget-*.ips`）。
+> 现在写在 `Package.swift` 的 widget target `linkerSettings` 里；`make diagnose` 可一键体检。
+
 已经实测到的结果（`pluginkit` / `chronod` 日志 / 沙盒容器三处互证）：
 
 | 检查 | 结果 |

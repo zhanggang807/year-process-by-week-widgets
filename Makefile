@@ -38,7 +38,7 @@ else
     -Xlinker -rpath -Xlinker $(CLT_LIB)
 endif
 
-.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall clean help
+.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose clean help
 
 all: build
 
@@ -127,6 +127,17 @@ widget-uninstall:
 
 open: app
 	open $(APP)
+
+# 一键体检：注册状态 / 入口点 / 最近崩溃 / 扩展是否被调用
+diagnose:
+	@echo "== 注册 =="; pluginkit -m -v -i $(WIDGET_ID) 2>/dev/null || echo "  未注册"
+	@echo "== 入口点（应为 _NSExtensionMain 的桩）=="
+	@otool -l "$(APP)/Contents/PlugIns/YearProgressWidget.appex/Contents/MacOS/YearProgressWidget" 2>/dev/null | awk '/cmd LC_MAIN/{f=1} f{print} f&&/entryoff/{f=0}' | grep entryoff || true
+	@otool -IV "$(APP)/Contents/PlugIns/YearProgressWidget.appex/Contents/MacOS/YearProgressWidget" 2>/dev/null | grep -i NSExtensionMain | head -1 || echo "  缺少 _NSExtensionMain（入口点未修好）"
+	@echo "== 最近崩溃（应无输出）=="
+	@ls -t ~/Library/Logs/DiagnosticReports/YearProgressWidget-*.ips 2>/dev/null | head -3 || true
+	@echo "== 扩展最近一次被调用 =="
+	@log show --last 30m --style compact --predicate 'process == "YearProgressWidget"' 2>/dev/null | grep -E "main \[WidgetBundle\]|WidgetHost" | tail -3 || echo "  还没被系统调用过（去「编辑小组件」里打开一次）"
 
 clean:
 	rm -rf .build $(BUILD_DIR)
