@@ -19,6 +19,8 @@ struct CLIOptions {
     var chrome: CardChrome = .card
     /// 导出时强制列数（调试用，便于对比面板/小组件布局）
     var columns: Int?
+    /// 导出时覆盖顶部字号（模拟 small 小组件）
+    var headerFontOverride: CGFloat?
 
     static func parse(_ argv: [String]) -> CLIOptions {
         var o = CLIOptions()
@@ -48,6 +50,8 @@ struct CLIOptions {
                 if let v = next(), let m = Double(v) { o.margin = CGFloat(m); i += 1 }
             case "--timezone":
                 i += 1
+            case "--header-font":
+                if let v = next(), let n = Double(v) { o.headerFontOverride = CGFloat(n); i += 1 }
             case "--columns":
                 if let v = next(), let n = Int(v) { o.columns = n; i += 1 }
             case "--chrome":

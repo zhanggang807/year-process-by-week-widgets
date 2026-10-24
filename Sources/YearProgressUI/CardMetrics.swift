@@ -30,10 +30,13 @@ public struct CardMetrics {
 
     public let size: CGSize
     public let profile: CardProfile
+    /// 非 nil 时覆盖顶部字号（small 小组件要跟面板一样的 13pt）
+    public let headerFontOverride: CGFloat?
 
-    public init(size: CGSize, profile: CardProfile = .app) {
+    public init(size: CGSize, profile: CardProfile = .app, headerFontOverride: CGFloat? = nil) {
         self.size = size
         self.profile = profile
+        self.headerFontOverride = headerFontOverride
     }
 
     private func clamp(_ value: CGFloat, _ range: ClosedRange<CGFloat>) -> CGFloat {
@@ -47,7 +50,7 @@ public struct CardMetrics {
     public var headerGap: CGFloat { max(6, size.width * profile.headerGapRatio) }
     public var noteGap: CGFloat { max(2, size.width * profile.noteGapRatio) }
 
-    public var headerFont: CGFloat { clamp(size.width * profile.headerRatio, profile.headerRange) + 2 }
+    public var headerFont: CGFloat { headerFontOverride ?? (clamp(size.width * profile.headerRatio, profile.headerRange) + 2) }
     public var noteFont: CGFloat { clamp(size.width * profile.noteRatio, profile.noteRange) }
 
     public var headerHeight: CGFloat { headerFont * 1.35 }

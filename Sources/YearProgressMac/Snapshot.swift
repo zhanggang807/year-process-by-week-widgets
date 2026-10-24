@@ -16,7 +16,8 @@ enum SnapshotRunner {
                                         size: options.size,
                                         profile: options.chrome == .widget ? .widget : .app,
                                         chrome: chrome,
-                                        fixedColumns: options.columns ?? (chrome == .card ? WidgetGridReference.columns(weekCount: progress.totalWeeks) : nil))
+                                        fixedColumns: options.columns ?? (chrome == .card ? WidgetGridReference.columns(weekCount: progress.totalWeeks) : nil),
+                                        headerFontOverride: options.headerFontOverride)
             .padding(options.margin)
             .background(Color.clear)
 
@@ -33,7 +34,7 @@ enum SnapshotRunner {
         }
         // 布局诊断（和卡片内部用同一套算法）
         let profile: CardProfile = options.chrome == .widget ? .widget : .app
-        let metrics = CardMetrics(size: options.size, profile: profile)
+        let metrics = CardMetrics(size: options.size, profile: profile, headerFontOverride: options.headerFontOverride)
         let fixedColumns = options.columns ?? (chrome == .card ? WidgetGridReference.columns(weekCount: progress.totalWeeks) : nil)
         let layout = GridLayoutCalculator.compute(weekCount: progress.totalWeeks,
                                                  available: metrics.gridArea(noteVisible: progress.boundaryNote != nil),

@@ -68,13 +68,15 @@ struct YearProgressWidgetView: View {
 
     var body: some View {
         GeometryReader { geo in
-            // 菜单栏里的主题/尺寸只作用于桌面挂件；小组件固定用「暗岩灰」底
+            // 菜单栏里的主题/尺寸只作用于桌面挂件；小组件固定用「暗岩灰」底。
+            // small 的标题字号与桌面挂件对齐（13pt）。
             YearProgressCardView(progress: entry.progress,
                                  theme: .slate,
                                  size: geo.size,
                                  profile: .widget,
                                  chrome: .widget,
-                                 showsTooltips: false)
+                                 showsTooltips: false,
+                                 headerFontOverride: family == .systemSmall ? 13 : nil)
         }
         // macOS 14 / iOS 17 起，小组件必须用 containerBackground 声明背板，否则系统显示占位提示。
         .containerBackground(for: .widget) {
