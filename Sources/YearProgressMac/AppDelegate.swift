@@ -38,6 +38,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var state: AppState!
     private var panel: WidgetPanel!
     private var statusItem: NSStatusItem!
+    /// 左键弹出的独立小窗（不影响桌面挂件）
+    private var quickPanel: NSPanel?
     /// 右键弹出的设置菜单（左键不弹菜单，用来显示桌面挂件）
     private let statusMenu = NSMenu()
 
@@ -68,6 +70,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         setUpStatusItem()
         setUpPanel()
+
+        if cli.showQuick {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                self?.toggleQuickPanel()
+            }
+        }
 
         if !AppDefaults.store.bool(forKey: Self.didWelcomeKey) {
             AppDefaults.store.set(true, forKey: Self.didWelcomeKey)
@@ -141,7 +149,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if isRightClick {
             showSettingsMenu()
         } else {
-            showPanelFromMenuBar()
+            toggleQuickPanel()
         }
     }
 
@@ -154,12 +162,54 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu = nil
     }
 
-    /// 左键：显示桌面挂件（贴右上角、当前主题/尺寸；默认小尺寸 + 石墨）
-    private func showPanelFromMenuBar() {
-        isVisible = true
-        anchorTopRight()
-        panel.orderFrontRegardless()
-        rebuildMenu()
+    /// 左键：在菜单栏图标下方弹一个独立小窗，展示当前进度。
+    /// 不碰桌面挂件的显隐和层级。位置会按屏幕可视区域夹边，避免出屏。
+    private func toggleQuickPanel() {
+        if let quick = quickPanel, quick.isVisible {
+            quick.orderOut(nil)
+            return
+        }
+
+        let size = AppState.defaultSize          // 小尺寸 338×158
+        let card = YearProgressCardView(progress: state.progress,
+                                        theme: state.theme,          // 默认石墨
+                                        size: size,
+                                        fixedColumns: WidgetGridReference.columns(weekCount: state.progress.totalWeeks))
+        let quick = NSPanel(contentRect: NSRect(origin: .zero, size: size),
+                            styleMask: [.borderless],
+                            backing: .buffered,
+                            defer: false)
+        quick.isOpaque = false
+        quick.backgroundColor = .clear
+        quick.hasShadow = false
+        quick.level = .floating
+        quick.isReleasedWhenClosed = false
+        quick.collectionBehavior = [.transient, .fullScreenAuxiliary]
+        quick.contentView = NSHostingView(rootView: card)
+        quick.delegate = self
+
+        positionQuickPanel(quick, size: size)
+        quick.makeKeyAndOrderFront(nil)
+        quickPanel = quick
+    }
+
+    private func positionQuickPanel(_ quick: NSPanel, size: CGSize) {
+        guard let button = statusItem.button, let buttonWindow = button.window else { return }
+        let buttonOnScreen = buttonWindow.convertToScreen(button.convert(button.bounds, to: nil))
+        let screen = buttonWindow.screen ?? NSScreen.screens.first ?? NSScreen.main
+        guard let vf = screen?.visibleFrame else { return }
+
+        let margin: CGFloat = 8
+        let gap: CGFloat = 6
+
+        // 默认右对齐图标；超出屏幕就夹回来
+        var x = buttonOnScreen.maxX - size.width
+        x = min(max(x, vf.minX + margin), vf.maxX - size.width - margin)
+        var y = buttonOnScreen.minY - size.height - gap
+        y = min(max(y, vf.minY + margin), vf.maxY - size.height - margin)
+
+        // 用显式 size 设 frame，避免 NSHostingView 赋内容时改动窗口尺寸导致定位偏差
+        quick.setFrame(NSRect(origin: CGPoint(x: x, y: y), size: size), display: false)
     }
 
     private func rebuildMenu() {
@@ -297,4 +347,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) { rebuildMenu() }
+}
+
+
+extension AppDelegate: NSWindowDelegate {
+    /// 点别处 / 切走应用时收起 quick panel
+    func windowDidResignKey(_ notification: Notification) {
+        guard let w = notification.object as? NSWindow, w === quickPanel else { return }
+        w.orderOut(nil)
+    }
 }
