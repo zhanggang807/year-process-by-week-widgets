@@ -206,7 +206,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         quick.hasShadow = false
         quick.level = .floating
         quick.isReleasedWhenClosed = false
-        quick.collectionBehavior = [.transient, .fullScreenAuxiliary]
+        // NSPanel 默认 hidesOnDeactivate=true：菜单栏点击不激活 App，
+        // 窗口会被系统立刻隐藏（optionAll 里在、屏幕上却看不到）。
+        quick.hidesOnDeactivate = false
+        quick.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         quick.contentView = NSHostingView(rootView: card)
 
         positionQuickPanel(quick, size: size)
