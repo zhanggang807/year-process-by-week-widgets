@@ -40,6 +40,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     /// 左键弹出的独立小窗（不影响桌面挂件）
     private var quickPanel: NSPanel?
+    /// 点外部收起用的全局鼠标监听
+    private var quickClickMonitor: Any?
     /// 右键弹出的设置菜单（左键不弹菜单，用来显示桌面挂件）
     private let statusMenu = NSMenu()
 
@@ -146,6 +148,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func statusItemClicked(_ sender: Any?) {
         guard let event = NSApp.currentEvent else { return }
         let isRightClick = event.type == .rightMouseUp || event.modifierFlags.contains(.control)
+        NSLog("[status] %@ click", isRightClick ? "right" : "left")
         if isRightClick {
             showSettingsMenu()
         } else {
@@ -166,9 +169,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// 不碰桌面挂件的显隐和层级。位置会按屏幕可视区域夹边，避免出屏。
     private func toggleQuickPanel() {
         if let quick = quickPanel, quick.isVisible {
-            quick.orderOut(nil)
+            hideQuickPanel()
             return
         }
+        NSLog("[quick] show")
 
         let size = AppState.defaultSize          // 小尺寸 338×158
         let card = YearProgressCardView(progress: state.progress,
@@ -186,11 +190,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         quick.isReleasedWhenClosed = false
         quick.collectionBehavior = [.transient, .fullScreenAuxiliary]
         quick.contentView = NSHostingView(rootView: card)
-        quick.delegate = self
 
         positionQuickPanel(quick, size: size)
-        quick.makeKeyAndOrderFront(nil)
+        // 不要 makeKey：菜单栏点击不会激活 App，成为 key 会被立刻收回（面板一闪就没）。
+        quick.orderFrontRegardless()
         quickPanel = quick
+
+        // 点其它 App / 桌面时收起（全局鼠标监听不需要辅助功能权限）
+        quickClickMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] _ in
+            self?.hideQuickPanel()
+        }
+    }
+
+    private func hideQuickPanel() {
+        NSLog("[quick] hide")
+        if let m = quickClickMonitor {
+            NSEvent.removeMonitor(m)
+            quickClickMonitor = nil
+        }
+        quickPanel?.orderOut(nil)
     }
 
     private func positionQuickPanel(_ quick: NSPanel, size: CGSize) {
@@ -349,11 +367,3 @@ extension AppDelegate: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) { rebuildMenu() }
 }
 
-
-extension AppDelegate: NSWindowDelegate {
-    /// 点别处 / 切走应用时收起 quick panel
-    func windowDidResignKey(_ notification: Notification) {
-        guard let w = notification.object as? NSWindow, w === quickPanel else { return }
-        w.orderOut(nil)
-    }
-}
