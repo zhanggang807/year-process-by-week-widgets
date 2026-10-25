@@ -38,7 +38,7 @@ else
     -Xlinker -rpath -Xlinker $(CLT_LIB)
 endif
 
-.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose clean help
+.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose icon clean help
 
 all: build
 
@@ -73,6 +73,7 @@ app: build
 	@mkdir -p $(APP)/Contents/MacOS $(APP)/Contents/Resources
 	@cp $(BIN) $(APP)/Contents/MacOS/YearProgress
 	@cp Support/App-Info.plist $(APP)/Contents/Info.plist
+	@cp Support/AppIcon.icns $(APP)/Contents/Resources/AppIcon.icns
 	@codesign --force --sign - $(APP) >/dev/null 2>&1 || echo "  (签名跳过)"
 	@echo "已生成 $(APP)"
 
@@ -128,6 +129,23 @@ widget-uninstall:
 
 open: app
 	open $(APP)
+
+# 重新生成 App 图标（Tools/make-icon.swift → .iconset → .icns）
+icon:
+	@mkdir -p $(BUILD_DIR)/AppIcon.iconset
+	$(SWIFT) Tools/make-icon.swift light $(BUILD_DIR)/AppIcon-1024.png 1024
+	@sips -z 16 16   $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_16x16.png >/dev/null
+	@sips -z 32 32   $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_16x16@2x.png >/dev/null
+	@sips -z 32 32   $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_32x32.png >/dev/null
+	@sips -z 64 64   $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_32x32@2x.png >/dev/null
+	@sips -z 128 128 $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_128x128.png >/dev/null
+	@sips -z 256 256 $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_128x128@2x.png >/dev/null
+	@sips -z 256 256 $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_256x256.png >/dev/null
+	@sips -z 512 512 $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_256x256@2x.png >/dev/null
+	@sips -z 512 512 $(BUILD_DIR)/AppIcon-1024.png --out $(BUILD_DIR)/AppIcon.iconset/icon_512x512.png >/dev/null
+	@cp $(BUILD_DIR)/AppIcon-1024.png $(BUILD_DIR)/AppIcon.iconset/icon_512x512@2x.png
+	@iconutil -c icns $(BUILD_DIR)/AppIcon.iconset -o Support/AppIcon.icns
+	@echo "已生成 Support/AppIcon.icns"
 
 # 一键体检：注册状态 / 入口点 / 最近崩溃 / 扩展是否被调用
 diagnose:

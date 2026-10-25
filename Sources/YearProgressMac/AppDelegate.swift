@@ -58,6 +58,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        if let icon = NSImage(named: "AppIcon") { NSApp.applicationIconImage = icon }
         state = AppState(dateOverride: cli.date)
         // 只有命令行显式传了 --theme/--size 才覆盖，否则沿用（或迁移后的）默认设置
         if let theme = cli.themeOverride { state.theme = theme }

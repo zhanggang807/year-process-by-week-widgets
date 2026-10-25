@@ -9,6 +9,8 @@
 （用纯白/纯黑时，浅色在深底上会视觉「发胀」、深色会「收缩」，同尺寸看起来就是不一样大；
 实测两者几何都是 38×38px，纯粹是错觉，所以改用对比更柔和的一对色。）
 
+![App 图标](docs/app-icon.png)
+
 ![2026 年（53 周，自动选 14 列）](docs/preview-2026.png)
 
 | 52 周的年份（13×4 方阵） | 年初（第 1 周） | 石墨主题 | 年末跨年周 |
@@ -38,6 +40,7 @@ make preview    # 导出几个典型日期的 PNG 到 docs/
 make app        # 只打包宿主 App（不含小组件扩展）
 make run        # 前台直接跑（开发用）
 make spec       # 重新生成 spec/year-weeks.json（跨平台真值表）
+make icon       # 重新生成 App 图标（Tools/make-icon.swift → .icns）
 ```
 
 安装后「怎么用」：**点菜单栏最右侧的日期时间 → 通知中心底部「编辑小组件…」→ 搜索「年进度」→ 选尺寸 → 添加**。
@@ -146,7 +149,8 @@ Sources/
     CLIOptions.swift / main.swift
   YearWeekSpecDump/          生成跨平台真值表
 Tests/YearProgressCoreTests/ 17 个测试
-Support/                     手写 Info.plist 与 entitlements（没有 Xcode，就自己摆包结构）
+Support/                     手写 Info.plist / entitlements / AppIcon.icns（没有 Xcode，就自己摆包结构）
+Tools/make-icon.swift        App 图标生成器（4×13 周网格，当前周高亮）
 spec/year-weeks.json         Swift 与 Kotlin 共用的真值表（2015–2035 + 1029 个探针日期，含 ISO 周年度）
 PLAN.md                      完整技术方案（含 iOS / Android 路线与里程碑）
 ```
