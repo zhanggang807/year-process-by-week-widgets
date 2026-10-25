@@ -30,7 +30,7 @@ struct ProgressTests {
         #expect(p.remainingWeeks == 11)
         #expect(p.percent > 77 && p.percent < 79)
         #expect(p.yearTitle == "2026年")
-        #expect(p.subtitle == "丙午年 · 第 42/53 周")
+        #expect(p.subtitle == "丙午年 · 第 42 周 · 剩 11 周")
         #expect(p.footerText == "已过 78% · 剩余 11 周")
         #expect(p.outOfGridWeek == nil)
     }
@@ -38,8 +38,8 @@ struct ProgressTests {
     @Test("顶部单行：年份 · 干支 · 周计数 · 百分比（含紧凑版）")
     func headerTextFormat() {
         let p = progress("2026-10-15 12:00")
-        #expect(p.headerText() == "2026年 · 丙午年 · 第 42/53 周 · 已过 78%")
-        #expect(p.headerText(compact: true) == "2026 · 丙午 · 42/53 · 78%")
+        #expect(p.headerText() == "2026年 · 丙午年 · 第 42 周 · 剩 11 周 · 已过 78%")
+        #expect(p.headerText(compact: true) == "2026 · 丙午 · 42 周 · 剩 11 周 · 78%")
         #expect(p.boundaryNote == nil)
 
         let q = progress("2025-12-30 12:00")

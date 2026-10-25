@@ -53,25 +53,25 @@ public struct YearProgress: Sendable {
 
     /// "2026年"
     public var yearTitle: String { "\(year)年" }
-    /// "丙午年 · 第 42/53 周"；跨年周时退化为 "丙午年 · 共 52 周"
+    /// "丙午年 · 第 42 周 · 剩 11 周"；跨年周时退化为 "丙午年 · 共 52 周"
     public var subtitle: String {
         if currentWeek == nil {
             return "\(ganzhi.yearName) · 共 \(totalWeeks) 周"
         }
-        return "\(ganzhi.yearName) · 第 \(currentWeek?.index ?? totalWeeks)/\(totalWeeks) 周"
+        return "\(ganzhi.yearName) · 第 \(currentWeek?.index ?? totalWeeks) 周 · 剩 \(remainingWeeks) 周"
     }
 
-    /// 顶部单行（完整版）："2026年 · 丙午年 · 第 42/53 周 · 已过 78%"
+    /// 顶部单行（完整版）："2026年 · 丙午年 · 第 42 周 · 剩 11 周 · 已过 78%"
     public func headerText(compact: Bool = false) -> String {
         let p = Int(percent.rounded())
         if compact {
             if outOfGridWeek != nil { return "\(year) · \(ganzhi.name) · \(totalWeeks) 周 · \(p)%" }
-            return "\(year) · \(ganzhi.name) · \(currentWeek?.index ?? totalWeeks)/\(totalWeeks) · \(p)%"
+            return "\(year) · \(ganzhi.name) · \(currentWeek?.index ?? totalWeeks) 周 · 剩 \(remainingWeeks) 周 · \(p)%"
         }
         if outOfGridWeek != nil {
             return "\(yearTitle) · \(ganzhi.yearName) · 共 \(totalWeeks) 周 · 已过 \(p)%"
         }
-        return "\(yearTitle) · \(ganzhi.yearName) · 第 \(currentWeek?.index ?? totalWeeks)/\(totalWeeks) 周 · 已过 \(p)%"
+        return "\(yearTitle) · \(ganzhi.yearName) · 第 \(currentWeek?.index ?? totalWeeks) 周 · 剩 \(remainingWeeks) 周 · 已过 \(p)%"
     }
 
     /// 只有「跨年周」那 1–3 天才出现的第二行小字。
