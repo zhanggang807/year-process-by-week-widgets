@@ -177,11 +177,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func showSettingsMenu() {
         rebuildMenu()
-        guard let button = statusItem.button else { return }
-        // 直接 popUp，不再临时挂 statusItem.menu（那套写法可能把按钮的 action 清掉）
-        statusMenu.popUp(positioning: nil,
-                         at: NSPoint(x: 0, y: 0),
-                         in: button)
+        guard statusItem.button != nil else { return }
+        // 交给系统定位（原生状态栏菜单位置：图标正下方、自动贴边）。
+        // 临时挂上菜单 → performClick 弹出 → 立刻摘掉；随后重新绑定按钮 action，
+        // 避免"挂过菜单后左键失效"的问题。
+        log.info("[status] settings menu popup")
+        statusItem.menu = statusMenu
+        statusItem.button?.performClick(nil)
+        statusItem.menu = nil
         configureStatusButton()
     }
 
