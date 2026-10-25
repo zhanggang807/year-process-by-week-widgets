@@ -50,15 +50,16 @@ path.lineWidth = 2
 color(0x000000, variant == "light" ? 0.07 : 0.20).setStroke()
 path.stroke()
 
-// 2) 一年 52 周：4 行 × 13 列，已过 41 周，当前周高亮
-let cols = 13, rows = 4
-let block: CGFloat = 48, gap: CGFloat = 8
+// 2) 和菜单栏图标同一布局：4 行 × 4 列，前 11 格实、后 5 格淡，第 11 格是当前周
+let cols = 4, rows = 4
+let block: CGFloat = 150, gap: CGFloat = 30
 let gridW = CGFloat(cols) * block + CGFloat(cols - 1) * gap
 let gridH = CGFloat(rows) * block + CGFloat(rows - 1) * gap
 let originX = (1024 - gridW) / 2
 let originY = (1024 - gridH) / 2
 
-let currentIndex = 40   // 0-based：第 41 周
+let filledCount = 11    // 与菜单栏图标一致
+let currentIndex = 10   // 第 11 格 = 当前周
 for i in 0..<(cols * rows) {
     let c = i % cols, r = i / cols
     let rect = NSRect(x: originX + CGFloat(c) * (block + gap),
@@ -67,7 +68,7 @@ for i in 0..<(cols * rows) {
     let blockPath = NSBezierPath(roundedRect: rect, xRadius: block * 0.26, yRadius: block * 0.26)
     if i == currentIndex {
         currentColor.setFill()
-    } else if i < currentIndex {
+    } else if i < filledCount {
         pastColor.setFill()
     } else {
         futureColor.setFill()

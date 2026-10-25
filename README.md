@@ -150,7 +150,7 @@ Sources/
   YearWeekSpecDump/          生成跨平台真值表
 Tests/YearProgressCoreTests/ 17 个测试
 Support/                     手写 Info.plist / entitlements / AppIcon.icns（没有 Xcode，就自己摆包结构）
-Tools/make-icon.swift        App 图标生成器（4×13 周网格，当前周高亮）
+Tools/make-icon.swift        App 图标生成器（4×4 网格，与菜单栏图标同布局）
 spec/year-weeks.json         Swift 与 Kotlin 共用的真值表（2015–2035 + 1029 个探针日期，含 ISO 周年度）
 PLAN.md                      完整技术方案（含 iOS / Android 路线与里程碑）
 ```
