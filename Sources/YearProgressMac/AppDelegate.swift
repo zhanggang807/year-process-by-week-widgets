@@ -1,6 +1,7 @@
 import YearProgressUI
 import AppKit
 import SwiftUI
+import os
 import YearProgressCore
 
 enum PanelLevel: String, CaseIterable {
@@ -25,6 +26,8 @@ enum PanelLevel: String, CaseIterable {
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
+
+    private let log = Logger(subsystem: "com.local.yearprogress", category: "statusbar")
 
     /// 与系统桌面小组件对齐（实测 2x 截图：距右 30–34px、距菜单栏底边 37px）
     /// → 16pt / 18pt
@@ -64,6 +67,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        log.info("[app] launched \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?", privacy: .public)")
         if let icon = NSImage(named: "AppIcon") { NSApp.applicationIconImage = icon }
         state = AppState(dateOverride: cli.date)
         // 只有命令行显式传了 --theme/--size 才覆盖，否则沿用（或迁移后的）默认设置
@@ -76,6 +80,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if cli.showQuick {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
                 self?.toggleQuickPanel()
+            }
+        }
+        if cli.testClick {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                self?.log.info("[status] performClick test")
+                self?.statusItem.button?.performClick(nil)
             }
         }
 
@@ -135,20 +145,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         // 不用 statusItem.menu：那会让左右键都弹菜单。
         // 自己处理点击，左键显示挂件，右键临时挂上菜单再弹。
-        button.target = self
-        button.action = #selector(statusItemClicked(_:))
-        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        configureStatusButton()
 
         statusMenu.delegate = self
         rebuildMenu()
     }
 
+    /// 重新绑定按钮的 target/action（挂过菜单后保险起见再调一次）
+    private func configureStatusButton() {
+        guard let button = statusItem.button else { return }
+        button.target = self
+        button.action = #selector(statusItemClicked(_:))
+        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        log.info("[status] button configured")
+    }
+
     // MARK: 菜单栏点击
 
     @objc private func statusItemClicked(_ sender: Any?) {
-        guard let event = NSApp.currentEvent else { return }
-        let isRightClick = event.type == .rightMouseUp || event.modifierFlags.contains(.control)
-        NSLog("[status] %@ click", isRightClick ? "right" : "left")
+        let event = NSApp.currentEvent
+        let isRightClick = event?.type == .rightMouseUp || (event?.modifierFlags.contains(.control) ?? false)
+        log.info("[status] click event=\(event.map { String($0.type.rawValue) } ?? "nil", privacy: .public) right=\(isRightClick ? "yes" : "no", privacy: .public)")
         if isRightClick {
             showSettingsMenu()
         } else {
@@ -158,21 +175,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func showSettingsMenu() {
         rebuildMenu()
-        // 临时把菜单挂到 status item 上，performClick 会按系统样式弹出菜单，
-        // 弹完立刻摘掉，下一次左键仍然走「显示挂件」。
-        statusItem.menu = statusMenu
-        statusItem.button?.performClick(nil)
-        statusItem.menu = nil
+        guard let button = statusItem.button else { return }
+        // 直接 popUp，不再临时挂 statusItem.menu（那套写法可能把按钮的 action 清掉）
+        statusMenu.popUp(positioning: nil,
+                         at: NSPoint(x: 0, y: 0),
+                         in: button)
+        configureStatusButton()
     }
 
     /// 左键：在菜单栏图标下方弹一个独立小窗，展示当前进度。
     /// 不碰桌面挂件的显隐和层级。位置会按屏幕可视区域夹边，避免出屏。
     private func toggleQuickPanel() {
         if let quick = quickPanel, quick.isVisible {
-            hideQuickPanel()
+            hideQuickPanel(reason: "toggle")
             return
         }
-        NSLog("[quick] show")
+        log.info("[quick] show")
 
         let size = AppState.defaultSize          // 小尺寸 338×158
         let card = YearProgressCardView(progress: state.progress,
@@ -197,13 +215,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         quickPanel = quick
 
         // 点其它 App / 桌面时收起（全局鼠标监听不需要辅助功能权限）
-        quickClickMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] _ in
-            self?.hideQuickPanel()
+        quickClickMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
+            self?.log.info("[quick] global mouse type=\(event.type.rawValue, privacy: .public) loc=\(String(describing: event.locationInWindow), privacy: .public)")
+            self?.hideQuickPanel(reason: "global mouse")
         }
     }
 
-    private func hideQuickPanel() {
-        NSLog("[quick] hide")
+    private func hideQuickPanel(reason: String) {
+        log.info("[quick] hide reason=\(reason, privacy: .public)")
         if let m = quickClickMonitor {
             NSEvent.removeMonitor(m)
             quickClickMonitor = nil

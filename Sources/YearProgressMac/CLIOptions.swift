@@ -23,6 +23,8 @@ struct CLIOptions {
     var headerFontOverride: CGFloat?
     /// 开发用：启动后自动弹出菜单栏 quick panel
     var showQuick = false
+    /// 开发用：模拟点击菜单栏按钮，验证 action 绑定
+    var testClick = false
 
     static func parse(_ argv: [String]) -> CLIOptions {
         var o = CLIOptions()
@@ -54,6 +56,8 @@ struct CLIOptions {
                 i += 1
             case "--show-quick":
                 o.showQuick = true
+            case "--test-click":
+                o.testClick = true
             case "--header-font":
                 if let v = next(), let n = Double(v) { o.headerFontOverride = CGFloat(n); i += 1 }
             case "--columns":
