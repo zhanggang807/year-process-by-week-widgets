@@ -272,13 +272,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = statusMenu
         menu.removeAllItems()
 
-        let progress = state.progress
-        let title = NSMenuItem(title: "\(progress.yearTitle) \(progress.subtitle)",
-                               action: nil, keyEquivalent: "")
-        title.isEnabled = false
-        menu.addItem(title)
-        menu.addItem(.separator())
-
         let guide = NSMenuItem(title: "添加系统小组件…", action: #selector(showWelcome), keyEquivalent: "?")
         guide.target = self
         menu.addItem(guide)
