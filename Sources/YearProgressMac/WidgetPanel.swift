@@ -55,7 +55,7 @@ struct QuickPopoverView: View {
         let total = CGSize(width: cardSize.width, height: cardSize.height + arrowHeight)
         let shape = PopoverShape(cornerRadius: cornerRadius,
                                  arrowHeight: arrowHeight,
-                                 arrowHalfWidth: 14,
+                                 arrowHalfWidth: 12,
                                  arrowCenterX: tailCenterX)
         return ZStack(alignment: .top) {
             shape.fill(LinearGradient(colors: theme.backgroundColors,

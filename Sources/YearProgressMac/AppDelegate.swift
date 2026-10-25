@@ -43,7 +43,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     /// 左键弹出的独立小窗（不影响桌面挂件）
     private var quickPanel: NSPanel?
-    private static let quickArrowHeight: CGFloat = 11
+    private static let quickArrowHeight: CGFloat = 14
     private static let quickCornerRadius: CGFloat = 20
     /// 点外部收起用的全局鼠标监听
     private var quickClickMonitor: Any?
@@ -259,7 +259,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         y = min(max(y, vf.minY + hMargin), vf.maxY - windowSize.height)
 
         // 被屏幕夹住时，尾巴跟着图标偏移（仍指向图标）
-        let half: CGFloat = 14
+        let half: CGFloat = 12
         let minTail = Self.quickCornerRadius + half + 4
         let maxTail = windowSize.width - Self.quickCornerRadius - half - 4
         let tailX = min(max(buttonOnScreen.midX - x, minTail), maxTail)

@@ -32,25 +32,19 @@ public struct PopoverShape: Shape {
         p.move(to: CGPoint(x: r, y: a))                       // 左上角之后
         p.addLine(to: CGPoint(x: left, y: a))
 
-        // 尖部用半径 rt 的圆帽（两段贝塞尔逼近半圆），比尖角圆润得多
-        let rt = min(5, half * 0.5)
-        let k: CGFloat = 0.5523
-        // 左侧上升，到达圆帽左端（切线竖直）
-        p.addCurve(to: CGPoint(x: cx - rt, y: rt),
-                   control1: CGPoint(x: left + half * 0.35, y: a * 0.55),
-                   control2: CGPoint(x: cx - rt, y: rt + (a - rt) * 0.35))
-        // 圆帽左半
-        p.addCurve(to: CGPoint(x: cx, y: 0),
-                   control1: CGPoint(x: cx - rt, y: rt - rt * k),
-                   control2: CGPoint(x: cx - rt * k, y: 0))
-        // 圆帽右半
-        p.addCurve(to: CGPoint(x: cx + rt, y: rt),
-                   control1: CGPoint(x: cx + rt * k, y: 0),
-                   control2: CGPoint(x: cx + rt, y: rt - rt * k))
-        // 右侧下降
-        p.addCurve(to: CGPoint(x: right, y: a),
-                   control1: CGPoint(x: cx + rt, y: rt + (a - rt) * 0.35),
-                   control2: CGPoint(x: right - half * 0.35, y: a * 0.55))
+        // 三角形尾巴：两条直边 + 顶点倒圆角（小半径，整体仍是三角）
+        let tipRadius: CGFloat = 4
+        let tanHalf = half / max(1, a)                 // tan(顶点半角)
+        let tangent = tipRadius / tanHalf               // 圆角切点到顶点的距离
+        let sideLength = hypot(half, a)
+        let u = min(tangent / sideLength, 0.85)         // 沿边方向的比例
+        let leftTip = CGPoint(x: cx - half * u, y: a * u)
+        let rightTip = CGPoint(x: cx + half * u, y: a * u)
+
+        p.addLine(to: leftTip)                          // 左直边上行
+        p.addQuadCurve(to: rightTip,                    // 顶点圆角（切线连续）
+                       control: CGPoint(x: cx, y: 0))
+        p.addLine(to: CGPoint(x: right, y: a))          // 右直边下行
 
         p.addLine(to: CGPoint(x: w - r, y: a))
         p.addQuadCurve(to: CGPoint(x: w, y: a + r), control: CGPoint(x: w, y: a))
