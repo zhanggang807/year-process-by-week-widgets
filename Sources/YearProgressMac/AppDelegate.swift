@@ -38,6 +38,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var state: AppState!
     private var panel: WidgetPanel!
     private var statusItem: NSStatusItem!
+    /// 右键弹出的设置菜单（左键不弹菜单，用来显示桌面挂件）
+    private let statusMenu = NSMenu()
 
     private var level: PanelLevel {
         get { PanelLevel(rawValue: AppDefaults.store.string(forKey: Self.levelKey) ?? "") ?? .desktop }
@@ -116,18 +118,52 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setUpStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.image = Self.makeStatusIcon()
-        statusItem.button?.imagePosition = .imageOnly
-        statusItem.button?.toolTip = "年进度小组件"
+        guard let button = statusItem.button else { return }
+        button.image = Self.makeStatusIcon()
+        button.imagePosition = .imageOnly
+        button.toolTip = "左键显示桌面挂件 · 右键设置"
 
-        let menu = NSMenu()
-        menu.delegate = self
-        statusItem.menu = menu
+        // 不用 statusItem.menu：那会让左右键都弹菜单。
+        // 自己处理点击，左键显示挂件，右键临时挂上菜单再弹。
+        button.target = self
+        button.action = #selector(statusItemClicked(_:))
+        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+
+        statusMenu.delegate = self
+        rebuildMenu()
+    }
+
+    // MARK: 菜单栏点击
+
+    @objc private func statusItemClicked(_ sender: Any?) {
+        guard let event = NSApp.currentEvent else { return }
+        let isRightClick = event.type == .rightMouseUp || event.modifierFlags.contains(.control)
+        if isRightClick {
+            showSettingsMenu()
+        } else {
+            showPanelFromMenuBar()
+        }
+    }
+
+    private func showSettingsMenu() {
+        rebuildMenu()
+        // 临时把菜单挂到 status item 上，performClick 会按系统样式弹出菜单，
+        // 弹完立刻摘掉，下一次左键仍然走「显示挂件」。
+        statusItem.menu = statusMenu
+        statusItem.button?.performClick(nil)
+        statusItem.menu = nil
+    }
+
+    /// 左键：显示桌面挂件（贴右上角、当前主题/尺寸；默认小尺寸 + 石墨）
+    private func showPanelFromMenuBar() {
+        isVisible = true
+        anchorTopRight()
+        panel.orderFrontRegardless()
         rebuildMenu()
     }
 
     private func rebuildMenu() {
-        guard let menu = statusItem.menu else { return }
+        let menu = statusMenu
         menu.removeAllItems()
 
         let progress = state.progress
