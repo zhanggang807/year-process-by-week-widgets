@@ -38,7 +38,7 @@ else
     -Xlinker -rpath -Xlinker $(CLT_LIB)
 endif
 
-.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose icon clean help
+.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose icon holidays clean help
 
 all: build
 
@@ -75,6 +75,7 @@ app: build
 	@cp $(BIN) $(APP)/Contents/MacOS/YearProgress
 	@cp Support/App-Info.plist $(APP)/Contents/Info.plist
 	@cp Support/AppIcon.icns $(APP)/Contents/Resources/AppIcon.icns
+	@cp -R Support/holidays $(APP)/Contents/Resources/holidays
 	@codesign --force --sign - $(APP)
 	@echo "已生成 $(APP)"
 
@@ -85,6 +86,7 @@ widget: app
 	@mkdir -p $(APPEX)/Contents/MacOS $(APPEX)/Contents/Resources
 	@cp $(BIN_WIDGET) $(APPEX)/Contents/MacOS/YearProgressWidget
 	@cp Support/Widget-Info.plist $(APPEX)/Contents/Info.plist
+	@cp -R Support/holidays $(APPEX)/Contents/Resources/holidays
 	@printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>' \
 	  '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' \
 	  '<plist version="1.0"><dict>' \
@@ -150,6 +152,16 @@ icon:
 	@cp $(BUILD_DIR)/AppIcon-1024.png $(BUILD_DIR)/AppIcon.iconset/icon_512x512@2x.png
 	@iconutil -c icns $(BUILD_DIR)/AppIcon.iconset -o Support/AppIcon.icns
 	@echo "已生成 Support/AppIcon.icns"
+
+# 拉取某年的官方节假日安排（来源：holiday-cn 镜像国务院通知）
+# 用法：make holidays YEAR=2027
+YEAR ?= 2026
+holidays:
+	@mkdir -p Support/holidays
+	@curl -fsSL -H "Accept: application/vnd.github.raw" \
+	  "https://api.github.com/repos/NateScarlet/holiday-cn/contents/$(YEAR).json?ref=master" \
+	  -o Support/holidays/$(YEAR).json
+	@echo "已更新 Support/holidays/$(YEAR).json（请检查 days 是否非空后再打包）"
 
 # 一键体检：注册状态 / 入口点 / 最近崩溃 / 扩展是否被调用
 diagnose:

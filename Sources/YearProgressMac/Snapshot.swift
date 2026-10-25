@@ -7,9 +7,14 @@ import YearProgressUI
 enum SnapshotRunner {
     @MainActor
     static func run(options: CLIOptions, outputPath: String) {
-        let progress = YearProgressCalculator.progress(for: options.date ?? Date(),
+        let now = options.date ?? Date()
+        let calendar = options.weekStartMode.makeCalendar(timeZone: options.timeZone)
+        let year = calendar.component(.year, from: now)
+        let progress = YearProgressCalculator.progress(for: now,
+                                                      calendar: calendar,
                                                       timeZone: options.timeZone,
-                                                      weekStartMode: options.weekStartMode)
+                                                      weekStartMode: options.weekStartMode,
+                                                      holidayTable: HolidayStore.table(for: year, timeZone: options.timeZone))
         if options.popoverPreview {
             let cardSize = AppState.defaultSize
             let view = QuickPopoverView(progress: progress,

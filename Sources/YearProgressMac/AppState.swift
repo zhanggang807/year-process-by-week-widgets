@@ -38,9 +38,7 @@ final class AppState: ObservableObject {
         } else {
             self.cardSize = Self.defaultSize          // 默认小尺寸
         }
-        self.progress = YearProgressCalculator.progress(for: dateOverride ?? Date(),
-                                                        timeZone: .current,
-                                                        weekStartMode: .monday)
+        self.progress = Self.makeProgress(for: dateOverride ?? Date(), weekStartMode: .monday)
         observeEnvironment()
         scheduleMidnightRefresh()
     }
@@ -56,10 +54,21 @@ final class AppState: ObservableObject {
     }
 
     func refresh() {
-        progress = YearProgressCalculator.progress(for: dateOverride ?? Date(),
-                                                   timeZone: .current,
-                                                   weekStartMode: weekStartMode)
+        progress = Self.makeProgress(for: dateOverride ?? Date(), weekStartMode: weekStartMode)
         scheduleMidnightRefresh()
+    }
+
+    /// 统一走 HolidayStore（缓存 → 打包 → 内建 → 法定兜底）
+    private static func makeProgress(for date: Date, weekStartMode: WeekStartMode) -> YearProgress {
+        let tz = TimeZone.current
+        let calendar = weekStartMode.makeCalendar(timeZone: tz)
+        let year = calendar.component(.year, from: date)
+        let holidays = HolidayStore.table(for: year, timeZone: tz)
+        return YearProgressCalculator.progress(for: date,
+                                               calendar: calendar,
+                                               timeZone: tz,
+                                               weekStartMode: weekStartMode,
+                                               holidayTable: holidays)
     }
 
     /// 下一个零点自动刷新。
@@ -84,6 +93,9 @@ final class AppState: ObservableObject {
             Task { @MainActor in self?.refresh() }
         }
         center.addObserver(forName: .NSSystemClockDidChange, object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in self?.refresh() }
+        }
+        center.addObserver(forName: .holidayDataUpdated, object: nil, queue: .main) { [weak self] _ in
             Task { @MainActor in self?.refresh() }
         }
         NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.didWakeNotification,

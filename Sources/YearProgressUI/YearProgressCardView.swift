@@ -38,7 +38,7 @@ public struct YearProgressCardView: View {
                 fixedColumns: Int? = nil,
                 headerFontOverride: CGFloat? = nil,
                 drawsBackground: Bool = true,
-                holidayMarker: HolidayMarkerStyle = .none) {
+                holidayMarker: HolidayMarkerStyle = .ring) {
         self.progress = progress
         self.theme = theme
         self.size = size

@@ -37,10 +37,16 @@ enum WidgetActivityLog {
 struct YearProgressProvider: TimelineProvider {
 
     private func makeEntry(for date: Date) -> YearProgressEntry {
-        YearProgressEntry(date: date,
-                          progress: YearProgressCalculator.progress(for: date,
-                                                                   timeZone: .current,
-                                                                   weekStartMode: .monday))
+        let tz = TimeZone.current
+        let calendar = WeekStartMode.monday.makeCalendar(timeZone: tz)
+        let year = calendar.component(.year, from: date)
+        let holidays = HolidayStore.table(for: year, timeZone: tz)
+        return YearProgressEntry(date: date,
+                                 progress: YearProgressCalculator.progress(for: date,
+                                                                          calendar: calendar,
+                                                                          timeZone: tz,
+                                                                          weekStartMode: .monday,
+                                                                          holidayTable: holidays))
     }
 
     func placeholder(in context: Context) -> YearProgressEntry {

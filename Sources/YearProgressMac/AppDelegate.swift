@@ -77,6 +77,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         setUpStatusItem()
         setUpPanel()
 
+        // 后台补全年份节假日数据（当前年 / 次年，缺失时才抓）
+        HolidayUpdater.refreshIfNeeded()
+
         if cli.showQuick {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
                 self?.toggleQuickPanel()
@@ -295,6 +298,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         refresh.target = self
         menu.addItem(refresh)
 
+        let holidays = NSMenuItem(title: "更新节假日数据", action: #selector(updateHolidays), keyEquivalent: "")
+        holidays.target = self
+        menu.addItem(holidays)
+
         menu.addItem(.separator())
 
         let levelHeader = NSMenuItem(title: "窗口层级", action: nil, keyEquivalent: "")
@@ -352,6 +359,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             panel.orderOut(nil)
         }
+        rebuildMenu()
+    }
+
+    @objc private func updateHolidays() {
+        HolidayUpdater.refreshIfNeeded(force: true)
         rebuildMenu()
     }
 
