@@ -25,6 +25,8 @@ public struct YearProgressCardView: View {
     public var headerFontOverride: CGFloat?
     /// false 时不画自己的背景（菜单栏弹窗由 PopoverShape 统一填色）
     public var drawsBackground: Bool
+    /// 节假日方块上的小标记样式
+    public var holidayMarker: HolidayMarkerStyle
 
     public init(progress: YearProgress,
                 theme: CardTheme,
@@ -35,7 +37,8 @@ public struct YearProgressCardView: View {
                 preferredColumns: Int = 13,
                 fixedColumns: Int? = nil,
                 headerFontOverride: CGFloat? = nil,
-                drawsBackground: Bool = true) {
+                drawsBackground: Bool = true,
+                holidayMarker: HolidayMarkerStyle = .none) {
         self.progress = progress
         self.theme = theme
         self.size = size
@@ -46,6 +49,7 @@ public struct YearProgressCardView: View {
         self.fixedColumns = fixedColumns
         self.headerFontOverride = headerFontOverride
         self.drawsBackground = drawsBackground
+        self.holidayMarker = holidayMarker
     }
 
     public var body: some View {
@@ -120,8 +124,8 @@ public struct YearProgressCardView: View {
                                           side: CGFloat(layout.cellSize),
                                           radius: radius,
                                           theme: theme,
-                                          timeZone: progress.timeZone,
-                                          showsTooltip: showsTooltips)
+                                          showsTooltip: showsTooltips,
+                                          holidayMarker: holidayMarker)
                         }
                     }
                 }
@@ -156,8 +160,8 @@ private struct WeekBlockView: View {
     let side: CGFloat
     let radius: CGFloat
     let theme: CardTheme
-    let timeZone: TimeZone
     let showsTooltip: Bool
+    let holidayMarker: HolidayMarkerStyle
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -170,6 +174,9 @@ private struct WeekBlockView: View {
                         .fill(theme.currentProgressFill)
                         .frame(height: max(0, min(1, cell.fraction)) * side)
                 }
+            }
+            if cell.holiday != nil {
+                HolidayMarker(style: holidayMarker, side: side, radius: radius, color: theme.holidayAccent)
             }
             // 第几周：水平 + 垂直居中
             number
@@ -231,15 +238,17 @@ private struct WeekBlockView: View {
     }
 
     private var tooltip: String {
-        let fmt = DateFormatter()
-        fmt.dateFormat = "M/d"
-        fmt.timeZone = timeZone
-        let range = "\(fmt.string(from: cell.start))–\(fmt.string(from: cell.end))"
+        let range = cell.rangeText
         switch cell.state {
-        case .past: return "第 \(cell.index) 周 · \(range) · 已过"
-        case .current: return "第 \(cell.index) 周 · \(range) · 本周（已过 \(Int((cell.fraction * 100).rounded()))%）"
-        case .future: return "第 \(cell.index) 周 · \(range) · 未来"
+        case .past: return "第 \(cell.index) 周 · \(range) · 已过\(holidaySuffix)"
+        case .current: return "第 \(cell.index) 周 · \(range) · 本周（已过 \(Int((cell.fraction * 100).rounded()))%）\(holidaySuffix)"
+        case .future: return "第 \(cell.index) 周 · \(range) · 未来\(holidaySuffix)"
         }
+    }
+
+    private var holidaySuffix: String {
+        guard let holiday = cell.holiday else { return "" }
+        return " · \(holiday)"
     }
 }
 

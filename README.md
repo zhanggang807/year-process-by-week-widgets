@@ -75,6 +75,7 @@ make icon       # 重新生成 App 图标（Tools/make-icon.swift → .icns）
 | `--scale <n>` / `--margin <pt>` | 导出倍率（默认 2）与留白（默认 36） |
 | `--timezone <id>` | 例如 `Asia/Shanghai` |
 | `--week-start monday\|sunday\|locale` | 一周从哪天开始，默认周一（ISO 8601） |
+| `--marker none\|dot\|bar\|triangle\|ring\|stripe` | 节假日标记样式（预览用；App 内默认不显示） |
 
 ---
 

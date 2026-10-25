@@ -43,8 +43,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     /// 左键弹出的独立小窗（不影响桌面挂件）
     private var quickPanel: NSPanel?
-    private static let quickArrowHeight: CGFloat = 14
-    private static let quickCornerRadius: CGFloat = 20
     /// 点外部收起用的全局鼠标监听
     private var quickClickMonitor: Any?
     /// 右键弹出的设置菜单（左键不弹菜单，用来显示桌面挂件）
@@ -208,14 +206,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         log.info("[quick] show")
 
         let cardSize = AppState.defaultSize      // 338×158
-        let windowSize = CGSize(width: cardSize.width, height: cardSize.height + Self.quickArrowHeight)
+        let windowSize = CGSize(width: cardSize.width, height: cardSize.height + QuickPopoverMetrics.arrowHeight)
         guard let placement = quickPlacement(windowSize: windowSize) else { return }
 
         let popover = QuickPopoverView(progress: state.progress,
                                        theme: state.theme,           // 默认石墨
                                        cardSize: cardSize,
-                                       arrowHeight: Self.quickArrowHeight,
-                                       cornerRadius: Self.quickCornerRadius,
                                        tailCenterX: placement.tailX)
         let quick = NSPanel(contentRect: NSRect(origin: .zero, size: windowSize),
                             styleMask: [.borderless],
@@ -260,8 +256,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let screen = buttonWindow.screen ?? NSScreen.screens.first ?? NSScreen.main else { return nil }
         let vf = screen.visibleFrame
 
-        let hMargin: CGFloat = 8
-        let gap: CGFloat = 4
+        let hMargin = QuickPopoverMetrics.edgeMargin
+        let gap = QuickPopoverMetrics.gap
 
         // 水平居中于图标
         var x = buttonOnScreen.midX - windowSize.width / 2
@@ -272,9 +268,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         y = min(max(y, vf.minY + hMargin), vf.maxY - windowSize.height)
 
         // 被屏幕夹住时，尾巴跟着图标偏移（仍指向图标）
-        let half: CGFloat = 12
-        let minTail = Self.quickCornerRadius + half + 4
-        let maxTail = windowSize.width - Self.quickCornerRadius - half - 4
+        let half = QuickPopoverMetrics.arrowHalfWidth
+        let inset = QuickPopoverMetrics.tailInset
+        let minTail = QuickPopoverMetrics.cornerRadius + half + inset
+        let maxTail = windowSize.width - QuickPopoverMetrics.cornerRadius - half - inset
         let tailX = min(max(buttonOnScreen.midX - x, minTail), maxTail)
         log.info("[quick] place iconMid=\(buttonOnScreen.midX, privacy: .public) winX=\(x, privacy: .public) winW=\(windowSize.width, privacy: .public) tailX=\(tailX, privacy: .public)")
 

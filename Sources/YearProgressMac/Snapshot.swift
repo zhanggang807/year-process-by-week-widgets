@@ -15,8 +15,6 @@ enum SnapshotRunner {
             let view = QuickPopoverView(progress: progress,
                                         theme: options.theme,
                                         cardSize: cardSize,
-                                        arrowHeight: 11,
-                                        cornerRadius: 20,
                                         tailCenterX: cardSize.width / 2)
                 .padding(options.margin)
                 .background(Color.clear)
@@ -40,7 +38,8 @@ enum SnapshotRunner {
                                         profile: options.chrome == .widget ? .widget : .app,
                                         chrome: chrome,
                                         fixedColumns: options.columns ?? (chrome == .card ? WidgetGridReference.columns(weekCount: progress.totalWeeks) : nil),
-                                        headerFontOverride: options.headerFontOverride)
+                                        headerFontOverride: options.headerFontOverride,
+                                        holidayMarker: options.holidayMarker)
             .padding(options.margin)
             .background(Color.clear)
 
@@ -63,6 +62,8 @@ enum SnapshotRunner {
                                                  available: metrics.gridArea(noteVisible: progress.boundaryNote != nil),
                                                  forcedColumns: fixedColumns)
         print("  布局: \(layout.columns) 列 × \(layout.rows) 行 · 方块 \(String(format: "%.1f", layout.cellSize))pt · 末行 \(layout.lastRowCount(weekCount: progress.totalWeeks)) 块 · 顶部字号 \(String(format: "%.1f", metrics.headerFont))pt")
+        let holidayWeeks = progress.weeks.filter { $0.holiday != nil }.map { "\($0.index):\($0.holiday!)" }
+        if !holidayWeeks.isEmpty { print("  假期周: \(holidayWeeks.joined(separator: "  "))") }
 
         let url = URL(fileURLWithPath: outputPath)
         try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)

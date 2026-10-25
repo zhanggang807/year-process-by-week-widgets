@@ -16,6 +16,7 @@ struct YearProgressEntry: TimelineEntry {
 /// 位置：~/Library/Containers/com.local.yearprogress.widget/Data/Library/Application Support/widget-activity.log
 enum WidgetActivityLog {
     static func touch(_ what: String) {
+        #if DEBUG
         guard let dir = try? FileManager.default.url(for: .applicationSupportDirectory,
                                                      in: .userDomainMask,
                                                      appropriateFor: nil,
@@ -29,6 +30,7 @@ enum WidgetActivityLog {
         } else {
             try? line.write(to: url, atomically: true, encoding: .utf8)
         }
+        #endif
     }
 }
 

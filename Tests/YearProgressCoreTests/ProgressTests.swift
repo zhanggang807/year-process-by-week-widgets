@@ -132,6 +132,31 @@ struct ProgressTests {
         _ = calendar
     }
 
+    @Test("DST 周用真实长度算比例（169h / 167h）")
+    func dstWeekFraction() {
+        let ny = TimeZone(identifier: "America/New_York")!
+
+        // 2026-11-01 02:00 回拨：所在周 169 小时
+        let fall = YearProgressCalculator.progress(for: date("2026-11-01 12:00", ny),
+                                                  timeZone: ny, weekStartMode: .monday)
+        let fallCell = fall.currentWeek!
+        #expect(abs(fallCell.endExclusive.timeIntervalSince(fallCell.start) - 169 * 3600) < 60)
+        #expect(abs(fallCell.fraction - 157.0 / 169.0) < 1e-6)
+
+        // 2026-03-08 02:00 前拨：所在周 167 小时
+        let spring = YearProgressCalculator.progress(for: date("2026-03-05 12:00", ny),
+                                                    timeZone: ny, weekStartMode: .monday)
+        let springCell = spring.currentWeek!
+        #expect(abs(springCell.endExclusive.timeIntervalSince(springCell.start) - 167 * 3600) < 60)
+        #expect(abs(springCell.fraction - 84.0 / 167.0) < 1e-6)
+    }
+
+    @Test("rangeText 在计算时预生成")
+    func weekRangeText() {
+        let p = progress("2026-10-15 12:00")
+        #expect(p.weeks[41].rangeText == "10/12–10/18")
+    }
+
     @Test("逐日全量校验：年份跟着公历年、本周唯一、状态自洽（2019–2031 × 4 时区）")
     func dailyInvariants() {
         for tzName in ["Asia/Shanghai", "UTC", "America/New_York", "Australia/Sydney"] {

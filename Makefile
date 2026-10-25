@@ -75,7 +75,7 @@ app: build
 	@cp $(BIN) $(APP)/Contents/MacOS/YearProgress
 	@cp Support/App-Info.plist $(APP)/Contents/Info.plist
 	@cp Support/AppIcon.icns $(APP)/Contents/Resources/AppIcon.icns
-	@codesign --force --sign - $(APP) >/dev/null 2>&1 || echo "  (签名跳过)"
+	@codesign --force --sign - $(APP)
 	@echo "已生成 $(APP)"
 
 # 组装宿主 App + WidgetKit 扩展（.appex），再注册到 LaunchServices / pluginkit。
@@ -91,8 +91,8 @@ widget: app
 	  '  <key>com.apple.security.app-sandbox</key><true/>' \
 	  '</dict></plist>' > $(BUILD_DIR)/widget.entitlements
 	@echo "签名扩展…"
-	@codesign --force --sign - --entitlements $(BUILD_DIR)/widget.entitlements --generate-entitlement-der $(APPEX) 2>&1 | sed 's/^/  /' || true
-	@codesign --force --sign - --generate-entitlement-der $(APP) 2>&1 | sed 's/^/  /' || true
+	@codesign --force --sign - --entitlements $(BUILD_DIR)/widget.entitlements --generate-entitlement-der $(APPEX)
+	@codesign --force --sign - --generate-entitlement-der $(APP)
 	@$(MAKE) -s register
 	@echo ""
 	@echo "下一步：点击菜单栏最右侧的时间 → 通知中心底部「编辑小组件…」→ 搜索「年进度」。"
@@ -110,12 +110,15 @@ register:
 INSTALL_PATH := /Applications/YearProgress.app
 
 install: widget
+	@osascript -e 'tell application id "$(BUNDLE_ID)" to quit' >/dev/null 2>&1 || true
+	@sleep 1
 	@rm -rf "$(INSTALL_PATH)"
 	@cp -R $(APP) "$(INSTALL_PATH)"
 	@pluginkit -a "$(INSTALL_PATH)/Contents/PlugIns/YearProgressWidget.appex" 2>/dev/null || true
 	@$(LSREGISTER) -f "$(INSTALL_PATH)" >/dev/null 2>&1 || true
 	@killall chronod 2>/dev/null || true
 	@echo "已安装到 $(INSTALL_PATH) 并重新注册"
+	@open "$(INSTALL_PATH)"
 
 uninstall:
 	@pluginkit -r "$(INSTALL_PATH)/Contents/PlugIns/YearProgressWidget.appex" 2>/dev/null || true

@@ -14,6 +14,10 @@ public struct WeekCell: Identifiable, Hashable, Sendable {
     public let state: State
     /// 本周已过的比例 0...1（非本周：past 为 1、future 为 0）。
     public let fraction: Double
+    /// 本周内的节假日名（只看周一~周五；周末不算），nil 表示无。
+    public let holiday: String?
+    /// 展示用区间，如 "10/12–10/18"（每次进度计算时生成一次，避免每格重复建 DateFormatter）
+    public let rangeText: String
 
     public var id: Int { index }
     /// 该周最后一天（周日）。用于展示区间。
@@ -103,28 +107,73 @@ public enum YearProgressCalculator {
     public static func progress(for date: Date,
                                 calendar: Calendar,
                                 timeZone: TimeZone,
-                                weekStartMode: WeekStartMode = .monday) -> YearProgress {
+                                weekStartMode: WeekStartMode = .monday,
+                                holidayTable: HolidayTable? = nil) -> YearProgress {
         // 展示年份 = 当前公历年（不是 ISO 周年度）
         let year = calendar.component(.year, from: date)
         let count = YearWeekMath.weeksInYear(year, calendar: calendar)
-        let dayLength: TimeInterval = 7 * 24 * 3600
+        let holidays = holidayTable ?? HolidayTable.builtIn(for: year)
+
+        // 每次计算只建一个 formatter，rangeText 预计算好（原来每个方块每次渲染都要建）
+        let dayFormat = DateFormatter()
+        dayFormat.locale = Locale(identifier: "en_US_POSIX")
+        dayFormat.timeZone = timeZone
+        dayFormat.dateFormat = "M/d"
 
         var cells: [WeekCell] = []
         cells.reserveCapacity(count)
+
+        // 第 1 周只算一次，其余按 7 个自然日推进；任何一步失败都显式断言，
+        // 不再 `continue` 静默少一格（那会让 totalWeeks/percent 悄悄算错）。
+        guard count > 0,
+              let first = YearWeekMath.weekRange(index: 1, weekYear: year, calendar: calendar) else {
+            assertionFailure("无法计算 \(year) 年第 1 周")
+            return YearProgress(year: year, ganzhi: Ganzhi(year: year), weeks: [],
+                                referenceDate: date, timeZone: timeZone,
+                                weekStartMode: weekStartMode, outOfGridWeek: nil)
+        }
+
+        var weekStart = first.start
         for index in 1...count {
-            guard let range = YearWeekMath.weekRange(index: index, weekYear: year, calendar: calendar) else { continue }
+            let endExclusive: Date
+            if let next = calendar.date(byAdding: .day, value: 7, to: weekStart) {
+                endExclusive = next
+            } else {
+                assertionFailure("无法计算第 \(index) 周的结束")
+                endExclusive = weekStart.addingTimeInterval(7 * 24 * 3600)
+            }
+
             let state: WeekCell.State
             let fraction: Double
-            if date >= range.endExclusive {
+            if date >= endExclusive {
                 state = .past; fraction = 1
-            } else if date < range.start {
+            } else if date < weekStart {
                 state = .future; fraction = 0
             } else {
                 state = .current
-                fraction = min(1, max(0, date.timeIntervalSince(range.start) / dayLength))
+                // 用这一周的真实长度（DST 周可能是 167/169 小时），而不是固定 168 小时
+                let span = endExclusive.timeIntervalSince(weekStart)
+                fraction = min(1, max(0, date.timeIntervalSince(weekStart) / span))
             }
-            cells.append(WeekCell(index: index, start: range.start, endExclusive: range.endExclusive,
-                                  state: state, fraction: fraction))
+            // 周内是否有工作日假期（周六日不算）
+            var holidayName: String?
+            if let holidays {
+                var day = weekStart
+                while day < endExclusive {
+                    let weekday = calendar.component(.weekday, from: day)   // 1=Sun ... 7=Sat
+                    if weekday != 1, weekday != 7, let name = holidays.holidayName(on: day, calendar: calendar) {
+                        holidayName = name
+                        break
+                    }
+                    day = calendar.date(byAdding: .day, value: 1, to: day) ?? endExclusive
+                }
+            }
+
+            let rangeText = "\(dayFormat.string(from: weekStart))–\(dayFormat.string(from: endExclusive.addingTimeInterval(-1)))"
+            cells.append(WeekCell(index: index, start: weekStart, endExclusive: endExclusive,
+                                  state: state, fraction: fraction, holiday: holidayName,
+                                  rangeText: rangeText))
+            weekStart = endExclusive
         }
 
         // 今天的这一周不在网格里时（跨年周），记下它真正属于哪一年第几周，用于文案说明。

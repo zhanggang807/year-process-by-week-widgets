@@ -94,6 +94,9 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// 节假日标记：暖红，和冷色方块形成对比（两种状态下都清楚）
+    public var holidayAccent: Color { Color(red: 0.902, green: 0.318, blue: 0.235) }
+
     /// 本周：浅色底（还没过）+ 从底部升起的深色进度条（已过）。
     public var currentFill: Color { futureFill }
     public var currentProgressFill: Color { pastFill }

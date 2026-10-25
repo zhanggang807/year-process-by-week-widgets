@@ -46,16 +46,15 @@ struct QuickPopoverView: View {
     let progress: YearProgress
     let theme: CardTheme
     let cardSize: CGSize
-    let arrowHeight: CGFloat
-    let cornerRadius: CGFloat
     /// 尾巴尖在窗口内的 x（正常居中；被屏幕边缘夹住时会偏移，仍指向图标）
     let tailCenterX: CGFloat
 
     var body: some View {
-        let total = CGSize(width: cardSize.width, height: cardSize.height + arrowHeight)
-        let shape = PopoverShape(cornerRadius: cornerRadius,
-                                 arrowHeight: arrowHeight,
-                                 arrowHalfWidth: 12,
+        let arrow = QuickPopoverMetrics.arrowHeight
+        let total = CGSize(width: cardSize.width, height: cardSize.height + arrow)
+        let shape = PopoverShape(cornerRadius: QuickPopoverMetrics.cornerRadius,
+                                 arrowHeight: arrow,
+                                 arrowHalfWidth: QuickPopoverMetrics.arrowHalfWidth,
                                  arrowCenterX: tailCenterX)
         return ZStack(alignment: .top) {
             shape.fill(LinearGradient(colors: theme.backgroundColors,
@@ -68,7 +67,7 @@ struct QuickPopoverView: View {
                                  showsTooltips: false,
                                  drawsBackground: false)
                 .frame(width: cardSize.width, height: cardSize.height)
-                .offset(y: arrowHeight)
+                .offset(y: arrow)
         }
         .frame(width: total.width, height: total.height)
         .clipShape(shape)

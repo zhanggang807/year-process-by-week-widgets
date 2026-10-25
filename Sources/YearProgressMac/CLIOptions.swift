@@ -27,6 +27,8 @@ struct CLIOptions {
     var testClick = false
     /// 导出菜单栏弹窗（带小三角）的预览
     var popoverPreview = false
+    /// 节假日标记样式
+    var holidayMarker: HolidayMarkerStyle = .none
     /// 开发用：模拟"挂菜单→摘菜单→重新绑定→左键点击"的完整序列
     var testMenuClick = false
 
@@ -64,6 +66,8 @@ struct CLIOptions {
                 o.testClick = true
             case "--popover":
                 o.popoverPreview = true
+            case "--marker":
+                if let v = next(), let m = HolidayMarkerStyle(rawValue: v) { o.holidayMarker = m; i += 1 }
             case "--test-menu-click":
                 o.testMenuClick = true
             case "--header-font":
@@ -102,6 +106,7 @@ struct CLIOptions {
       --timezone <id>       例如 Asia/Shanghai
       --week-start monday|sunday|locale
       --chrome card|widget   导出样式：card（App 大卡片）/ widget（系统小组件，无外框）
+      --marker none|dot|bar|triangle|ring|stripe   节假日标记样式（预览用）
     """
 
     static func parseDate(_ s: String, timeZone: TimeZone) -> Date? {
