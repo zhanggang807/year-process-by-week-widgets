@@ -3,9 +3,9 @@ import Foundation
 /// 一个方块 = 一年里的一周。
 public struct WeekCell: Identifiable, Hashable, Sendable {
     public enum State: String, Hashable, Sendable {
-        case past      // 已过（白块）
-        case current   // 本周（白底 + 黑描边 + 进度条）
-        case future    // 未来（黑块）
+        case past      // 已过（主题的深色块）
+        case current   // 本周（上半深色/下半浅色，随进度推进）
+        case future    // 未来（主题的浅色块）
     }
 
     public let index: Int          // 第几周，1...53
@@ -24,13 +24,13 @@ public struct WeekCell: Identifiable, Hashable, Sendable {
     public var end: Date { endExclusive.addingTimeInterval(-1) }
 }
 
-/// 某一年的周进度快照：纯值对象，任何时刻都能由「当前时间 + 时区」重算。
 /// 「今天」落在网格之外时的信息（年初/年末那几个跨年周）。
 public struct OutOfGridWeek: Hashable, Sendable {
     public let year: Int        // 它真正属于哪一年（周年度）
     public let index: Int       // 第几周
 }
 
+/// 某一年的周进度快照：纯值对象，任何时刻都能由「当前时间 + 时区」重算。
 public struct YearProgress: Sendable {
     public let year: Int                 // 展示年份 = 当前公历年
     public let ganzhi: Ganzhi
@@ -47,6 +47,7 @@ public struct YearProgress: Sendable {
     public var remainingWeeks: Int { weeks.filter { $0.state == .future }.count }
 
     /// 已完成比例 0...100（按「周」计，本周按已过的天数比例折算）。
+    /// 注意这是"周进度"，不是"天进度"：最后一周走到一半时百分比会明显跳一格。
     public var percent: Double {
         guard totalWeeks > 0 else { return 0 }
         let done = Double(pastCount) + (currentWeek?.fraction ?? 0)

@@ -7,6 +7,11 @@
 #   make preview    用几个典型日期导出 PNG 到 docs/
 #   make spec       重新生成 spec/year-weeks.json（跨平台真值表）
 #   make widget     打包 + 组装 + 签名 .appex 并注册到系统（通知中心「编辑小组件」里可见）
+#   make install    安装到 /Applications（先退出旧实例，装完自动重开）
+#   make uninstall  卸载 /Applications 里的 App
+#   make diagnose   注册状态 / 入口点 / 最近崩溃 / 扩展调用
+#   make icon       重新生成 App 图标
+#   make holidays YEAR=2027   拉取某年的官方节假日安排
 #   make clean
 
 SWIFT      ?= swift
@@ -43,7 +48,7 @@ endif
 all: build
 
 help:
-	@sed -n '1,12p' Makefile
+	@sed -n '1,22p' Makefile
 
 build:
 	$(SWIFT) build -c $(CONFIG)
@@ -82,6 +87,9 @@ app: build
 # 组装宿主 App + WidgetKit 扩展（.appex），再注册到 LaunchServices / pluginkit。
 # 没有 Xcode 时也能做：swiftc 能编 WidgetKit 代码，剩下的就是手工摆包结构 + 签名。
 widget: app
+	@# App Extension 的入口必须是扩展运行时（Xcode 里的 LD_ENTRY_POINT = _NSExtensionMain）。
+	@# 少了它会直接跑 WidgetBundle.main()，ExtensionFoundation 初始化即 SIGTRAP。
+	@$(SWIFT) build -c $(CONFIG) --product YearProgressWidget -Xlinker -e -Xlinker _NSExtensionMain
 	@rm -rf $(APPEX)
 	@mkdir -p $(APPEX)/Contents/MacOS $(APPEX)/Contents/Resources
 	@cp $(BIN_WIDGET) $(APPEX)/Contents/MacOS/YearProgressWidget

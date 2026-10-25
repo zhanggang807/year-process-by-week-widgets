@@ -50,6 +50,8 @@ public struct CardMetrics {
     public var headerGap: CGFloat { max(6, size.width * profile.headerGapRatio) }
     public var noteGap: CGFloat { max(2, size.width * profile.noteGapRatio) }
 
+    /// +2 是两轮视觉微调后定下的固定增量：clamp 保证极限尺寸可读，
+    /// 固定增量保证中等尺寸下标题不会随容器轻微变化而抖动。
     public var headerFont: CGFloat { headerFontOverride ?? (clamp(size.width * profile.headerRatio, profile.headerRange) + 2) }
     public var noteFont: CGFloat { clamp(size.width * profile.noteRatio, profile.noteRange) }
 

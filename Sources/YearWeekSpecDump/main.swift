@@ -23,7 +23,6 @@ struct ProbeEntry: Codable {
 }
 
 struct Fixture: Codable {
-    let generatedAt: String
     let rule: String
     let timeZone: String
     let weekStart: String
@@ -41,8 +40,6 @@ let dayFormat = DateFormatter()
 dayFormat.locale = Locale(identifier: "en_US_POSIX")
 dayFormat.timeZone = tz
 dayFormat.dateFormat = "yyyy-MM-dd"
-let stampFormat = ISO8601DateFormatter()
-
 let yearRange = 2015...2035
 var years: [YearEntry] = []
 var probes: [ProbeEntry] = []
@@ -86,8 +83,7 @@ for year in yearRange {
     }
 }
 
-let fixture = Fixture(generatedAt: stampFormat.string(from: Date()),
-                      rule: "ISO 8601 (Monday first, minimumDaysInFirstWeek = 4)",
+let fixture = Fixture(rule: "ISO 8601 (Monday first, minimumDaysInFirstWeek = 4)",
                       timeZone: "UTC",
                       weekStart: "monday",
                       years: years,

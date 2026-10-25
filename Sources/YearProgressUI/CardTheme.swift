@@ -1,7 +1,14 @@
 import SwiftUI
-import AppKit
 
-/// 卡片配色。默认紫色（与参考图同一气质），黑白方块在其上都清晰可辨。
+// 主题层要同时服务 macOS 面板和未来的 iOS 小组件：
+// 只在对应平台导入 AppKit/UIKit，避免 iOS 编译时找不到 NSColor。
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
+#endif
+
+/// 卡片配色。面板默认石墨；widget 固定暗岩灰；另有紫色与跟随系统两套供切换。
 public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
     case violet
     case graphite
@@ -21,13 +28,24 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// 系统主题的底色：macOS 用窗口底色，iOS 用 systemBackground
+    static var systemBackground: Color {
+        #if canImport(AppKit)
+        return Color(nsColor: .windowBackgroundColor)
+        #elseif canImport(UIKit)
+        return Color(uiColor: .systemBackground)
+        #else
+        return Color.gray
+        #endif
+    }
+
     public var backgroundColors: [Color] {
         switch self {
         case .violet: return [Color(red: 0.478, green: 0.263, blue: 0.937),
                               Color(red: 0.663, green: 0.333, blue: 0.949)]
         case .graphite: return [Color(red: 0.208, green: 0.208, blue: 0.227),
                                 Color(red: 0.118, green: 0.118, blue: 0.133)]
-        case .system: return [Color(nsColor: .windowBackgroundColor)]
+        case .system: return [Self.systemBackground]
         case .slate: return [Color(red: 0.200, green: 0.212, blue: 0.231),   // #33363B
                              Color(red: 0.125, green: 0.137, blue: 0.153)]   // #202327
         }
@@ -83,7 +101,7 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .violet: return .white
         case .graphite, .slate: return Color.white.opacity(0.92)
-        case .system: return Color(nsColor: .windowBackgroundColor)   // 与 .primary 相反
+        case .system: return Self.systemBackground                      // 与 .primary 相反
         }
     }
     public var futureLabel: Color {

@@ -55,9 +55,9 @@ struct CLIOptions {
             case "--size":
                 if let v = next(), let s = parseSize(v) { o.size = s; o.sizeOverride = s; i += 1 }
             case "--scale":
-                if let v = next(), let s = Double(v) { o.scale = CGFloat(s); i += 1 }
+                if let v = next(), let s = Double(v), s > 0 { o.scale = CGFloat(s); i += 1 }
             case "--margin":
-                if let v = next(), let m = Double(v) { o.margin = CGFloat(m); i += 1 }
+                if let v = next(), let m = Double(v), m >= 0 { o.margin = CGFloat(m); i += 1 }
             case "--timezone":
                 i += 1
             case "--show-quick":
@@ -71,9 +71,9 @@ struct CLIOptions {
             case "--test-menu-click":
                 o.testMenuClick = true
             case "--header-font":
-                if let v = next(), let n = Double(v) { o.headerFontOverride = CGFloat(n); i += 1 }
+                if let v = next(), let n = Double(v), n > 0 { o.headerFontOverride = CGFloat(n); i += 1 }
             case "--columns":
-                if let v = next(), let n = Int(v) { o.columns = n; i += 1 }
+                if let v = next(), let n = Int(v), n > 0 { o.columns = n; i += 1 }
             case "--chrome":
                 if let v = next() { o.chrome = (v == "widget") ? .widget : .card; i += 1 }
             case "--week-start":
@@ -99,7 +99,7 @@ struct CLIOptions {
     参数:
       --snapshot <path>     导出 PNG 后退出
       --date <yyyy-MM-dd>   把「今天」固定为某一天
-      --theme violet|graphite
+      --theme violet|graphite|system|slate
       --size <W>x<H>        默认 600x292
       --scale <n>           导出倍率，默认 2
       --margin <pt>         导出留白，默认 36

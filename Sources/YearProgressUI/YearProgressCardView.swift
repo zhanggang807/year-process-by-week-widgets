@@ -9,7 +9,7 @@ public enum CardChrome: Sendable {
     case widget
 }
 
-/// 卡片本体：顶部一行居中「2026年 · 丙午年 · 第 42/53 周 · 已过 78%」，下面是方块网格。
+/// 卡片本体：顶部一行居中（年份 · 干支 · 第 N 周 · 剩 M 周 · 已过 X%），下面是方块网格。
 /// App 与系统小组件共用同一份实现。
 public struct YearProgressCardView: View {
     public let progress: YearProgress
@@ -154,7 +154,8 @@ private struct CardChromeModifier: ViewModifier {
     }
 }
 
-/// 一个方块 = 一周。已过 = 黑块，未来 = 白块，本周 = 白底 + 从底部升起的黑色进度条。
+/// 一个方块 = 一周。已过=深色、未来=浅色；本周的深色部分从顶部向下增长；
+/// 节假日周按 `holidayMarker` 叠加标记；数字用 `.monospacedDigit` 保证列对齐。
 private struct WeekBlockView: View {
     let cell: WeekCell
     let side: CGFloat
@@ -258,11 +259,13 @@ private struct TooltipModifier: ViewModifier {
     let enabled: Bool
 
     func body(content: Content) -> some View {
+        // .help 是 macOS-only；小组件传 enabled=false，但 iOS 编译时也不能出现该调用
+        #if canImport(AppKit)
         if enabled {
             return AnyView(content.help(text))
-        } else {
-            return AnyView(content)
         }
+        #endif
+        return AnyView(content)
     }
 }
 

@@ -66,6 +66,7 @@ public enum GridLayoutCalculator {
     public static func bestCellSize(columns: Int, rows: Int, available: (width: Double, height: Double)) -> Double {
         let byWidth = available.width / (Double(columns) + gapRatio * Double(columns - 1))
         let byHeight = available.height / (Double(rows) + gapRatio * Double(rows - 1))
+        // 下界 1pt：极端小容器里宁可溢出一点，也不要算出 0/负数导致布局崩溃
         return max(1, min(byWidth, byHeight))
     }
 

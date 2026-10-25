@@ -71,7 +71,7 @@ make icon       # 重新生成 App 图标（Tools/make-icon.swift → .icns）
 |---|---|
 | `--snapshot <path>` | 离屏渲染成 PNG 后退出（无需窗口，用于自查/分享） |
 | `--date <yyyy-MM-dd>` | 把「今天」固定成某一天，方便验证任意日期 |
-| `--theme violet\|graphite` | 卡片配色，默认紫色 |
+| `--theme violet\|graphite\|system\|slate` | 卡片配色；面板默认石墨 |
 | `--size <W>x<H>` | 卡片尺寸，默认 600x292 |
 | `--scale <n>` / `--margin <pt>` | 导出倍率（默认 2）与留白（默认 36） |
 | `--timezone <id>` | 例如 `Asia/Shanghai` |
@@ -165,11 +165,15 @@ Sources/
     YearProgress.swift       WeekCell / YearProgress / YearProgressCalculator
     Ganzhi.swift             天干地支生肖
     GridLayout.swift         列数、行数、方块边长、间距、每行几个
+    HolidayTable.swift       节假日数据模型 / 校验 / 法定兜底
+    HolidayStore.swift       缓存 → 打包 → 内建 → 兜底 的读取与保存
   YearProgressUI/           App 与小组件共用的视图层（SwiftUI）
     YearProgressCardView.swift 卡片视图（顶部单行 + 网格 + 方块），支持 app / widget 两种档位
     CardTheme.swift / CardMetrics.swift   配色与尺寸推导（含字号上下限）
   YearProgressWidget/        WidgetKit 扩展（TimelineProvider + Widget + WidgetBundle）
   YearProgressMac/           macOS 宿主 App（AppKit + SwiftUI）
+    AppDefaults.swift         面板偏好域（平台层，不放 Core）
+    HolidayUpdater.swift      年度节假日抓取 / 节流 / 通知
     WelcomeWindow.swift       首启使用说明窗口
     AppState.swift            状态 + 零点刷新调度
     AppDelegate.swift         菜单栏图标与菜单、窗口层级
@@ -178,7 +182,7 @@ Sources/
     CLIOptions.swift / main.swift
   YearWeekSpecDump/          生成跨平台真值表
 Tests/YearProgressCoreTests/ 17 个测试
-Support/                     手写 Info.plist / entitlements / AppIcon.icns（没有 Xcode，就自己摆包结构）
+Support/                     手写 Info.plist / entitlements / AppIcon.icns / holidays/*.json
 Tools/make-icon.swift        App 图标生成器（4×4 网格，与菜单栏图标同布局）
 spec/year-weeks.json         Swift 与 Kotlin 共用的真值表（2015–2035 + 1029 个探针日期，含 ISO 周年度）
 PLAN.md                      完整技术方案（含 iOS / Android 路线与里程碑）
@@ -205,3 +209,11 @@ PLAN.md                      完整技术方案（含 iOS / Android 路线与里
 - **M3** 试真 WidgetKit 小组件：手工打 `.appex` + `pluginkit -a` 注册，成功即可加入系统小组件库；失败就保留当前形态（视觉一致）。
 - **M4** iOS：`YearProgressCore` 直接复用，补 WidgetKit 扩展 + App Intents 配置 + 宿主 App（需要 Xcode 才能编译验证）。
 - **M5** Android：Kotlin + Jetpack Glance，用 `spec/year-weeks.json` 做跨端一致性校验。
+
+
+---
+
+## 注释约定
+
+代码注释写**为什么**（约束、平台差异、时序、踩过的坑），不逐行翻译"这行在做什么"：
+非显然的常量、系统行为绕过（如 `hidesOnDeactivate`、`NSExtensionMain`）、数据来源与兜底顺序，都必须留一句来龙去脉。

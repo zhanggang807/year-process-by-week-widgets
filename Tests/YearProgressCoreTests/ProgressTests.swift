@@ -51,6 +51,13 @@ struct ProgressTests {
         #expect(r.boundaryNote == "本周属于 2026 年第 53 周")
     }
 
+    @Test("跨年周的紧凑 header 也能正确退化为「共 N 周」")
+    func compactHeaderAtBoundary() {
+        let p = progress("2025-12-30 12:00")
+        #expect(p.headerText() == "2025年 · 乙巳年 · 共 52 周 · 已过 100%")
+        #expect(p.headerText(compact: true) == "2025 · 乙巳 · 52 周 · 100%")
+    }
+
     @Test("网格连续、无空洞，且覆盖整年")
     func cellsAreContiguous() {
         let p = progress("2026-06-01 12:00")

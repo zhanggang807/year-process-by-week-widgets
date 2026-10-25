@@ -26,14 +26,21 @@ enum SnapshotRunner {
             let renderer = ImageRenderer(content: view)
             renderer.scale = options.scale
             renderer.isOpaque = false
-            if let image = renderer.nsImage,
-               let tiff = image.tiffRepresentation,
-               let rep = NSBitmapImageRep(data: tiff),
-               let png = rep.representation(using: .png, properties: [:]) {
-                try? png.write(to: URL(fileURLWithPath: outputPath))
-                print("已导出 \(outputPath)  \(Int(image.size.width * options.scale))x\(Int(image.size.height * options.scale))")
-                exit(0)
+            guard let image = renderer.nsImage,
+                  let tiff = image.tiffRepresentation,
+                  let rep = NSBitmapImageRep(data: tiff),
+                  let png = rep.representation(using: .png, properties: [:]) else {
+                FileHandle.standardError.write(Data("snapshot: popover 渲染失败\n".utf8))
+                exit(1)
             }
+            do {
+                try png.write(to: URL(fileURLWithPath: outputPath))
+            } catch {
+                FileHandle.standardError.write(Data("snapshot: 写入失败 \(error)\n".utf8))
+                exit(1)
+            }
+            print("已导出 \(outputPath)  \(Int(image.size.width * options.scale))x\(Int(image.size.height * options.scale))")
+            exit(0)
         }
 
         let chrome: CardChrome = options.chrome == .widget ? .widget : .card

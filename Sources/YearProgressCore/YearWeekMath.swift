@@ -39,11 +39,6 @@ public enum YearWeekMath {
             ?? calendar.startOfDay(for: date)
     }
 
-    /// 显示用的「周年度」：保证今天的这一周一定落在这一年里。
-    public static func weekYear(of date: Date, calendar: Calendar) -> Int {
-        calendar.component(.yearForWeekOfYear, from: date)
-    }
-
     /// 指定周年的第 index 周（index 从 1 开始）的起止时刻。
     public static func weekRange(index: Int, weekYear: Int, calendar: Calendar) -> (start: Date, endExclusive: Date)? {
         var comps = DateComponents()

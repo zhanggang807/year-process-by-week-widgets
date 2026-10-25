@@ -18,14 +18,16 @@ final class AppState: ObservableObject {
     private static let themeKey = AppDefaults.Key.theme
     private static let sizeKey = AppDefaults.Key.cardSize
     private var timer: Timer?
+    /// 保存 token 才能在 deinit 时移除；否则状态对象被重建时会留下悬空观察者。
+    private var observerTokens: [(center: NotificationCenter, token: NSObjectProtocol)] = []
 
+    /// 桌面挂件默认尺寸 = macOS 中号小组件。
+    static let defaultSize = CGSize(width: 338, height: 158)
     static let sizePresets: [(name: String, size: CGSize)] = [
         ("大（600×292）", CGSize(width: 600, height: 292)),
         ("中（450×219）", CGSize(width: 450, height: 219)),
-        ("小（338×158 · 同系统中号小组件）", CGSize(width: 338, height: 158)),
+        ("小（338×158 · 同系统中号小组件）", defaultSize),
     ]
-    /// 桌面挂件默认尺寸 = macOS 中号小组件。
-    static let defaultSize = CGSize(width: 338, height: 158)
 
     init(dateOverride: Date? = nil) {
         self.dateOverride = dateOverride
@@ -44,6 +46,7 @@ final class AppState: ObservableObject {
     }
 
     /// 默认值变化时清掉旧偏好（旧版本写过 theme/size），只迁移一次。
+    /// 用 settingsVersion 而不是"每次启动都清"，避免用户调好的配置被反复重置。
     private static let settingsVersion = 3
     private static func migratePreferencesIfNeeded() {
         let defaults = AppDefaults.store
@@ -72,6 +75,7 @@ final class AppState: ObservableObject {
     }
 
     /// 下一个零点自动刷新。
+    /// 之所以精确排到 0 点、而不是每秒轮询：进度是按"天"变化的，轮询只会白耗电。
     private func scheduleMidnightRefresh() {
         timer?.invalidate()
         let calendar = weekStartMode.makeCalendar(timeZone: .current)
@@ -84,23 +88,33 @@ final class AppState: ObservableObject {
     }
 
     private func observeEnvironment() {
+        // 这些事件都会让"今天是第几周/第几天"变化：跨天、改时间、改时区、睡眠唤醒。
         let center = NotificationCenter.default
         // 系统跨天（含睡眠后跨天）
-        center.addObserver(forName: .NSCalendarDayChanged, object: nil, queue: .main) { [weak self] _ in
+        let dayChanged = center.addObserver(forName: .NSCalendarDayChanged, object: nil, queue: .main) { [weak self] _ in
             Task { @MainActor in self?.refresh() }
         }
-        center.addObserver(forName: .NSSystemTimeZoneDidChange, object: nil, queue: .main) { [weak self] _ in
+        let zoneChanged = center.addObserver(forName: .NSSystemTimeZoneDidChange, object: nil, queue: .main) { [weak self] _ in
             Task { @MainActor in self?.refresh() }
         }
-        center.addObserver(forName: .NSSystemClockDidChange, object: nil, queue: .main) { [weak self] _ in
+        let clockChanged = center.addObserver(forName: .NSSystemClockDidChange, object: nil, queue: .main) { [weak self] _ in
             Task { @MainActor in self?.refresh() }
         }
-        center.addObserver(forName: .holidayDataUpdated, object: nil, queue: .main) { [weak self] _ in
+        let holidays = center.addObserver(forName: .holidayDataUpdated, object: nil, queue: .main) { [weak self] _ in
             Task { @MainActor in self?.refresh() }
         }
-        NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.didWakeNotification,
-                                                          object: nil, queue: .main) { [weak self] _ in
+        let workspaceCenter = NSWorkspace.shared.notificationCenter
+        let woke = workspaceCenter.addObserver(forName: NSWorkspace.didWakeNotification, object: nil, queue: .main) { [weak self] _ in
             Task { @MainActor in self?.refresh() }
         }
+        observerTokens = [
+            (center, dayChanged), (center, zoneChanged), (center, clockChanged), (center, holidays),
+            (workspaceCenter, woke),
+        ]
+    }
+
+    deinit {
+        timer?.invalidate()
+        for (center, token) in observerTokens { center.removeObserver(token) }
     }
 }

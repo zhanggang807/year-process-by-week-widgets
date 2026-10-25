@@ -5,7 +5,8 @@ public struct PopoverShape: Shape {
     public var cornerRadius: CGFloat
     public var arrowHeight: CGFloat
     public var arrowHalfWidth: CGFloat
-    public var arrowCenterX: CGFloat
+    /// nil 表示水平居中；有值时是尾巴尖在窗口内的 x
+    public var arrowCenterX: CGFloat?
 
     public init(cornerRadius: CGFloat = 20,
                 arrowHeight: CGFloat = 11,
@@ -14,15 +15,18 @@ public struct PopoverShape: Shape {
         self.cornerRadius = cornerRadius
         self.arrowHeight = arrowHeight
         self.arrowHalfWidth = arrowHalfWidth
-        self.arrowCenterX = arrowCenterX ?? 0
+        self.arrowCenterX = arrowCenterX
     }
 
     public func path(in rect: CGRect) -> Path {
         let r = min(cornerRadius, rect.height / 2, rect.width / 2)
         let a = arrowHeight
         let half = arrowHalfWidth
-        // 尾巴尖始终在顶部（y=0），左右夹住，避免出圆角
-        let cx = min(max(arrowCenterX == 0 ? rect.midX : arrowCenterX, r + half + 2), rect.width - r - half - 2)
+        // 尾巴尖始终在顶部（y=0）；限制在圆角内侧，窗口过窄时退化为居中
+        let desired = arrowCenterX ?? rect.midX
+        let lower = r + half + 2
+        let upper = max(lower, rect.width - r - half - 2)
+        let cx = min(max(desired, lower), upper)
         let left = cx - half
         let right = cx + half
         let w = rect.width
