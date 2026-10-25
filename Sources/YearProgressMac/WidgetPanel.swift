@@ -1,6 +1,8 @@
 import YearProgressUI
 import AppKit
 import SwiftUI
+import YearProgressCore
+import YearProgressUI
 
 /// 无边框、无标题栏、点它不抢焦点的「桌面小组件」窗口。
 final class WidgetPanel: NSPanel {
@@ -35,5 +37,40 @@ struct PanelRootView: View {
                             size: state.cardSize,
                             fixedColumns: WidgetGridReference.columns(weekCount: state.progress.totalWeeks))
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+    }
+}
+
+
+/// 菜单栏弹窗：顶部带圆角小三角气泡尾巴的卡片
+struct QuickPopoverView: View {
+    let progress: YearProgress
+    let theme: CardTheme
+    let cardSize: CGSize
+    let arrowHeight: CGFloat
+    let cornerRadius: CGFloat
+    /// 尾巴尖在窗口内的 x（正常居中；被屏幕边缘夹住时会偏移，仍指向图标）
+    let tailCenterX: CGFloat
+
+    var body: some View {
+        let total = CGSize(width: cardSize.width, height: cardSize.height + arrowHeight)
+        let shape = PopoverShape(cornerRadius: cornerRadius,
+                                 arrowHeight: arrowHeight,
+                                 arrowHalfWidth: 14,
+                                 arrowCenterX: tailCenterX)
+        return ZStack(alignment: .top) {
+            shape.fill(LinearGradient(colors: theme.backgroundColors,
+                                      startPoint: .topLeading,
+                                      endPoint: .bottomTrailing))
+            YearProgressCardView(progress: progress,
+                                 theme: theme,
+                                 size: cardSize,
+                                 chrome: .widget,
+                                 showsTooltips: false,
+                                 drawsBackground: false)
+                .frame(width: cardSize.width, height: cardSize.height)
+                .offset(y: arrowHeight)
+        }
+        .frame(width: total.width, height: total.height)
+        .clipShape(shape)
     }
 }

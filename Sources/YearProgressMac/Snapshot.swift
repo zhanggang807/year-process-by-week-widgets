@@ -10,6 +10,29 @@ enum SnapshotRunner {
         let progress = YearProgressCalculator.progress(for: options.date ?? Date(),
                                                       timeZone: options.timeZone,
                                                       weekStartMode: options.weekStartMode)
+        if options.popoverPreview {
+            let cardSize = AppState.defaultSize
+            let view = QuickPopoverView(progress: progress,
+                                        theme: options.theme,
+                                        cardSize: cardSize,
+                                        arrowHeight: 11,
+                                        cornerRadius: 20,
+                                        tailCenterX: cardSize.width / 2)
+                .padding(options.margin)
+                .background(Color.clear)
+            let renderer = ImageRenderer(content: view)
+            renderer.scale = options.scale
+            renderer.isOpaque = false
+            if let image = renderer.nsImage,
+               let tiff = image.tiffRepresentation,
+               let rep = NSBitmapImageRep(data: tiff),
+               let png = rep.representation(using: .png, properties: [:]) {
+                try? png.write(to: URL(fileURLWithPath: outputPath))
+                print("已导出 \(outputPath)  \(Int(image.size.width * options.scale))x\(Int(image.size.height * options.scale))")
+                exit(0)
+            }
+        }
+
         let chrome: CardChrome = options.chrome == .widget ? .widget : .card
         let card = YearProgressCardView(progress: progress,
                                         theme: options.theme,

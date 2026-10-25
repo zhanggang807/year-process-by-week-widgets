@@ -25,6 +25,8 @@ struct CLIOptions {
     var showQuick = false
     /// 开发用：模拟点击菜单栏按钮，验证 action 绑定
     var testClick = false
+    /// 导出菜单栏弹窗（带小三角）的预览
+    var popoverPreview = false
 
     static func parse(_ argv: [String]) -> CLIOptions {
         var o = CLIOptions()
@@ -58,6 +60,8 @@ struct CLIOptions {
                 o.showQuick = true
             case "--test-click":
                 o.testClick = true
+            case "--popover":
+                o.popoverPreview = true
             case "--header-font":
                 if let v = next(), let n = Double(v) { o.headerFontOverride = CGFloat(n); i += 1 }
             case "--columns":

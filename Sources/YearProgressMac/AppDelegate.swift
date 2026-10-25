@@ -43,6 +43,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     /// 左键弹出的独立小窗（不影响桌面挂件）
     private var quickPanel: NSPanel?
+    private static let quickArrowHeight: CGFloat = 11
+    private static let quickCornerRadius: CGFloat = 20
     /// 点外部收起用的全局鼠标监听
     private var quickClickMonitor: Any?
     /// 右键弹出的设置菜单（左键不弹菜单，用来显示桌面挂件）
@@ -192,12 +194,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         log.info("[quick] show")
 
-        let size = AppState.defaultSize          // 小尺寸 338×158
-        let card = YearProgressCardView(progress: state.progress,
-                                        theme: state.theme,          // 默认石墨
-                                        size: size,
-                                        fixedColumns: WidgetGridReference.columns(weekCount: state.progress.totalWeeks))
-        let quick = NSPanel(contentRect: NSRect(origin: .zero, size: size),
+        let cardSize = AppState.defaultSize      // 338×158
+        let windowSize = CGSize(width: cardSize.width, height: cardSize.height + Self.quickArrowHeight)
+        guard let placement = quickPlacement(windowSize: windowSize) else { return }
+
+        let popover = QuickPopoverView(progress: state.progress,
+                                       theme: state.theme,           // 默认石墨
+                                       cardSize: cardSize,
+                                       arrowHeight: Self.quickArrowHeight,
+                                       cornerRadius: Self.quickCornerRadius,
+                                       tailCenterX: placement.tailX)
+        let quick = NSPanel(contentRect: NSRect(origin: .zero, size: windowSize),
                             styleMask: [.borderless],
                             backing: .buffered,
                             defer: false)
@@ -210,9 +217,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // 窗口会被系统立刻隐藏（optionAll 里在、屏幕上却看不到）。
         quick.hidesOnDeactivate = false
         quick.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
-        quick.contentView = NSHostingView(rootView: card)
+        quick.contentView = NSHostingView(rootView: popover)
+        quick.setFrame(placement.frame, display: false)
 
-        positionQuickPanel(quick, size: size)
         // 不要 makeKey：菜单栏点击不会激活 App，成为 key 会被立刻收回（面板一闪就没）。
         quick.orderFrontRegardless()
         quickPanel = quick
@@ -233,23 +240,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         quickPanel?.orderOut(nil)
     }
 
-    private func positionQuickPanel(_ quick: NSPanel, size: CGSize) {
-        guard let button = statusItem.button, let buttonWindow = button.window else { return }
+    /// 弹窗位置：水平居中于菜单栏图标；夹在屏幕内；返回尾巴尖在窗口内的 x
+    private func quickPlacement(windowSize: CGSize) -> (frame: NSRect, tailX: CGFloat)? {
+        guard let button = statusItem.button, let buttonWindow = button.window else { return nil }
         let buttonOnScreen = buttonWindow.convertToScreen(button.convert(button.bounds, to: nil))
-        let screen = buttonWindow.screen ?? NSScreen.screens.first ?? NSScreen.main
-        guard let vf = screen?.visibleFrame else { return }
+        guard let screen = buttonWindow.screen ?? NSScreen.screens.first ?? NSScreen.main else { return nil }
+        let vf = screen.visibleFrame
 
-        let margin: CGFloat = 8
-        let gap: CGFloat = 6
+        let hMargin: CGFloat = 8
+        let gap: CGFloat = 4
 
-        // 默认右对齐图标；超出屏幕就夹回来
-        var x = buttonOnScreen.maxX - size.width
-        x = min(max(x, vf.minX + margin), vf.maxX - size.width - margin)
-        var y = buttonOnScreen.minY - size.height - gap
-        y = min(max(y, vf.minY + margin), vf.maxY - size.height - margin)
+        // 水平居中于图标
+        var x = buttonOnScreen.midX - windowSize.width / 2
+        x = min(max(x, vf.minX + hMargin), vf.maxX - windowSize.width - hMargin)
 
-        // 用显式 size 设 frame，避免 NSHostingView 赋内容时改动窗口尺寸导致定位偏差
-        quick.setFrame(NSRect(origin: CGPoint(x: x, y: y), size: size), display: false)
+        // 尾巴尖在图标下方 gap 处；顶端不越出菜单栏
+        var y = buttonOnScreen.minY - windowSize.height - gap
+        y = min(max(y, vf.minY + hMargin), vf.maxY - windowSize.height)
+
+        // 被屏幕夹住时，尾巴跟着图标偏移（仍指向图标）
+        let half: CGFloat = 14
+        let minTail = Self.quickCornerRadius + half + 4
+        let maxTail = windowSize.width - Self.quickCornerRadius - half - 4
+        let tailX = min(max(buttonOnScreen.midX - x, minTail), maxTail)
+        log.info("[quick] place iconMid=\(buttonOnScreen.midX, privacy: .public) winX=\(x, privacy: .public) winW=\(windowSize.width, privacy: .public) tailX=\(tailX, privacy: .public)")
+
+        return (NSRect(x: x, y: y, width: windowSize.width, height: windowSize.height), tailX)
     }
 
     private func rebuildMenu() {

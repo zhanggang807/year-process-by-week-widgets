@@ -23,6 +23,8 @@ public struct YearProgressCardView: View {
     public var fixedColumns: Int?
     /// 非 nil 时覆盖顶部字号
     public var headerFontOverride: CGFloat?
+    /// false 时不画自己的背景（菜单栏弹窗由 PopoverShape 统一填色）
+    public var drawsBackground: Bool
 
     public init(progress: YearProgress,
                 theme: CardTheme,
@@ -32,7 +34,8 @@ public struct YearProgressCardView: View {
                 showsTooltips: Bool = true,
                 preferredColumns: Int = 13,
                 fixedColumns: Int? = nil,
-                headerFontOverride: CGFloat? = nil) {
+                headerFontOverride: CGFloat? = nil,
+                drawsBackground: Bool = true) {
         self.progress = progress
         self.theme = theme
         self.size = size
@@ -42,6 +45,7 @@ public struct YearProgressCardView: View {
         self.preferredColumns = preferredColumns
         self.fixedColumns = fixedColumns
         self.headerFontOverride = headerFontOverride
+        self.drawsBackground = drawsBackground
     }
 
     public var body: some View {
@@ -55,9 +59,11 @@ public struct YearProgressCardView: View {
         content(m: m, layout: layout, note: note)
             .padding(.horizontal, m.padding)
             .frame(width: size.width, height: size.height, alignment: .top)
-            .background(
-                LinearGradient(colors: theme.backgroundColors, startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
+            .background {
+                if drawsBackground {
+                    LinearGradient(colors: theme.backgroundColors, startPoint: .topLeading, endPoint: .bottomTrailing)
+                }
+            }
             .modifier(CardChromeModifier(chrome: chrome, cornerRadius: m.cornerRadius))
     }
 
