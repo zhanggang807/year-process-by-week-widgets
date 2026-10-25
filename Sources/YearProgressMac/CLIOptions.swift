@@ -27,6 +27,8 @@ struct CLIOptions {
     var testClick = false
     /// 导出菜单栏弹窗（带小三角）的预览
     var popoverPreview = false
+    /// 开发用：模拟"挂菜单→摘菜单→重新绑定→左键点击"的完整序列
+    var testMenuClick = false
 
     static func parse(_ argv: [String]) -> CLIOptions {
         var o = CLIOptions()
@@ -62,6 +64,8 @@ struct CLIOptions {
                 o.testClick = true
             case "--popover":
                 o.popoverPreview = true
+            case "--test-menu-click":
+                o.testMenuClick = true
             case "--header-font":
                 if let v = next(), let n = Double(v) { o.headerFontOverride = CGFloat(n); i += 1 }
             case "--columns":

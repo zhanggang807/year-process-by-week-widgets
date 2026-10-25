@@ -84,6 +84,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 self?.toggleQuickPanel()
             }
         }
+        if cli.testMenuClick {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self else { return }
+                self.log.info("[status] test: attach/detach menu then click")
+                self.statusItem.menu = self.statusMenu
+                self.statusItem.menu = nil
+                self.configureStatusButton()
+                self.statusItem.button?.performClick(nil)
+            }
+        }
         if cli.testClick {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
                 self?.log.info("[status] performClick test")
