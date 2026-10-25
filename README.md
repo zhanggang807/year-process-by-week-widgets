@@ -190,6 +190,10 @@ PLAN.md                      完整技术方案（含 iOS / Android 路线与里
 
 ---
 
+## 后续路线
+
+iOS / Android 的移植任务已拆成可勾选的清单，见 [TODO.md](TODO.md)（含前置环境、复用边界、小组件、节假日数据、验收标准）。
+
 ## 本机环境说明（为什么不装 Xcode）
 
 这台机器只有 CommandLineTools（macOS 27.0.1 / SDK 26.5），**没有 Xcode**，所以：
