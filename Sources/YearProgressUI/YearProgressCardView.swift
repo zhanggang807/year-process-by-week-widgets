@@ -38,7 +38,7 @@ public struct YearProgressCardView: View {
                 fixedColumns: Int? = nil,
                 headerFontOverride: CGFloat? = nil,
                 drawsBackground: Bool = true,
-                holidayMarker: HolidayMarkerStyle = .ring) {
+                holidayMarker: HolidayMarkerStyle = .triangle) {
         self.progress = progress
         self.theme = theme
         self.size = size
@@ -185,7 +185,20 @@ private struct WeekBlockView: View {
         .frame(width: side, height: side)
         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
         .overlay {
-            if let stroke {
+            if cell.state == .current {
+                // 本周描边跨在深浅分界上：上段用浅色边、下段用深色边，
+                // 和方块里的数字同一种双色处理，保证两种底色上都看得见。
+                let f = CGFloat(min(1, max(0, cell.fraction)))
+                let w = max(2, side * 0.10)
+                ZStack {
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
+                        .strokeBorder(theme.pastLabel, lineWidth: w)
+                        .mask(alignment: .top) { Rectangle().frame(height: f * side) }
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
+                        .strokeBorder(theme.futureLabel, lineWidth: w)
+                        .mask(alignment: .bottom) { Rectangle().frame(height: (1 - f) * side) }
+                }
+            } else if let stroke {
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
                     .strokeBorder(stroke.color, lineWidth: stroke.width)
             }
@@ -234,7 +247,7 @@ private struct WeekBlockView: View {
         switch cell.state {
         case .past: return theme.pastStroke.map { ($0, width) }
         case .future: return theme.futureStroke.map { ($0, width) }
-        case .current: return nil
+        case .current: return nil   // 本周走单独的双色描边
         }
     }
 

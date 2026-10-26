@@ -28,7 +28,7 @@ struct CLIOptions {
     /// 导出菜单栏弹窗（带小三角）的预览
     var popoverPreview = false
     /// 节假日标记样式
-    var holidayMarker: HolidayMarkerStyle = .ring
+    var holidayMarker: HolidayMarkerStyle = .triangle
     /// 开发用：模拟"挂菜单→摘菜单→重新绑定→左键点击"的完整序列
     var testMenuClick = false
 
