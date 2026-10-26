@@ -112,6 +112,13 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// 本周方块的描边：回到最初的单色整体描边。
+    /// 自定义深色主题上用黑色（和浅色底形成原来的“白底黑边”观感）；
+    /// 系统主题用主文字色，跟随浅色/深色。
+    public var currentStroke: Color {
+        self == .system ? .primary : .black
+    }
+
     /// 节假日标记：暖红，和冷色方块形成对比（两种状态下都清楚）
     public var holidayAccent: Color { Color(red: 0.902, green: 0.318, blue: 0.235) }
 
