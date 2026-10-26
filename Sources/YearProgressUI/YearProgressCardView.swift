@@ -185,7 +185,14 @@ private struct WeekBlockView: View {
         .frame(width: side, height: side)
         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
         .overlay {
-            if let stroke {
+            if cell.state == .current {
+                // 参考样式：方块外沿一圈浅色高光 + 轻微光晕，
+                // 用负 padding 画在方块外侧（间隙 3.5pt，1.5pt 外圈不会压到邻居）
+                RoundedRectangle(cornerRadius: radius + 1.5, style: .continuous)
+                    .strokeBorder(theme.currentStroke, lineWidth: max(1.2, side * 0.075))
+                    .padding(-1.5)
+                    .shadow(color: theme.currentStroke.opacity(0.45), radius: 2)
+            } else if let stroke {
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
                     .strokeBorder(stroke.color, lineWidth: stroke.width)
             }
@@ -234,8 +241,7 @@ private struct WeekBlockView: View {
         switch cell.state {
         case .past: return theme.pastStroke.map { ($0, width) }
         case .future: return theme.futureStroke.map { ($0, width) }
-        // 原来的单色整体描边（约 1pt）
-        case .current: return (theme.currentStroke, max(1, side * 0.05))
+        case .current: return nil   // 本周走外侧浅色光环
         }
     }
 
