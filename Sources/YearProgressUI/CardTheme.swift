@@ -112,12 +112,6 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
-    /// 本周方块的描边：浅色外圈（参考 Blip/系统选中态），
-    /// 在深色卡片上呈近白偏冷的高光；系统主题跟随主文字色。
-    public var currentStroke: Color {
-        self == .system ? Color.primary.opacity(0.82) : Color(red: 0.88, green: 0.90, blue: 0.99)
-    }
-
     /// 节假日标记：暖红，和冷色方块形成对比（两种状态下都清楚）
     public var holidayAccent: Color { Color(red: 0.902, green: 0.318, blue: 0.235) }
 
