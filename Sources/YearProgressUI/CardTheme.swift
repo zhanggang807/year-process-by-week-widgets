@@ -112,10 +112,10 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
-    /// 本周 ring：蓝色。和节假日的红色折角区分开，在深/浅两种方块上都够跳。
+    /// 本周 ring：高饱和纯正蓝。和节假日的红色折角形成冷暖强对比。
     public var currentRing: Color {
-        // 系统主题在浅色背景下用更深的蓝；自定义深色主题用亮天蓝
-        self == .system ? Color(red: 0.18, green: 0.42, blue: 0.88) : Color(red: 0.30, green: 0.60, blue: 1.0)
+        // 系统主题稍微压深一点，保证浅色背景上也够清楚
+        self == .system ? Color(red: 0.0, green: 0.16, blue: 0.90) : Color(red: 0.0, green: 0.20, blue: 1.0)
     }
 
     /// 节假日标记：暖红，和冷色方块形成对比（两种状态下都清楚）
