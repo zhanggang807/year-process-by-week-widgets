@@ -186,10 +186,11 @@ private struct WeekBlockView: View {
         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
         .overlay {
             if cell.state == .current {
-                // 本周：ring 红色描边（与 HolidayMarkerStyle.ring 同款），
-                // 面板、弹窗、小组件共用这一份视图。
+                // 本周：金黄色 ring（节假日是红色折角，两者用颜色区分）。
+                // 比假日 ring 稍粗，保证小尺寸也看得见。
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
-                    .strokeBorder(theme.holidayAccent, lineWidth: max(1.2, side * 0.065))
+                    .strokeBorder(theme.currentRing, lineWidth: max(1.6, side * 0.09))
+                    .shadow(color: theme.currentRing.opacity(0.35), radius: 1.5)
             } else if let stroke {
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
                     .strokeBorder(stroke.color, lineWidth: stroke.width)
