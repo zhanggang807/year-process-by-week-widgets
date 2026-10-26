@@ -9,10 +9,10 @@
 	<key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
 	<key>CFBundleName</key><string>YearProgressWidget</string>
 	<key>CFBundlePackageType</key><string>XPC!</string>
-	<key>CFBundleShortVersionString</key><string>0.5.8</string>
+	<key>CFBundleShortVersionString</key><string>0.5.9</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array><string>MacOSX</string></array>
-	<key>CFBundleVersion</key><string>47</string>
+	<key>CFBundleVersion</key><string>48</string>
 	<key>LSMinimumSystemVersion</key><string>14.0</string>
 	<key>NSExtension</key>
 	<dict>
