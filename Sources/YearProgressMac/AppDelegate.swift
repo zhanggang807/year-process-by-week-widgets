@@ -2,6 +2,7 @@ import YearProgressUI
 import AppKit
 import SwiftUI
 import os
+import WidgetKit
 import YearProgressCore
 
 enum PanelLevel: String, CaseIterable {
@@ -85,6 +86,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         // 后台补全年份节假日数据（当前年 / 次年，缺失时才抓）
         HolidayUpdater.refreshIfNeeded()
+
+        // 覆盖安装后系统小组件可能仍持有旧的归档/快照；主动请求一次重载，
+        // 让桌面小组件尽快用上新版本里的背景与图标。
+        WidgetCenter.shared.reloadAllTimelines()
 
         if cli.showQuick {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in

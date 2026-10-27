@@ -89,9 +89,12 @@ struct YearProgressWidgetView: View {
                                  fixedColumns: family == .systemMedium
                                      ? WidgetGridReference.columns(weekCount: entry.progress.totalWeeks)
                                      : nil,
-                                 headerFontOverride: family == .systemSmall ? 13 : nil)
+                                 headerFontOverride: family == .systemSmall ? 13 : nil,
+                                 drawsBackground: false)
         }
         // macOS 14 / iOS 17 起，小组件必须用 containerBackground 声明背板，否则系统显示占位提示。
+        // 背景交给系统容器，卡面本身保持透明：桌面小组件宿主的某些渲染方案会
+        // 移除开发者背景（或保留透明），卡面再画一层不透明底会减少可匹配的方案。
         .containerBackground(for: .widget) {
             LinearGradient(colors: CardTheme.slate.backgroundColors,
                            startPoint: .topLeading,

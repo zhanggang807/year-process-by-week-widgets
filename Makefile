@@ -43,7 +43,7 @@ else
     -Xlinker -rpath -Xlinker $(CLT_LIB)
 endif
 
-.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose icon holidays clean help
+.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose icon holidays reset-widget-cache clean help
 
 all: build
 
@@ -94,6 +94,7 @@ widget: app
 	@mkdir -p $(APPEX)/Contents/MacOS $(APPEX)/Contents/Resources
 	@cp $(BIN_WIDGET) $(APPEX)/Contents/MacOS/YearProgressWidget
 	@cp Support/Widget-Info.plist $(APPEX)/Contents/Info.plist
+	@cp Support/AppIcon.icns $(APPEX)/Contents/Resources/AppIcon.icns
 	@cp -R Support/holidays $(APPEX)/Contents/Resources/holidays
 	@printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>' \
 	  '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' \
@@ -110,6 +111,9 @@ widget: app
 
 # 把扩展与宿主 App 注册给系统（widget 库靠这两步发现我们）
 register:
+	@# LaunchServices/PlugInKit 会缓存扩展的 Info.plist（图标、渲染能力等）。
+	@# 只 -a 不 -r 时，升级后仍可能继续使用旧记录；先清掉再注册。
+	@pluginkit -r $(APPEX) 2>/dev/null || true
 	@pluginkit -a $(APPEX) 2>&1 | sed 's/^/  /' || echo "  (pluginkit 注册返回非零，可能已注册)"
 	@$(LSREGISTER) -f $(APP) >/dev/null 2>&1 || true
 	@killall chronod 2>/dev/null || true
@@ -118,17 +122,37 @@ register:
 
 # 把宿主 App 装到 /Applications（系统小组件库对这里的 App 最友好）
 INSTALL_PATH := /Applications/YearProgress.app
+APPEX_INSTALL := $(INSTALL_PATH)/Contents/PlugIns/YearProgressWidget.appex
 
 install: widget
 	@osascript -e 'tell application id "$(BUNDLE_ID)" to quit' >/dev/null 2>&1 || true
 	@sleep 1
+	@# widget 目标会先注册 build/ 下的 App；装到 /Applications 后必须清掉 build 记录，
+	@# 否则同一个 bundle id 会出现两条 LaunchServices 记录，chronod 可能报
+	@# “LS doesn't have a containing bundle” 或继续用旧图标。
+	@pluginkit -r $(APPEX) 2>/dev/null || true
+	@$(LSREGISTER) -u $(APP) >/dev/null 2>&1 || true
+	@# 只替换已安装副本；不要 -u 卸载 /Applications，否则会破坏 appex 的 containing bundle 关系。
 	@rm -rf "$(INSTALL_PATH)"
 	@cp -R $(APP) "$(INSTALL_PATH)"
-	@pluginkit -a "$(INSTALL_PATH)/Contents/PlugIns/YearProgressWidget.appex" 2>/dev/null || true
+	@pluginkit -r "$(APPEX_INSTALL)" 2>/dev/null || true
 	@$(LSREGISTER) -f "$(INSTALL_PATH)" >/dev/null 2>&1 || true
+	@sleep 1
+	@pluginkit -a "$(APPEX_INSTALL)" 2>/dev/null || true
+	@$(MAKE) -s reset-widget-cache
 	@killall chronod 2>/dev/null || true
+	@# 小组件库/桌面宿主的图标与渲染缓存由通知中心持有，重启后才会重新读取 appex。
+	@killall NotificationCenter 2>/dev/null || true
+	@killall iconservicesagent 2>/dev/null || true
+	@sleep 1
 	@echo "已安装到 $(INSTALL_PATH) 并重新注册"
 	@open "$(INSTALL_PATH)"
+
+# 清掉本扩展的归档/快照缓存；这些文件由 chronod 生成，删掉后会按需重建。
+# 覆盖安装后如果不清理，桌面小组件可能继续展示旧版本留下的白板快照。
+reset-widget-cache:
+	@find "$(HOME)/Library/Containers/$(WIDGET_ID)/Data/SystemData/com.apple.chrono" -type f -delete 2>/dev/null || true
+	@echo "已清理 $(WIDGET_ID) 的小组件归档缓存"
 
 uninstall:
 	@pluginkit -r "$(INSTALL_PATH)/Contents/PlugIns/YearProgressWidget.appex" 2>/dev/null || true
@@ -177,6 +201,10 @@ diagnose:
 	@echo "== 入口点（应为 _NSExtensionMain 的桩）=="
 	@otool -l "$(APP)/Contents/PlugIns/YearProgressWidget.appex/Contents/MacOS/YearProgressWidget" 2>/dev/null | awk '/cmd LC_MAIN/{f=1} f{print} f&&/entryoff/{f=0}' | grep entryoff || true
 	@otool -IV "$(APP)/Contents/PlugIns/YearProgressWidget.appex/Contents/MacOS/YearProgressWidget" 2>/dev/null | grep -i NSExtensionMain | head -1 || echo "  缺少 _NSExtensionMain（入口点未修好）"
+	@echo "== 图标 =="
+	@plutil -p "$(INSTALL_PATH)/Contents/Info.plist" 2>/dev/null | grep -E 'CFBundleIcon' || true
+	@plutil -p "$(APPEX_INSTALL)/Contents/Info.plist" 2>/dev/null | grep -E 'CFBundleIcon' || true
+	@ls -l "$(APPEX_INSTALL)/Contents/Resources/AppIcon.icns" 2>/dev/null || echo "  缺少 appex 图标"
 	@echo "== 最近 1 小时崩溃（应无输出）=="
 	@find ~/Library/Logs/DiagnosticReports -name "YearProgressWidget-*.ips" -mmin -60 2>/dev/null | head -3 || true
 	@echo "== 扩展最近一次被调用 =="

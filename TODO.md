@@ -121,3 +121,12 @@
 - iOS 跨 App/Widget 的运行时数据共享需要 App Group（真实团队签名）；v1 先走"打包 JSON"。
 - Android 的 Glance 没有任意 Canvas，复杂网格可能需要预渲染 Bitmap。
 - 两端都需要对应工具链才能编译验证；**未安装前不产出"已编译"的承诺**。
+- **macOS 27 桌面小组件白板（待工具链对齐）**：macOS 27.0.1 的桌面 WidgetKit 宿主会请求
+  `fullColor + backgroundViewPolicy=Include(transparent)` 这一新渲染方案；本机只有 macOS 26.5 SDK，
+  扩展侧只能生成 `fullColor+Include / fullColor+Remove / accented+Remove`，宿主找不到完全匹配的归档时
+  会显示白板。通知中心里的小组件正常。彻底修复需要用 macOS 27 SDK（Xcode 27）重新编译扩展，
+  本仓库按约定不会自动安装该工具链。
+- **App 图标与扩展注册**：WidgetKit 搜索界面读的是扩展/宿主 App 的图标资源；扩展 Info.plist 必须带
+  `CFBundleIconFile`，且 `Contents/Resources/AppIcon.icns` 要随 appex 一起打包。
+  `make install` 会清掉 `build/` 下的重复 LaunchServices 记录，避免同一 bundle id 出现两条记录后
+  chronod 继续使用旧图标或报告 “LS doesn't have a containing bundle”。
