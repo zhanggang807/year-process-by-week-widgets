@@ -2,6 +2,10 @@ import Foundation
 import YearProgressCore
 import YearProgressUI
 
+enum LoginItemAction: String {
+    case status, register, unregister
+}
+
 /// 极简命令行解析：`--snapshot out.png --date 2026-10-15 --theme violet --size 600x292`
 struct CLIOptions {
     var snapshotPath: String?
@@ -31,6 +35,8 @@ struct CLIOptions {
     var holidayMarker: HolidayMarkerStyle = .triangle
     /// 开发用：模拟"挂菜单→摘菜单→重新绑定→左键点击"的完整序列
     var testMenuClick = false
+    /// 诊断用：在 App 包内检查/切换登录项（SMAppService）
+    var loginItemAction: LoginItemAction?
 
     static func parse(_ argv: [String]) -> CLIOptions {
         var o = CLIOptions()
@@ -70,6 +76,12 @@ struct CLIOptions {
                 if let v = next(), let m = HolidayMarkerStyle(rawValue: v) { o.holidayMarker = m; i += 1 }
             case "--test-menu-click":
                 o.testMenuClick = true
+            case "--login-status":
+                o.loginItemAction = .status
+            case "--login-register":
+                o.loginItemAction = .register
+            case "--login-unregister":
+                o.loginItemAction = .unregister
             case "--header-font":
                 if let v = next(), let n = Double(v), n > 0 { o.headerFontOverride = CGFloat(n); i += 1 }
             case "--columns":
@@ -107,6 +119,7 @@ struct CLIOptions {
       --week-start monday|sunday|locale
       --chrome card|widget   导出样式：card（App 大卡片）/ widget（系统小组件，无外框）
       --marker none|dot|bar|triangle|ring|stripe   节假日标记样式（预览用）
+      --login-status|--login-register|--login-unregister  诊断登录项（不启动界面）
     """
 
     static func parseDate(_ s: String, timeZone: TimeZone) -> Date? {

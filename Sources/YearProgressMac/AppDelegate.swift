@@ -2,6 +2,7 @@ import YearProgressUI
 import AppKit
 import SwiftUI
 import os
+import ServiceManagement
 import WidgetKit
 import YearProgressCore
 
@@ -312,6 +313,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         toggle.target = self
         menu.addItem(toggle)
 
+        let login = NSMenuItem(title: launchAtLoginTitle,
+                               action: #selector(toggleLaunchAtLogin),
+                               keyEquivalent: "")
+        login.target = self
+        login.state = launchAtLoginEnabled ? .on : .off
+        menu.addItem(login)
+
         let refresh = NSMenuItem(title: "立即刷新", action: #selector(refresh), keyEquivalent: "r")
         refresh.target = self
         menu.addItem(refresh)
@@ -383,6 +391,46 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func updateHolidays() {
         HolidayUpdater.refreshIfNeeded(force: true)
         rebuildMenu()
+    }
+
+    /// 现代 macOS 推荐用 SMAppService 管理登录项：它会出现在
+    /// 「系统设置 → 通用 → 登录项」里，用户仍可在系统层面禁用。
+    private var launchAtLoginEnabled: Bool {
+        SMAppService.mainApp.status == .enabled
+    }
+
+    private var launchAtLoginTitle: String {
+        SMAppService.mainApp.status == .requiresApproval
+            ? "开机启动（需在系统设置允许）"
+            : "开机启动"
+    }
+
+    @objc private func toggleLaunchAtLogin() {
+        do {
+            if launchAtLoginEnabled {
+                try SMAppService.mainApp.unregister()
+            } else {
+                try SMAppService.mainApp.register()
+            }
+            log.info("[login] enabled=\(self.launchAtLoginEnabled, privacy: .public)")
+        } catch {
+            log.error("[login] \(error.localizedDescription, privacy: .public)")
+            showLoginItemError(error)
+        }
+        rebuildMenu()
+    }
+
+    private func showLoginItemError(_ error: Error) {
+        let alert = NSAlert()
+        alert.messageText = "无法设置开机启动"
+        alert.informativeText = """
+        \(error.localizedDescription)
+
+        请确认 App 已安装到 /Applications；如果系统要求确认，请到
+        「系统设置 → 通用 → 登录项」中允许 YearProgress。
+        """
+        alert.addButton(withTitle: "好")
+        alert.runModal()
     }
 
     @objc private func refresh() {

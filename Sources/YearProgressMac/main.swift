@@ -1,4 +1,5 @@
 import AppKit
+import ServiceManagement
 
 // 年进度小组件（macOS）
 //   YearProgressMac                                  启动桌面小组件
@@ -10,6 +11,24 @@ import AppKit
 let options = CLIOptions.parse(CommandLine.arguments)
 
 MainActor.assumeIsolated {
+    if let action = options.loginItemAction {
+        let service = SMAppService.mainApp
+        do {
+            switch action {
+            case .status:
+                break
+            case .register:
+                try service.register()
+            case .unregister:
+                try service.unregister()
+            }
+            print("loginItem status=\(service.status.rawValue)")
+            exit(0)
+        } catch {
+            FileHandle.standardError.write(Data("loginItem error=\(error)\n".utf8))
+            exit(1)
+        }
+    }
     if let path = options.snapshotPath {
         SnapshotRunner.run(options: options, outputPath: path)
     } else {
