@@ -135,6 +135,9 @@ public struct YearProgressCardView: View {
                         }
                     }
                 }
+                // 53 周时最后一行只有 11 块；在整行宽度内居中，避免右侧留空不对称。
+                // 满行居中和左对齐等价，不会改变正常行的列对齐。
+                .frame(width: CGFloat(layout.gridWidth), alignment: .center)
             }
         }
         .frame(width: CGFloat(layout.gridWidth), height: CGFloat(layout.gridHeight), alignment: .topLeading)
