@@ -19,7 +19,12 @@ enum PanelLevel: String, CaseIterable {
         switch self {
         case .normal: return .normal
         case .floating: return .floating
-        case .desktop: return NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.desktopWindow)))
+        case .desktop:
+            // 关键：不要和壁纸用同一层（kCGDesktopWindowLevel）。
+            // 同层会被 Finder 桌面判定为遮挡，AppKit 停止绘制 SwiftUI 内容，
+            // 表现就是“关掉所有应用后只剩一块白板”。
+            // 抬到桌面图标层之上、普通窗口（0）之下。
+            return NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.desktopIconWindow)) + 1)
         }
     }
 }
@@ -125,6 +130,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                                                selector: #selector(screenParametersChanged),
                                                name: NSApplication.didChangeScreenParametersNotification,
                                                object: nil)
+
+        // 应用切换 / 回到桌面时，桌面层窗口可能被判定为遮挡而不再重绘。
+        // 这里主动 orderFront + 强制 display，保证内容立即出现。
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(desktopVisibilityChanged),
+                                               name: NSApplication.didBecomeActiveNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(desktopVisibilityChanged),
+                                               name: NSApplication.didResignActiveNotification,
+                                               object: nil)
+        let workspace = NSWorkspace.shared.notificationCenter
+        for name in [NSWorkspace.didActivateApplicationNotification,
+                     NSWorkspace.didDeactivateApplicationNotification] {
+            workspace.addObserver(self, selector: #selector(desktopVisibilityChanged),
+                                  name: name, object: nil)
+        }
+    }
+
+    @objc private func desktopVisibilityChanged() {
+        guard isVisible else { return }
+        panel.orderFrontRegardless()
+        panel.contentView?.needsDisplay = true
+        panel.displayIfNeeded()
     }
 
     /// 永远贴住主屏可视区域的右上角（窗口与卡片等大）。
