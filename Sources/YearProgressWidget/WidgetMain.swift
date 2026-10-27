@@ -10,6 +10,9 @@ import YearProgressUI
 struct YearProgressEntry: TimelineEntry {
     let date: Date
     let progress: YearProgress
+    /// 组件库预览走 getSnapshot；桌面时间线走 getTimeline。
+    /// 预览需要一张自带的完整卡面，桌面时间线则让系统容器负责背景。
+    var isSnapshot = false
 }
 
 /// 诊断用：系统只要调用过我们（画预览 / 取时间线），就往沙盒容器里记一行。
@@ -56,7 +59,9 @@ struct YearProgressProvider: TimelineProvider {
 
     func getSnapshot(in context: Context, completion: @escaping (YearProgressEntry) -> Void) {
         WidgetActivityLog.touch("snapshot")
-        completion(makeEntry(for: Date()))
+        var entry = makeEntry(for: Date())
+        entry.isSnapshot = true
+        completion(entry)
     }
 
     /// 只排两个 entry：现在 + 下一个零点，之后由系统在零点后重新要时间线。
@@ -72,6 +77,7 @@ struct YearProgressProvider: TimelineProvider {
 
 struct YearProgressWidgetView: View {
     @Environment(\.widgetFamily) private var family
+    @Environment(\.widgetRenderingMode) private var renderingMode
     let entry: YearProgressEntry
 
     var body: some View {
@@ -90,7 +96,8 @@ struct YearProgressWidgetView: View {
                                      ? WidgetGridReference.columns(weekCount: entry.progress.totalWeeks)
                                      : nil,
                                  headerFontOverride: family == .systemSmall ? 13 : nil,
-                                 drawsBackground: false)
+                                 drawsBackground: entry.isSnapshot,
+                                 accented: renderingMode == .accented)
         }
         // macOS 14 / iOS 17 起，小组件必须用 containerBackground 声明背板，否则系统显示占位提示。
         // 背景交给系统容器，卡面本身保持透明：桌面小组件宿主的某些渲染方案会

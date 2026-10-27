@@ -27,6 +27,9 @@ public struct YearProgressCardView: View {
     public var drawsBackground: Bool
     /// 节假日方块上的小标记样式
     public var holidayMarker: HolidayMarkerStyle
+    /// 系统强制 accented 渲染时（例如 macOS 开启「降低透明度」），
+    /// 自定义颜色会被压成同一个 tint；这里改用不同透明度保留已过/未来层级。
+    public var accented: Bool
 
     public init(progress: YearProgress,
                 theme: CardTheme,
@@ -38,7 +41,8 @@ public struct YearProgressCardView: View {
                 fixedColumns: Int? = nil,
                 headerFontOverride: CGFloat? = nil,
                 drawsBackground: Bool = true,
-                holidayMarker: HolidayMarkerStyle = .triangle) {
+                holidayMarker: HolidayMarkerStyle = .triangle,
+                accented: Bool = false) {
         self.progress = progress
         self.theme = theme
         self.size = size
@@ -50,6 +54,7 @@ public struct YearProgressCardView: View {
         self.headerFontOverride = headerFontOverride
         self.drawsBackground = drawsBackground
         self.holidayMarker = holidayMarker
+        self.accented = accented
     }
 
     public var body: some View {
@@ -125,7 +130,8 @@ public struct YearProgressCardView: View {
                                           radius: radius,
                                           theme: theme,
                                           showsTooltip: showsTooltips,
-                                          holidayMarker: holidayMarker)
+                                          holidayMarker: holidayMarker,
+                                          accented: accented)
                         }
                     }
                 }
@@ -163,6 +169,7 @@ private struct WeekBlockView: View {
     let theme: CardTheme
     let showsTooltip: Bool
     let holidayMarker: HolidayMarkerStyle
+    let accented: Bool
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -172,12 +179,13 @@ private struct WeekBlockView: View {
                 ZStack(alignment: .top) {
                     Color.clear
                     Rectangle()
-                        .fill(theme.currentProgressFill)
+                        .fill(accented ? Color.white.opacity(0.95) : theme.currentProgressFill)
                         .frame(height: max(0, min(1, cell.fraction)) * side)
                 }
             }
             if cell.holiday != nil {
-                HolidayMarker(style: holidayMarker, side: side, radius: radius, color: theme.holidayAccent)
+                HolidayMarker(style: holidayMarker, side: side, radius: radius,
+                              color: accented ? Color.white.opacity(0.95) : theme.holidayAccent)
             }
             // 第几周：水平 + 垂直居中
             number
@@ -189,8 +197,10 @@ private struct WeekBlockView: View {
                 // 本周：金黄色 ring（节假日是红色折角，用颜色区分）。
                 // 线宽与 HolidayMarkerStyle.ring 保持一致（1.2pt 起）。
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
-                    .strokeBorder(theme.currentRing, lineWidth: max(1.2, side * 0.065))
-                    .shadow(color: theme.currentRing.opacity(0.35), radius: 1.5)
+                    .strokeBorder(accented ? Color.white : theme.currentRing,
+                                  lineWidth: max(1.2, side * 0.065))
+                    .shadow(color: accented ? Color.white.opacity(0.35) : theme.currentRing.opacity(0.35),
+                            radius: 1.5)
             } else if let stroke {
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
                     .strokeBorder(stroke.color, lineWidth: stroke.width)
@@ -201,6 +211,15 @@ private struct WeekBlockView: View {
     }
 
     private var fill: Color {
+        // accented 模式下不要再用 theme 的彩色 fill：WidgetKit 会把它们统一 tint，
+        // 导致所有方块看起来一样亮。用不同透明度制造层级；系统把高透明度映射成强调色，
+        // 所以视觉上是“已过亮、未来暗”，和彩色模式的深浅方向相反，但信息仍然可读。
+        if accented {
+            switch cell.state {
+            case .past: return Color.white.opacity(0.86)
+            case .future, .current: return Color.white.opacity(0.22)
+            }
+        }
         switch cell.state {
         case .past: return theme.pastFill
         case .future: return theme.futureFill
@@ -221,21 +240,22 @@ private struct WeekBlockView: View {
 
         switch cell.state {
         case .past:
-            base.foregroundStyle(theme.pastLabel)
+            base.foregroundStyle(accented ? Color.black.opacity(0.78) : theme.pastLabel)
         case .future:
-            base.foregroundStyle(theme.futureLabel)
+            base.foregroundStyle(accented ? Color.white.opacity(0.82) : theme.futureLabel)
         case .current:
             let f = CGFloat(min(1, max(0, cell.fraction)))
             ZStack {
-                base.foregroundStyle(theme.pastLabel)
+                base.foregroundStyle(accented ? Color.black.opacity(0.78) : theme.pastLabel)
                     .mask(alignment: .top) { Rectangle().frame(height: f * side) }
-                base.foregroundStyle(theme.futureLabel)
+                base.foregroundStyle(accented ? Color.white.opacity(0.82) : theme.futureLabel)
                     .mask(alignment: .bottom) { Rectangle().frame(height: (1 - f) * side) }
             }
         }
     }
 
     private var stroke: (color: Color, width: CGFloat)? {
+        if accented { return nil }
         let width = max(0.8, side * 0.030)
         switch cell.state {
         case .past: return theme.pastStroke.map { ($0, width) }
