@@ -1,4 +1,11 @@
 .build/
 build/
-.DS_Store
+DerivedData/
+.swiftpm/
 *.xcuserstate
+xcuserdata/
+*.app
+*.appex
+*.dSYM
+*.xcarchive
+.DS_Store
