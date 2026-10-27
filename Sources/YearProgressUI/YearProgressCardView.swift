@@ -262,7 +262,7 @@ private struct WeekBlockView: View {
             // 未来块几乎是透明的，用淡描边把「还没到的周」画出来；
             // 已过块保持实心，两者形成实心/空心对比，比单纯明暗更清楚。
             return cell.state == .future
-                ? (Color.white.opacity(0.30), max(0.8, side * 0.035))
+                ? (Color.white.opacity(0.42), max(1.0, side * 0.045))
                 : nil
         }
         let width = max(0.8, side * 0.030)

@@ -78,6 +78,7 @@ struct YearProgressProvider: TimelineProvider {
 struct YearProgressWidgetView: View {
     @Environment(\.widgetFamily) private var family
     @Environment(\.widgetRenderingMode) private var renderingMode
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     let entry: YearProgressEntry
 
     var body: some View {
@@ -97,7 +98,10 @@ struct YearProgressWidgetView: View {
                                      : nil,
                                  headerFontOverride: family == .systemSmall ? 13 : nil,
                                  drawsBackground: entry.isSnapshot,
-                                 accented: renderingMode == .accented)
+                                 // 降低透明度时宿主可能仍报告 .fullColor，但最终是按
+                                 // accented/glass 合成；直接读系统辅助功能开关，保证
+                                 // placeholder、snapshot、live 三条路径一致。
+                                 accented: reduceTransparency || renderingMode == .accented)
         }
         // macOS 14 / iOS 17 起，小组件必须用 containerBackground 声明背板，否则系统显示占位提示。
         // 背景交给系统容器，卡面本身保持透明：桌面小组件宿主的某些渲染方案会
