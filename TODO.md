@@ -130,7 +130,3 @@
   `CFBundleIconFile`，且 `Contents/Resources/AppIcon.icns` 要随 appex 一起打包。
   `make install` 会清掉 `build/` 下的重复 LaunchServices 记录，避免同一 bundle id 出现两条记录后
   chronod 继续使用旧图标或报告 “LS doesn't have a containing bundle”。
-- **降低透明度下的 accented 回退**：macOS 开启「降低透明度」时，桌面 WidgetKit 会强制走
-  `accented` 渲染，自定义彩色 fill 会被统一 tint（Apple 自家组件同样如此）。系统小组件现在检测
-  `widgetRenderingMode == .accented`，改用不同透明度的白色层级：已过亮、未来暗，本周保留描边；
-  彩色模式不受影响。
