@@ -8,8 +8,8 @@ public struct WeekCell: Identifiable, Hashable, Sendable {
         case future    // 未来（主题的浅色块）
     }
 
-    public let index: Int          // 第几周，1...53
-    public let start: Date         // 周一 00:00
+    public let index: Int          // 该公历年内的第几周，1...54
+    public let start: Date         // 周首日 00:00
     public let endExclusive: Date  // 下周一 00:00
     public let state: State
     /// 本周已过的比例 0...1（非本周：past 为 1、future 为 0）。
@@ -24,7 +24,7 @@ public struct WeekCell: Identifiable, Hashable, Sendable {
     public var end: Date { endExclusive.addingTimeInterval(-1) }
 }
 
-/// 「今天」落在网格之外时的信息（年初/年末那几个跨年周）。
+/// 仅用于异常/空网格的兜底；正常公历年重叠周模型下不会出现。
 public struct OutOfGridWeek: Hashable, Sendable {
     public let year: Int        // 它真正属于哪一年（周年度）
     public let index: Int       // 第几周
@@ -38,7 +38,7 @@ public struct YearProgress: Sendable {
     public let referenceDate: Date
     public let timeZone: TimeZone
     public let weekStartMode: WeekStartMode
-    /// 非 nil 表示「今天」所在的周不属于展示年份（只会出现在 1 月 1–3 日或 12 月 29–31 日）。
+    /// 重叠周模型下正常不会出现；保留给计算异常/未来数据源的兜底。
     public let outOfGridWeek: OutOfGridWeek?
 
     public var totalWeeks: Int { weeks.count }
@@ -58,7 +58,7 @@ public struct YearProgress: Sendable {
 
     /// "2026年"
     public var yearTitle: String { "\(year)年" }
-    /// "丙午年 · 第 42 周 · 剩 11 周"；跨年周时退化为 "丙午年 · 共 52 周"
+    /// "丙午年 · 第 42 周 · 剩 11 周"；异常/空网格时退化为 "丙午年 · 共 N 周"
     public var subtitle: String {
         if currentWeek == nil {
             return "\(ganzhi.yearName) · 共 \(totalWeeks) 周"
@@ -79,13 +79,13 @@ public struct YearProgress: Sendable {
         return "\(yearTitle) · \(ganzhi.yearName) · 第 \(currentWeek?.index ?? totalWeeks) 周 · 剩 \(remainingWeeks) 周 · 已过 \(p)%"
     }
 
-    /// 只有「跨年周」那 1–3 天才出现的第二行小字。
+    /// 保留给异常/未来数据源；正常重叠周模型中为 nil。
     public var boundaryNote: String? {
         guard let outside = outOfGridWeek else { return nil }
         return "本周属于 \(outside.year) 年第 \(outside.index) 周"
     }
 
-    /// "已过 78% · 剩余 11 周"；跨年周时说明本周到底属于哪一年。
+    /// "已过 78% · 剩余 11 周"；异常跨年信息只在有 outOfGridWeek 时出现。
     public var footerText: String {
         let p = Int(percent.rounded())
         if let outside = outOfGridWeek {
@@ -110,9 +110,18 @@ public enum YearProgressCalculator {
                                 timeZone: TimeZone,
                                 weekStartMode: WeekStartMode = .monday,
                                 holidayTable: HolidayTable? = nil) -> YearProgress {
-        // 展示年份 = 当前公历年（不是 ISO 周年度）
+        // 展示年份 = 当前公历年；网格包含所有与这个公历年相交的周。
+        // 首周可能从上一年的 12 月开始，末周可能延到下一年的 1 月；
+        // 因此总周数是 53 或 54，而不是 ISO 周年度的 52/53。
         let year = calendar.component(.year, from: date)
-        let count = YearWeekMath.weeksInYear(year, calendar: calendar)
+        guard let yearStart = calendar.date(from: DateComponents(year: year, month: 1, day: 1)),
+              let nextYearStart = calendar.date(from: DateComponents(year: year + 1, month: 1, day: 1)) else {
+            assertionFailure("无法计算 \(year) 年的起止")
+            return YearProgress(year: year, ganzhi: Ganzhi(year: year), weeks: [],
+                                referenceDate: date, timeZone: timeZone,
+                                weekStartMode: weekStartMode, outOfGridWeek: nil)
+        }
+        let weekStarts = YearWeekMath.overlappingWeekStarts(year: year, calendar: calendar)
         let holidays = holidayTable ?? HolidayTable.builtIn(for: year)
 
         // 每次计算只建一个 formatter，rangeText 预计算好（原来每个方块每次渲染都要建）
@@ -122,20 +131,10 @@ public enum YearProgressCalculator {
         dayFormat.dateFormat = "M/d"
 
         var cells: [WeekCell] = []
-        cells.reserveCapacity(count)
+        cells.reserveCapacity(weekStarts.count)
 
-        // 第 1 周只算一次，其余按 7 个自然日推进；任何一步失败都显式断言，
-        // 不再 `continue` 静默少一格（那会让 totalWeeks/percent 悄悄算错）。
-        guard count > 0,
-              let first = YearWeekMath.weekRange(index: 1, weekYear: year, calendar: calendar) else {
-            assertionFailure("无法计算 \(year) 年第 1 周")
-            return YearProgress(year: year, ganzhi: Ganzhi(year: year), weeks: [],
-                                referenceDate: date, timeZone: timeZone,
-                                weekStartMode: weekStartMode, outOfGridWeek: nil)
-        }
-
-        var weekStart = first.start
-        for index in 1...count {
+        for (offset, weekStart) in weekStarts.enumerated() {
+            let index = offset + 1
             let endExclusive: Date
             if let next = calendar.date(byAdding: .day, value: 7, to: weekStart) {
                 endExclusive = next
@@ -152,21 +151,28 @@ public enum YearProgressCalculator {
                 state = .future; fraction = 0
             } else {
                 state = .current
-                // 用这一周的真实长度（DST 周可能是 167/169 小时），而不是固定 168 小时
-                let span = endExclusive.timeIntervalSince(weekStart)
-                fraction = min(1, max(0, date.timeIntervalSince(weekStart) / span))
+                // 本周刚好跨年时，只按「落在展示年份内那几天」计算比例。
+                // 否则 1 月 1 日会因为所在周从去年 12 月开始，被显示成“本周已过 6/7”。
+                let portionStart = max(weekStart, yearStart)
+                let portionEnd = min(endExclusive, nextYearStart)
+                let span = portionEnd.timeIntervalSince(portionStart)
+                fraction = span > 0
+                    ? min(1, max(0, date.timeIntervalSince(portionStart) / span))
+                    : 0
             }
-            // 周内是否有工作日假期（周六日不算）
+
+            // 周内是否有工作日假期（周六日不算）；只检查落在展示年份内的日期。
             var holidayName: String?
             if let holidays {
-                var day = weekStart
-                while day < endExclusive {
+                var day = max(weekStart, yearStart)
+                let scanEnd = min(endExclusive, nextYearStart)
+                while day < scanEnd {
                     let weekday = calendar.component(.weekday, from: day)   // 1=Sun ... 7=Sat
                     if weekday != 1, weekday != 7, let name = holidays.holidayName(on: day, calendar: calendar) {
                         holidayName = name
                         break
                     }
-                    day = calendar.date(byAdding: .day, value: 1, to: day) ?? endExclusive
+                    day = calendar.date(byAdding: .day, value: 1, to: day) ?? scanEnd
                 }
             }
 
@@ -174,10 +180,9 @@ public enum YearProgressCalculator {
             cells.append(WeekCell(index: index, start: weekStart, endExclusive: endExclusive,
                                   state: state, fraction: fraction, holiday: holidayName,
                                   rangeText: rangeText))
-            weekStart = endExclusive
         }
 
-        // 今天的这一周不在网格里时（跨年周），记下它真正属于哪一年第几周，用于文案说明。
+        // 重叠周模型下，公历年内每一天都在网格里；保留兜底以防计算异常。
         let outside: OutOfGridWeek? = cells.contains { date >= $0.start && date < $0.endExclusive }
             ? nil
             : OutOfGridWeek(year: calendar.component(.yearForWeekOfYear, from: date),

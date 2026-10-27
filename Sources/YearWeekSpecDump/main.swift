@@ -15,7 +15,7 @@ struct YearEntry: Codable {
 struct ProbeEntry: Codable {
     let date: String
     let year: Int              // 展示年份 = 当前公历年
-    let weekIndex: Int         // 第几周；0 表示本周不在该网格内（跨年周）
+    let weekIndex: Int         // 第几周；0 仅表示空网格/异常
     let totalWeeks: Int
     let state: String          // current / none（跨年周）
     let isoWeekYear: Int       // 真正所属的周年度
@@ -40,19 +40,19 @@ let dayFormat = DateFormatter()
 dayFormat.locale = Locale(identifier: "en_US_POSIX")
 dayFormat.timeZone = tz
 dayFormat.dateFormat = "yyyy-MM-dd"
-let yearRange = 2015...2035
+let yearRange = 2012...2040
 var years: [YearEntry] = []
 var probes: [ProbeEntry] = []
 
 for year in yearRange {
-    let count = YearWeekMath.weeksInYear(year, calendar: calendar)
-    guard let first = YearWeekMath.weekRange(index: 1, weekYear: year, calendar: calendar),
-          let last = YearWeekMath.weekRange(index: count, weekYear: year, calendar: calendar) else { continue }
+    let starts = YearWeekMath.overlappingWeekStarts(year: year, calendar: calendar)
+    guard let first = starts.first, let last = starts.last,
+          let lastEndExclusive = calendar.date(byAdding: .day, value: 7, to: last) else { continue }
     years.append(YearEntry(year: year,
-                           weeks: count,
-                           firstWeekStart: dayFormat.string(from: first.start),
-                           lastWeekStart: dayFormat.string(from: last.start),
-                           lastWeekEnd: dayFormat.string(from: last.endExclusive.addingTimeInterval(-1))))
+                           weeks: starts.count,
+                           firstWeekStart: dayFormat.string(from: first),
+                           lastWeekStart: dayFormat.string(from: last),
+                           lastWeekEnd: dayFormat.string(from: lastEndExclusive.addingTimeInterval(-1))))
 
     // 探针：每月 1/8/15/22 日 + 12/31，用于跨端一致性校验
     var comps = DateComponents()
@@ -83,7 +83,7 @@ for year in yearRange {
     }
 }
 
-let fixture = Fixture(rule: "ISO 8601 (Monday first, minimumDaysInFirstWeek = 4)",
+let fixture = Fixture(rule: "Gregorian year overlapping weeks (Monday first; 53/54 weeks)",
                       timeZone: "UTC",
                       weekStart: "monday",
                       years: years,

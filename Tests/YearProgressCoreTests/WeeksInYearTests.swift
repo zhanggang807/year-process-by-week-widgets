@@ -34,4 +34,26 @@ struct WeeksInYearTests {
             #expect(YearWeekMath.weeksInYear(2025, calendar: cal) == 52, "\(tzName)")
         }
     }
+
+    @Test("公历年重叠周：53/54 周，且 2012/2040 为 54")
+    func overlappingWeeks() {
+        #expect(YearWeekMath.weeksOverlapping(year: 2025, calendar: calendar) == 53)
+        #expect(YearWeekMath.weeksOverlapping(year: 2026, calendar: calendar) == 53)
+        #expect(YearWeekMath.weeksOverlapping(year: 2027, calendar: calendar) == 53)
+        #expect(YearWeekMath.weeksOverlapping(year: 2012, calendar: calendar) == 54)
+        #expect(YearWeekMath.weeksOverlapping(year: 2040, calendar: calendar) == 54)
+    }
+
+    @Test("公历年重叠周：YearProgress 实际产生 54 周")
+    func yearProgressCanProduce54Weeks() {
+        let cal = WeekStartMode.monday.makeCalendar(timeZone: TimeZone(identifier: "UTC")!)
+        let mid = cal.date(from: DateComponents(year: 2012, month: 6, day: 1, hour: 12))!
+        let p = YearProgressCalculator.progress(for: mid, calendar: cal,
+                                                timeZone: TimeZone(identifier: "UTC")!,
+                                                weekStartMode: .monday)
+        #expect(p.totalWeeks == 54)
+        #expect(p.currentWeek != nil)
+        #expect(p.weeks.first?.index == 1)
+        #expect(p.weeks.last?.index == 54)
+    }
 }

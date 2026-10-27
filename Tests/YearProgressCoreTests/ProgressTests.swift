@@ -43,19 +43,19 @@ struct ProgressTests {
         #expect(p.boundaryNote == nil)
 
         let q = progress("2025-12-30 12:00")
-        #expect(q.headerText() == "2025年 · 乙巳年 · 共 52 周 · 已过 100%")
-        #expect(q.boundaryNote == "本周属于 2026 年第 1 周")
+        #expect(q.headerText() == "2025年 · 乙巳年 · 第 53 周 · 剩 0 周 · 已过 99%")
+        #expect(q.boundaryNote == nil)
 
         let r = progress("2027-01-01 12:00")
-        #expect(r.headerText() == "2027年 · 丁未年 · 共 52 周 · 已过 0%")
-        #expect(r.boundaryNote == "本周属于 2026 年第 53 周")
+        #expect(r.headerText() == "2027年 · 丁未年 · 第 1 周 · 剩 52 周 · 已过 0%")
+        #expect(r.boundaryNote == nil)
     }
 
-    @Test("跨年周的紧凑 header 也能正确退化为「共 N 周」")
+    @Test("年末最后一周的紧凑 header")
     func compactHeaderAtBoundary() {
         let p = progress("2025-12-30 12:00")
-        #expect(p.headerText() == "2025年 · 乙巳年 · 共 52 周 · 已过 100%")
-        #expect(p.headerText(compact: true) == "2025 · 乙巳 · 52 周 · 100%")
+        #expect(p.headerText() == "2025年 · 乙巳年 · 第 53 周 · 剩 0 周 · 已过 99%")
+        #expect(p.headerText(compact: true) == "2025 · 乙巳 · 53 周 · 剩 0 周 · 99%")
     }
 
     @Test("网格连续、无空洞，且覆盖整年")
@@ -75,33 +75,34 @@ struct ProgressTests {
 
     // MARK: 年份按「当前公历年」算（本次修改的主规则）
 
-    @Test("展示年份 = 当前公历年：2025-12-30 属于 ISO 2026 年第 1 周，但卡片必须是 2025 年")
+    @Test("展示年份 = 公历年：2025-12-30 是 2025 年第 53 周")
     func yearFollowsGregorianYearInLateDecember() {
         let p = progress("2025-12-30 12:00")
         #expect(p.year == 2025)
         #expect(p.yearTitle == "2025年")
         #expect(p.ganzhi.yearName == "乙巳年")
-        #expect(p.totalWeeks == 52)
-        #expect(p.currentWeek == nil)
+        #expect(p.totalWeeks == 53)
+        #expect(p.currentWeek?.index == 53)
         #expect(p.pastCount == 52)
         #expect(p.remainingWeeks == 0)
-        #expect(p.percent == 100)
-        #expect(p.outOfGridWeek == OutOfGridWeek(year: 2026, index: 1))
-        #expect(p.subtitle == "乙巳年 · 共 52 周")
-        #expect(p.footerText == "已过 100% · 本周属于 2026 年第 1 周")
+        #expect(abs(p.percent - 99.0566) < 0.01)
+        #expect(p.outOfGridWeek == nil)
+        #expect(p.subtitle == "乙巳年 · 第 53 周 · 剩 0 周")
+        #expect(p.footerText == "已过 99% · 剩余 0 周")
     }
 
-    @Test("年初同理：2027-01-01 属于 2026 年第 53 周，卡片显示 2027 年")
+    @Test("年初同理：2027-01-01 是 2027 年第 1 周")
     func yearFollowsGregorianYearInEarlyJanuary() {
         let p = progress("2027-01-01 12:00")
         #expect(p.year == 2027)
         #expect(p.yearTitle == "2027年")
         #expect(p.ganzhi.yearName == "丁未年")
-        #expect(p.currentWeek == nil)
+        #expect(p.totalWeeks == 53)
+        #expect(p.currentWeek?.index == 1)
         #expect(p.pastCount == 0)
-        #expect(p.percent == 0)
-        #expect(p.outOfGridWeek == OutOfGridWeek(year: 2026, index: 53))
-        #expect(p.footerText == "已过 0% · 本周属于 2026 年第 53 周")
+        #expect(abs(p.percent - 0.3145) < 0.01)
+        #expect(p.outOfGridWeek == nil)
+        #expect(p.footerText == "已过 0% · 剩余 52 周")
     }
 
     @Test("常规日期不会出现跨年周")
@@ -111,32 +112,6 @@ struct ProgressTests {
             #expect(p.outOfGridWeek == nil, "\(s)")
             #expect(p.currentWeek != nil, "\(s)")
         }
-    }
-
-    @Test("跨年周只会落在 1 月 1–3 日 / 12 月 29–31 日，且每年最多一出现")
-    func boundaryWindowIsNarrow() {
-        let calendar = WeekStartMode.monday.makeCalendar(timeZone: shanghai)
-        for tzName in ["Asia/Shanghai", "UTC"] {
-            let tz = TimeZone(identifier: tzName)!
-            let cal = WeekStartMode.monday.makeCalendar(timeZone: tz)
-            var cursor = cal.date(from: DateComponents(year: 2019, month: 1, day: 1, hour: 12))!
-            let end = cal.date(from: DateComponents(year: 2032, month: 1, day: 1, hour: 12))!
-            var gapsByYear: [Int: Int] = [:]
-            while cursor < end {
-                let p = YearProgressCalculator.progress(for: cursor, calendar: cal, timeZone: tz, weekStartMode: .monday)
-                if p.currentWeek == nil {
-                    let comps = cal.dateComponents([.year, .month, .day], from: cursor)
-                    let month = comps.month!, day = comps.day!
-                    let allowed = (month == 1 && day <= 3) || (month == 12 && day >= 29)
-                    #expect(allowed, "\(tzName) \(comps) 意外落在网格外")
-                    gapsByYear[comps.year!, default: 0] += 1
-                    #expect(p.percent == 0 || p.percent == 100)
-                }
-                cursor = cal.date(byAdding: .day, value: 1, to: cursor)!
-            }
-            #expect(gapsByYear.values.allSatisfy { $0 <= 3 }, "\(tzName) 跨年周最多 3 天：\(gapsByYear)")
-        }
-        _ = calendar
     }
 
     @Test("DST 周用真实长度算比例（169h / 167h）")
@@ -174,28 +149,27 @@ struct ProgressTests {
             while cursor < end {
                 let p = YearProgressCalculator.progress(for: cursor, calendar: cal, timeZone: tz, weekStartMode: .monday)
                 #expect(p.year == cal.component(.year, from: cursor), "\(tzName) \(cursor) 年份不符")
+                #expect([53, 54].contains(p.totalWeeks))
                 #expect(p.weeks.count == p.totalWeeks)
-                #expect(p.weeks.filter { $0.state == .current }.count <= 1)
-                #expect(p.pastCount + p.remainingWeeks + (p.currentWeek == nil ? 0 : 1) == p.totalWeeks)
+                #expect(p.weeks.filter { $0.state == .current }.count == 1)
+                #expect(p.pastCount + p.remainingWeeks + 1 == p.totalWeeks)
                 for (a, b) in zip(p.weeks, p.weeks.dropFirst()) { #expect(a.endExclusive == b.start) }
-                if let c = p.currentWeek {
-                    #expect(c.start <= cursor && cursor < c.endExclusive)
-                    #expect(p.outOfGridWeek == nil)
-                } else {
-                    #expect(p.outOfGridWeek != nil)
-                }
+                let c = try! #require(p.currentWeek)
+                #expect(c.start <= cursor && cursor < c.endExclusive)
+                #expect(p.outOfGridWeek == nil)
                 cursor = cal.date(byAdding: .day, value: 1, to: cursor)!
             }
         }
     }
 
-    @Test("周日模式同样自洽（52/53 周；跨年周也有兜底）")
+    @Test("周日模式同样自洽（53/54 周，且每天都有本周）")
     func sundayModeIsSelfConsistent() {
         for string in ["2026-01-01 12:00", "2026-10-15 12:00", "2025-12-30 12:00", "2028-02-29 12:00"] {
             let p = YearProgressCalculator.progress(for: date(string, shanghai),
                                                     timeZone: shanghai, weekStartMode: .sunday)
-            #expect([52, 53].contains(p.totalWeeks), "\(string) -> \(p.totalWeeks)")
-            #expect(p.currentWeek != nil || p.outOfGridWeek != nil, "\(string)")
+            #expect([53, 54].contains(p.totalWeeks), "\(string) -> \(p.totalWeeks)")
+            #expect(p.currentWeek != nil, "\(string)")
+            #expect(p.outOfGridWeek == nil, "\(string)")
             #expect(p.year == 2025 || p.year == 2026 || p.year == 2028)
         }
     }

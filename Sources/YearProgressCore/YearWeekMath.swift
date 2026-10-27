@@ -13,6 +13,28 @@ public enum YearWeekMath {
         return range.count
     }
 
+    /// 公历年 Y 内所有与它相交的周起点（首周可能从 Y-1 年 12 月开始）。
+    /// 这是「展示年份 = 公历年」的网格口径，不是 ISO 周年度。
+    public static func overlappingWeekStarts(year: Int, calendar: Calendar) -> [Date] {
+        guard let yearStart = calendar.date(from: DateComponents(year: year, month: 1, day: 1)),
+              let nextYearStart = calendar.date(from: DateComponents(year: year + 1, month: 1, day: 1)) else {
+            return []
+        }
+        var starts: [Date] = []
+        var start = weekStart(of: yearStart, calendar: calendar)
+        while start < nextYearStart {
+            starts.append(start)
+            guard let next = calendar.date(byAdding: .day, value: 7, to: start) else { break }
+            start = next
+        }
+        return starts
+    }
+
+    /// 公历年内与它相交的周数：通常为 53 或 54。
+    public static func weeksOverlapping(year: Int, calendar: Calendar) -> Int {
+        max(1, overlappingWeekStarts(year: year, calendar: calendar).count)
+    }
+
     /// 独立于 `Calendar` 的 ISO 8601 规则推导，仅用于交叉校验（勿用于生产取值）：
     /// 1 月 1 日是周四 → 53 周；闰年且 1 月 1 日是周三 → 53 周；否则 52 周。
     public static func isoWeeksInYearByRule(_ year: Int) -> Int {
