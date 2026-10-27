@@ -5,11 +5,12 @@
 > 分支：`main`  
 > 交接基线：`0614b17 chore: 忽略构建产物`  
 > 当前版本：`0.6.6 / build 55`  
-> 当前开发机：macOS 27.0.1，Apple M5，16GB，只有 CommandLineTools（未安装 Xcode）
+> 当前开发机：macOS 27.0.1，Apple M5，16GB，Xcode 27.1 / iOS SDK 27.1；
+> 未安装 iOS Simulator runtime，也没有连接 iPhone/Android 真机
 
 ## 1. 先看这里
 
-这是一个 macOS 菜单栏 + WidgetKit 小组件项目：把当前公历年的每周画成方块。
+这是一个跨平台的年度周进度小组件项目：把当前公历年的每周画成方块。
 
 当前已实现：
 
@@ -21,6 +22,8 @@
 - 开机启动（`SMAppService`）
 - 节假日数据：内置 JSON → 运行时更新 → 法定日期兜底
 - 跨端真值表：`spec/year-weeks.json`
+- iOS App + WidgetKit：主屏幕 small / medium / large，锁屏圆形 / 矩形
+- Android / HyperOS 3：标准 AppWidgetProvider，2×2 / 4×2
 
 当前最低系统版本：**macOS 14.0（Sonoma）**。
 
@@ -44,6 +47,15 @@ make install
 
 # 体检：注册状态、入口点、图标、最近崩溃、扩展调用
 make diagnose
+
+# Android / HyperOS 3
+make android-test
+make android-build
+
+# iOS / iPadOS
+make ios-test
+make ios-build
+open ios/YearProgress.xcodeproj
 ```
 
 常用开发命令：
@@ -71,29 +83,19 @@ make clean
 
 ### iOS
 
-当前**没有** Xcode 工程，只有 SwiftPM package。要做 iOS 端还需要：
+工程：`ios/YearProgress.xcodeproj`，最低 iOS 17。包含两个 Framework target
+（`YearProgressCore` / `YearProgressUI`）、宿主 App 和 Widget Extension。
 
-- Xcode（建议与 macOS 版本匹配的 Xcode 27）
-- iOS SDK + Simulator runtime
-- 新建真正的 Xcode App target + Widget Extension target
-
-可复用：
-
-- `Sources/YearProgressCore`：纯 Foundation，直接复用
-- `Sources/YearProgressUI`：有条件编译的 AppKit/UIKit 分支，但尚未在 iOS 目标实际编译验证
-
-iOS 最低建议 **iOS 17**，因为使用 `containerBackground` 等 WidgetKit API。
+- 模拟器与真机 SDK 的 Debug 构建均通过；Simulator SDK Release 构建通过。
+- 当前没有 Simulator runtime，尚不能执行桌面/锁屏可视化验收。
+- 真机运行需在 Xcode 给 App 与 Extension 选择同一个 Developer Team。
+- 详细命令见 `ios/README.md`。
 
 ### Android
 
-当前没有 Android 工程。需要：
-
-- JDK 21（当前开发机已有）
-- Android Studio 或 Android SDK command-line tools
-- `platform-tools`、`build-tools`、platform SDK、emulator + system image
-- Gradle wrapper（Android Studio 生成，不必单独全局安装 Gradle）
-
-Android 端不能复用 SwiftUI，需要 Kotlin + Jetpack Compose + Glance；`spec/year-weeks.json` 和节假日 JSON 可共用。
+工程：`android/`，使用 Kotlin + 标准 AppWidgetProvider + RemoteViews。
+本机 Android SDK 36 / Build Tools 36 / JDK 21 已用于 `test + assembleDebug + lintDebug`，
+均通过。当前没有连接 HyperOS 3 真机，也没有 Android 模拟器镜像。
 
 **不要自动安装 Xcode/Android SDK**；先和用户确认环境和磁盘空间。
 
@@ -163,6 +165,8 @@ Tests/YearProgressCoreTests/ 44 个测试
 Support/                     Info.plist、entitlements、图标、节假日 JSON
 spec/year-weeks.json         跨端一致性真值表（2012–2040，1421 个探针）
 docs/                        README 预览图
+android/                     Android / HyperOS 3 Gradle 工程
+ios/                         iOS Xcode 工程、WidgetKit、图标与说明
 ```
 
 ## 6. 当前验证状态
@@ -173,7 +177,11 @@ docs/                        README 预览图
 - `make test`：**44 tests / 11 suites 全部通过**
 - `make diagnose`：注册、`_NSExtensionMain`、图标、无崩溃均正常
 - `/Applications/YearProgress.app` 已安装，版本 `0.6.6 / build 55`
-- Git 工作区在生成本文件前是干净的
+- `swift test`：44 tests / 11 suites 全部通过
+- iOS Simulator SDK Debug、Release + Device SDK Debug：通过
+- iOS `xcodebuild analyze`：通过
+- Android `clean test assembleDebug lintDebug`：通过（0 errors）
+- 跨零点和真机桌面视觉尚未验收
 
 ## 7. 已知限制 / 不要再踩的坑
 
@@ -193,9 +201,10 @@ docs/                        README 预览图
 
 ### iOS/Android
 
-- iOS 没有 Xcode 工程，需新建 Widget Extension target
-- Android 没有 Gradle 工程，需要 Kotlin/Glance 重写 UI
-- 不要声称 iOS/Android 已编译，除非对应工具链真实跑过
+- iOS 已有 Xcode 工程并真实编译通过，但当前没有 Simulator runtime / 真机运行记录
+- Android 已有 Gradle 工程并真实编译通过，但还没有 HyperOS 3 桌面添加记录
+- iOS 真机签名、App Group、运行时节假日更新尚未配置
+- Android 2027 官方节假日 JSON 发布后需放入 `Support/holidays/` 并重新打包
 
 ### 分发
 
@@ -257,11 +266,13 @@ make test
 
 ### iOS
 
-按 `TODO.md` 开工；先确认 Xcode 版本和签名方式，再创建 Xcode App + Widget Extension target。
+安装 iOS Simulator runtime 后运行 App，添加 small/medium/large 和锁屏组件，重点验收
+视觉密度、主题、跨零点刷新。真机验收前配置 Developer Team。
 
 ### Android
 
-按 `TODO.md` 开工；先安装 Android Studio/SDK，再以 `spec/year-weeks.json` 做 Kotlin parity test。
+在 HyperOS 3 真机安装 `android/app/build/outputs/apk/debug/app-debug.apk`，验收
+2×2 / 4×2 调整尺寸、跨时区与零点刷新。
 
 ---
 

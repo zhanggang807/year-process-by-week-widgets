@@ -2,6 +2,11 @@
 build/
 DerivedData/
 .swiftpm/
+.gradle/
+.idea/
+local.properties
+*.jks
+*.keystore
 *.xcuserstate
 xcuserdata/
 *.app

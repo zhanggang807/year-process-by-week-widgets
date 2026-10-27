@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/pin_unsupported"
+        android:shortcutId="pin_year_progress_small"
+        android:shortcutLongLabel="@string/shortcut_pin_small_long"
+        android:shortcutShortLabel="@string/pin_small">
+        <intent
+            android:action="com.local.yearprogress.action.PIN_SMALL"
+            android:targetClass="com.local.yearprogress.app.MainActivity"
+            android:targetPackage="com.local.yearprogress" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/pin_unsupported"
+        android:shortcutId="pin_year_progress_medium"
+        android:shortcutLongLabel="@string/shortcut_pin_medium_long"
+        android:shortcutShortLabel="@string/pin_medium">
+        <intent
+            android:action="com.local.yearprogress.action.PIN_MEDIUM"
+            android:targetClass="com.local.yearprogress.app.MainActivity"
+            android:targetPackage="com.local.yearprogress" />
+    </shortcut>
+</shortcuts>

@@ -421,9 +421,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         case .requiresApproval:
             // 已经登记，但需要用户在系统设置里放行；再 register 不会有帮助。
             openLoginItemsSettings()
-        case .notFound:
-            showLoginItemMessage("请先把 App 安装到 /Applications，再开启开机启动。")
         default:
+            // macOS has been observed returning `.notFound` for an app that is
+            // correctly installed in /Applications but has not been registered
+            // yet. Calling register() is the only reliable way to distinguish
+            // that state from a genuinely invalid installation.
             do {
                 try service.register()
                 if service.status == .requiresApproval {

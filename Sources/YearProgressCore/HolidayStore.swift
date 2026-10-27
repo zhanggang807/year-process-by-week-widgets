@@ -74,9 +74,16 @@ public enum HolidayStore {
     /// Widget 扩展是独立沙盒，读不到 App 的 Application Support；
     /// 宿主 App（未沙盒）把同一份 JSON 镜像到它的容器里，下一次刷新就能读到。
     public static func widgetContainerCacheDirectory() -> URL {
+        #if os(macOS)
         FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent("Library/Containers/com.local.yearprogress.widget/Data/Library/Application Support/YearProgress/holidays",
                                     isDirectory: true)
+        #else
+        // iOS app and extension use separate containers. v1 reads bundled
+        // holidays only, so this fallback is never used for cross-process IO.
+        FileManager.default.temporaryDirectory
+            .appendingPathComponent("YearProgress/holidays", isDirectory: true)
+        #endif
     }
 
     // MARK: 私有
@@ -94,8 +101,10 @@ public enum HolidayStore {
     }
 
     private static func mirrorToWidget(_ table: HolidayTable, data: Data) {
+        #if os(macOS)
         let dir = widgetContainerCacheDirectory()
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         try? data.write(to: dir.appendingPathComponent("\(table.year).json"), options: .atomic)
+        #endif
     }
 }

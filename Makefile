@@ -12,6 +12,14 @@
 #   make diagnose   注册状态 / 入口点 / 最近崩溃 / 扩展调用
 #   make icon       重新生成 App 图标
 #   make holidays YEAR=2027   拉取某年的官方节假日安排
+#   make android-test         Android 核心 / parity / 节假日测试
+#   make android-build        构建 HyperOS 3 可安装 APK
+#   make android-install      通过 adb 安装到已连接设备
+#   make android-lint         检查 Android 工程
+#   make ios-test             跑共享 Swift 测试
+#   make ios-build            无签名的 iOS Simulator / 真机 SDK 编译
+#   make ios-icon             重新生成 iOS 1024 图标
+#   make ios-open             用 Xcode 打开 iOS 工程
 #   make clean
 
 SWIFT      ?= swift
@@ -43,12 +51,12 @@ else
     -Xlinker -rpath -Xlinker $(CLT_LIB)
 endif
 
-.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose icon holidays reset-widget-cache clean help
+.PHONY: all build test run preview spec app open widget widget-uninstall register install uninstall diagnose icon holidays reset-widget-cache android-test android-build android-install android-lint ios-test ios-build ios-icon ios-open clean help
 
 all: build
 
 help:
-	@sed -n '1,22p' Makefile
+	@sed -n '1,31p' Makefile
 
 build:
 	$(SWIFT) build -c $(CONFIG)
@@ -196,6 +204,50 @@ holidays:
 	  "https://api.github.com/repos/NateScarlet/holiday-cn/contents/$(YEAR).json?ref=master" \
 	  -o Support/holidays/$(YEAR).json
 	@echo "已更新 Support/holidays/$(YEAR).json（请检查 days 是否非空后再打包）"
+
+# Android / HyperOS 3。SDK 路径可覆盖：
+#   make android-build ANDROID_HOME=/path/to/Android/sdk
+ANDROID_HOME ?= $(HOME)/Library/Android/sdk
+ADB ?= $(ANDROID_HOME)/platform-tools/adb
+ANDROID_APK := android/app/build/outputs/apk/debug/app-debug.apk
+
+android-test:
+	@cd android && ANDROID_HOME="$(ANDROID_HOME)" ./gradlew test
+
+android-build:
+	@cd android && ANDROID_HOME="$(ANDROID_HOME)" ./gradlew assembleDebug
+	@echo "已生成 $(ANDROID_APK)"
+
+android-install: android-build
+	@"$(ADB)" install -r "$(ANDROID_APK)"
+	@echo "已安装。长按 HyperOS 桌面空白处 → 添加小部件 → 搜索“年进度”。"
+
+android-lint:
+	@cd android && ANDROID_HOME="$(ANDROID_HOME)" ./gradlew lintDebug
+
+# iOS / iPadOS：模拟器与真机 SDK 都做无签名编译；真机安装请在 Xcode 配置团队。
+IOS_PROJECT := ios/YearProgress.xcodeproj
+
+ios-test:
+	@$(SWIFT) test
+
+ios-build:
+	@xcodebuild -project "$(IOS_PROJECT)" -scheme YearProgressIOS \
+	  -configuration Debug -sdk iphonesimulator \
+	  -destination 'generic/platform=iOS Simulator' \
+	  -derivedDataPath ios/build/simulator CODE_SIGNING_ALLOWED=NO build
+	@xcodebuild -project "$(IOS_PROJECT)" -scheme YearProgressIOS \
+	  -configuration Debug -sdk iphoneos \
+	  -destination 'generic/platform=iOS' \
+	  -derivedDataPath ios/build/device CODE_SIGNING_ALLOWED=NO build
+	@echo "iOS App: ios/build/device/Build/Products/Debug-iphoneos/YearProgress.app"
+
+ios-icon:
+	@xcrun swift Tools/make-ios-icon.swift \
+	  ios/YearProgress/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png
+
+ios-open:
+	@open "$(IOS_PROJECT)"
 
 # 一键体检：注册状态 / 入口点 / 最近崩溃 / 扩展是否被调用
 diagnose:

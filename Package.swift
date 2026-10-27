@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "YearProgress",
-    platforms: [.macOS(.v14)],
+    platforms: [.macOS(.v14), .iOS(.v17)],
     products: [
         .library(name: "YearProgressCore", targets: ["YearProgressCore"]),
         .library(name: "YearProgressUI", targets: ["YearProgressUI"]),

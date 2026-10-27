@@ -150,6 +150,36 @@ pluginkit -m -v -p com.apple.widgetkit-extension | grep -i yearprogress
 小组件档位字号有上下限（`CardProfile.widget`），以及去掉了 App 专属的圆角和 tooltip
 （圆角背板由系统提供，用 `.containerBackground(for: .widget)` 声明）。
 
+## Android / HyperOS 3
+
+仓库新增了 `android/` 原生工程，提供 **2×2** 和 **4×2** 两个 HyperOS 桌面小组件入口。
+它使用标准 `AppWidgetProvider + RemoteViews`，复用同一份周口径和节假日数据，
+支持尺寸变化、点击打开 App、零点与开机刷新。宿主 App 内置“一键添加到桌面”，
+可绕过 HyperOS 搜索页中过长的第三方组件列表。
+
+```bash
+make android-test     # 共享真值表 + 2026 节假日周测试
+make android-build    # android/app/build/outputs/apk/debug/app-debug.apk
+make android-install  # 安装到已连接的 Android 设备
+```
+
+完整说明与当前验证边界见 [android/README.md](android/README.md)。HyperOS 真机桌面验收
+尚未完成，因为本机没有连接 Android 设备或安装模拟器镜像。
+
+## iOS / iPadOS
+
+`ios/YearProgress.xcodeproj` 已提供 SwiftUI 宿主 App + WidgetKit Extension，
+支持主屏幕小号/中号/大号，以及锁屏圆形/矩形组件。
+
+```bash
+make ios-test
+make ios-build
+open ios/YearProgress.xcodeproj
+```
+
+命令行无签名编译已同时通过 iOS Simulator 与真机 SDK。完整签名、添加步骤和验证边界见
+[ios/README.md](ios/README.md)。
+
 ## 规则约定（都写进了测试）
 
 | 主题 | 约定 |

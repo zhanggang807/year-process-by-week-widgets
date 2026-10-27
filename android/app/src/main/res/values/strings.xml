@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">年进度</string>
+    <string name="widget_small_name">年进度 · 2×2</string>
+    <string name="widget_medium_name">年进度 · 4×2</string>
+    <string name="widget_description">把一年里的每一周画成一格。已过为深色，未来为浅色，本周带蓝色描边，节假日周带红色折角。</string>
+    <string name="app_title">年度周进度</string>
+    <string name="app_intro">一年并不长。把 53 周铺开，已过、正在发生和还未到来的时间就一目了然。</string>
+    <string name="preview_label">小组件预览</string>
+    <string name="refresh_widget">刷新桌面小组件</string>
+    <string name="refresh_done">小组件已刷新</string>
+    <string name="how_to_add_title">添加到 HyperOS 桌面</string>
+    <string name="how_to_add_body">推荐先点击上面的“添加 2×2”或“添加 4×2”，由系统直接弹出放置确认。若 HyperOS 桌面不支持直达，再长按桌面空白处 → 添加小部件 → 搜索“年进度”。</string>
+    <string name="direct_pin_title">直接添加到桌面</string>
+    <string name="widget_status_loading">正在检查系统组件索引…</string>
+    <string name="widget_registered">系统已识别 %1$d 个年进度组件</string>
+    <string name="widget_not_registered">系统暂未识别组件，请重启手机后再打开本页</string>
+    <string name="pin_small">添加 2×2</string>
+    <string name="pin_medium">添加 4×2</string>
+    <string name="shortcut_pin_small_long">添加年进度小组件（2×2）</string>
+    <string name="shortcut_pin_medium_long">添加年进度小组件（4×2）</string>
+    <string name="pin_requested">已请求添加“%1$s”，请按桌面提示确认</string>
+    <string name="pin_unsupported">当前桌面不支持一键添加，请按下方方法手动搜索“年进度”</string>
+    <string name="legend_title">图例</string>
+    <string name="legend_past">深色：已经过去</string>
+    <string name="legend_current">蓝色描边：本周</string>
+    <string name="legend_future">浅色：未来</string>
+    <string name="legend_holiday">红色折角：含工作日假期</string>
+    <string name="refresh_note">小组件会在本地零点自动更新；如 HyperOS 省电策略延迟刷新，点击上面的按钮即可立即同步。</string>
+    <string name="preview_accessibility">年度周进度预览</string>
+    <string name="preview_medium_header">2026年 · 丙午年 · 第 42 周 · 已过 78%</string>
+    <string name="preview_medium_grid">01  02  03  04  05  06  07  08  09  10\n11  12  13  14  15  16  17  18  19  20\n21  22  23  24  25  26  27  28  29  30\n31  32  33  34  35  36  37  38  39  40</string>
+    <string name="preview_small_header">2026 · 丙午 · 42 周 · 78%</string>
+    <string name="preview_small_grid">01  02  03  04  05  06  07  08\n09  10  11  12  13  14  15  16\n17  18  19  20  21  22  23  24\n25  26  27  28  29  30  31  32</string>
+</resources>
