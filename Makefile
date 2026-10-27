@@ -139,10 +139,12 @@ install: widget
 	@$(LSREGISTER) -f "$(INSTALL_PATH)" >/dev/null 2>&1 || true
 	@sleep 1
 	@pluginkit -a "$(APPEX_INSTALL)" 2>/dev/null || true
-	@$(MAKE) -s reset-widget-cache
+	@# 先停 chronod / 通知中心，再清归档，避免在宿主读写时删文件造成注册/缓存竞态。
 	@killall chronod 2>/dev/null || true
-	@# 小组件库/桌面宿主的图标与渲染缓存由通知中心持有，重启后才会重新读取 appex。
 	@killall NotificationCenter 2>/dev/null || true
+	@sleep 1
+	@$(MAKE) -s reset-widget-cache
+	@# 小组件库/桌面宿主的图标与渲染缓存由通知中心持有，重启后才会重新读取 appex。
 	@killall iconservicesagent 2>/dev/null || true
 	@sleep 1
 	@echo "已安装到 $(INSTALL_PATH) 并重新注册"

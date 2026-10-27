@@ -69,16 +69,27 @@ public extension HolidayTable {
         }
         var seen = Set<String>()
         var out: [HolidayDay] = []
+        // 只校验日期本身，时区用 UTC 即可；节假日 JSON 是“年月日”而不是瞬间时间。
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         for day in file.days where day.isOffDay {
             let parts = day.date.split(separator: "-")
             guard parts.count == 3,
                   let y = Int(parts[0]), let m = Int(parts[1]), let d = Int(parts[2]),
-                  y == expectedYear, (1...12).contains(m), (1...31).contains(d) else {
+                  y == expectedYear, (1...12).contains(m), (1...31).contains(d),
+                  let parsed = calendar.date(from: DateComponents(year: y, month: m, day: d)) else {
+                throw HolidayValidationError.invalidDate(day.date)
+            }
+            // Calendar 会把 2/30 之类归一化到 3/2；回读 components 才能确认原日期合法。
+            let normalized = calendar.dateComponents([.year, .month, .day], from: parsed)
+            guard normalized.year == y, normalized.month == m, normalized.day == d else {
                 throw HolidayValidationError.invalidDate(day.date)
             }
             guard !seen.contains(day.date) else { throw HolidayValidationError.duplicateDate(day.date) }
             seen.insert(day.date)
-            guard !day.name.isEmpty else { throw HolidayValidationError.emptyName(day.date) }
+            guard !day.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                throw HolidayValidationError.emptyName(day.date)
+            }
             out.append(HolidayDay(month: m, day: d, name: day.name))
         }
         guard out.count >= 5 else { throw HolidayValidationError.tooFewOffDays(out.count) }

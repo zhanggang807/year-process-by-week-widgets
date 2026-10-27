@@ -84,4 +84,19 @@ struct HolidayDataTests {
             #expect(table.days.contains { $0.month == cny.month && $0.day == cny.day && $0.name == "春节" })
         }
     }
+
+    @Test("校验拒绝不存在的日历日期")
+    func rejectsInvalidCalendarDate() {
+        let file = HolidayFile(year: 2026, days: [
+            .init(date: "2026-02-30", name: "测试", isOffDay: true),
+            .init(date: "2026-01-01", name: "元旦", isOffDay: true),
+            .init(date: "2026-05-01", name: "劳动节", isOffDay: true),
+            .init(date: "2026-10-01", name: "国庆节", isOffDay: true),
+            .init(date: "2026-10-02", name: "国庆节", isOffDay: true),
+            .init(date: "2026-10-03", name: "国庆节", isOffDay: true)
+        ])
+        #expect(throws: HolidayValidationError.self) {
+            try HolidayTable(file: file, expectedYear: 2026)
+        }
+    }
 }

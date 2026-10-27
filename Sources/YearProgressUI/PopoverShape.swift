@@ -21,12 +21,13 @@ public struct PopoverShape: Shape {
     public func path(in rect: CGRect) -> Path {
         let r = min(cornerRadius, rect.height / 2, rect.width / 2)
         let a = arrowHeight
-        let half = arrowHalfWidth
+        // 窗口过窄时缩小尾巴宽度并退化为居中，避免左右边越过窗口。
+        let half = min(arrowHalfWidth, max(1, (rect.width - 2 * (r + 2)) / 2))
         // 尾巴尖始终在顶部（y=0）；限制在圆角内侧，窗口过窄时退化为居中
         let desired = arrowCenterX ?? rect.midX
         let lower = r + half + 2
-        let upper = max(lower, rect.width - r - half - 2)
-        let cx = min(max(desired, lower), upper)
+        let upper = rect.width - r - half - 2
+        let cx = upper >= lower ? min(max(desired, lower), upper) : rect.midX
         let left = cx - half
         let right = cx + half
         let w = rect.width

@@ -76,7 +76,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         log.info("[app] launched \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?", privacy: .public)")
-        if let icon = NSImage(named: "AppIcon") { NSApp.applicationIconImage = icon }
+        if let url = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"),
+           let icon = NSImage(contentsOf: url) {
+            NSApp.applicationIconImage = icon
+        }
         state = AppState(dateOverride: cli.date)
         // 只有命令行显式传了 --theme/--size 才覆盖，否则沿用（或迁移后的）默认设置
         if let theme = cli.themeOverride { state.theme = theme }
@@ -406,29 +409,51 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func toggleLaunchAtLogin() {
-        do {
-            if launchAtLoginEnabled {
-                try SMAppService.mainApp.unregister()
-            } else {
-                try SMAppService.mainApp.register()
+        let service = SMAppService.mainApp
+        switch service.status {
+        case .enabled:
+            do {
+                try service.unregister()
+            } catch {
+                log.error("[login] \(error.localizedDescription, privacy: .private)")
+                showLoginItemError(error)
             }
-            log.info("[login] enabled=\(self.launchAtLoginEnabled, privacy: .public)")
-        } catch {
-            log.error("[login] \(error.localizedDescription, privacy: .public)")
-            showLoginItemError(error)
+        case .requiresApproval:
+            // 已经登记，但需要用户在系统设置里放行；再 register 不会有帮助。
+            openLoginItemsSettings()
+        case .notFound:
+            showLoginItemMessage("请先把 App 安装到 /Applications，再开启开机启动。")
+        default:
+            do {
+                try service.register()
+                if service.status == .requiresApproval {
+                    openLoginItemsSettings()
+                }
+            } catch {
+                log.error("[login] \(error.localizedDescription, privacy: .private)")
+                showLoginItemError(error)
+            }
         }
         rebuildMenu()
     }
 
+    private func openLoginItemsSettings() {
+        guard let url = URL(string: "x-apple.systempreferences:com.apple.LoginItems-Settings.extension") else { return }
+        NSWorkspace.shared.open(url)
+    }
+
     private func showLoginItemError(_ error: Error) {
-        let alert = NSAlert()
-        alert.messageText = "无法设置开机启动"
-        alert.informativeText = """
+        showLoginItemMessage("""
         \(error.localizedDescription)
 
-        请确认 App 已安装到 /Applications；如果系统要求确认，请到
-        「系统设置 → 通用 → 登录项」中允许 YearProgress。
-        """
+        请确认 App 已安装到 /Applications。
+        """)
+    }
+
+    private func showLoginItemMessage(_ message: String) {
+        let alert = NSAlert()
+        alert.messageText = "无法设置开机启动"
+        alert.informativeText = message + "\n\n可以到「系统设置 → 通用 → 登录项」手动检查。"
         alert.addButton(withTitle: "好")
         alert.runModal()
     }

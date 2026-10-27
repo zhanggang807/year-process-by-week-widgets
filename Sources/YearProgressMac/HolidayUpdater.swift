@@ -1,4 +1,5 @@
 import Foundation
+import os
 import WidgetKit
 import YearProgressCore
 
@@ -9,7 +10,9 @@ extension Notification.Name {
 /// 从公开发布源抓取节假日安排（holiday-cn 镜像，原始来源是国务院通知）。
 enum HolidayFetcher {
     static func fetch(year: Int) async throws -> HolidayTable {
-        let url = URL(string: "https://api.github.com/repos/NateScarlet/holiday-cn/contents/\(year).json?ref=master")!
+        guard let url = URL(string: "https://api.github.com/repos/NateScarlet/holiday-cn/contents/\(year).json?ref=master") else {
+            throw URLError(.badURL)
+        }
         var request = URLRequest(url: url)
         request.timeoutInterval = 15
         request.setValue("application/vnd.github.raw", forHTTPHeaderField: "Accept")
@@ -28,6 +31,7 @@ enum HolidayFetcher {
 /// 成功后写缓存、刷新桌面挂件、通知 UI。
 @MainActor
 enum HolidayUpdater {
+    private static let log = Logger(subsystem: "com.local.yearprogress", category: "holidays")
     private static let attemptKeyPrefix = "holidayFetchAttempt."
 
     static func refreshIfNeeded(force: Bool = false, now: Date = Date()) {
@@ -46,7 +50,9 @@ enum HolidayUpdater {
                     WidgetCenter.shared.reloadAllTimelines()
                     NotificationCenter.default.post(name: .holidayDataUpdated, object: nil)
                 } catch {
-                    // 保持现有数据（bundle / 内建 / 法定兜底），下次再试
+                    // 保持现有数据（bundle / 内建 / 法定兜底），下次再试；
+                    // 只记录年份和错误类别，不记录用户信息。
+                    log.error("holiday fetch failed year=\(year, privacy: .public) error=\(error.localizedDescription, privacy: .private)")
                 }
             }
         }
