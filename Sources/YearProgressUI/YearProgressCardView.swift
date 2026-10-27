@@ -142,15 +142,14 @@ private struct CardChromeModifier: ViewModifier {
     let chrome: CardChrome
     let cornerRadius: CGFloat
 
+    @ViewBuilder
     func body(content: Content) -> some View {
         switch chrome {
         case .widget:
-            return AnyView(content)
+            content
         case .card:
-            return AnyView(
-                content
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-            )
+            content
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         }
     }
 }
@@ -265,14 +264,18 @@ private struct TooltipModifier: ViewModifier {
     let text: String
     let enabled: Bool
 
+    @ViewBuilder
     func body(content: Content) -> some View {
         // .help 是 macOS-only；小组件传 enabled=false，但 iOS 编译时也不能出现该调用
         #if canImport(AppKit)
         if enabled {
-            return AnyView(content.help(text))
+            content.help(text)
+        } else {
+            content
         }
+        #else
+        content
         #endif
-        return AnyView(content)
     }
 }
 
