@@ -220,7 +220,7 @@ private struct WeekBlockView: View {
         if accented {
             switch cell.state {
             case .past: return Color.white.opacity(0.86)
-            case .future, .current: return Color.white.opacity(0.22)
+            case .future, .current: return Color.white.opacity(0.10)
             }
         }
         switch cell.state {
@@ -245,20 +245,26 @@ private struct WeekBlockView: View {
         case .past:
             base.foregroundStyle(accented ? Color.black.opacity(0.78) : theme.pastLabel)
         case .future:
-            base.foregroundStyle(accented ? Color.white.opacity(0.82) : theme.futureLabel)
+            base.foregroundStyle(accented ? Color.white.opacity(0.96) : theme.futureLabel)
         case .current:
             let f = CGFloat(min(1, max(0, cell.fraction)))
             ZStack {
                 base.foregroundStyle(accented ? Color.black.opacity(0.78) : theme.pastLabel)
                     .mask(alignment: .top) { Rectangle().frame(height: f * side) }
-                base.foregroundStyle(accented ? Color.white.opacity(0.82) : theme.futureLabel)
+                base.foregroundStyle(accented ? Color.white.opacity(0.96) : theme.futureLabel)
                     .mask(alignment: .bottom) { Rectangle().frame(height: (1 - f) * side) }
             }
         }
     }
 
     private var stroke: (color: Color, width: CGFloat)? {
-        if accented { return nil }
+        if accented {
+            // 未来块几乎是透明的，用淡描边把「还没到的周」画出来；
+            // 已过块保持实心，两者形成实心/空心对比，比单纯明暗更清楚。
+            return cell.state == .future
+                ? (Color.white.opacity(0.30), max(0.8, side * 0.035))
+                : nil
+        }
         let width = max(0.8, side * 0.030)
         switch cell.state {
         case .past: return theme.pastStroke.map { ($0, width) }
