@@ -39,14 +39,14 @@ enum GridSeparatorMetrics {
 
     /// 以方块左边缘为 0 时，分隔线中心的 x 坐标。
     ///
-    /// - 行内：落在本方块与下一方块之间间隙的正中。
-    /// - 行末：没有下一块，线贴在本方块右边缘内侧，避免悬空到网格外的留白里。
-    static func centerX(cellSide: CGFloat, gap: CGFloat, isRowEnd: Bool) -> CGFloat {
-        isRowEnd ? cellSide - width / 2 : cellSide + gap / 2
+    /// 行内和行末使用同一条规则：都落在方块右侧 `gap / 2`。
+    /// 行末没有下一块时，线会自然悬在右侧留白里，但距离与行内完全一致。
+    static func centerX(cellSide: CGFloat, gap: CGFloat) -> CGFloat {
+        cellSide + gap / 2
     }
 
     /// `.overlay(alignment: .trailing)` 下，从方块右边缘到线中心的偏移。
-    static func trailingOffset(gap: CGFloat, isRowEnd: Bool) -> CGFloat {
-        isRowEnd ? 0 : gap / 2 + width / 2
+    static func trailingOffset(gap: CGFloat) -> CGFloat {
+        gap / 2 + width / 2
     }
 }

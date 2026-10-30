@@ -139,8 +139,7 @@ public struct YearProgressCardView: View {
                                           holidayMarker: holidayMarker,
                                           separator: GridSeparatorRules.separator(after: index,
                                                                                  periods: periods,
-                                                                                 decoration: decoration),
-                                          isRowEnd: index == rowRange.upperBound - 1)
+                                                                                 decoration: decoration))
                         }
                     }
                 }
@@ -181,8 +180,6 @@ private struct WeekBlockView: View {
     let holidayMarker: HolidayMarkerStyle
     /// 画在本方块右侧的分隔线；季度优先于月份。
     let separator: GridSeparatorKind
-    /// 行末没有下一块：线贴右边缘，而不是画到网格外。
-    let isRowEnd: Bool
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -217,13 +214,13 @@ private struct WeekBlockView: View {
             }
         }
         .overlay(alignment: .trailing) {
-            // 线属于「本方块右侧」：中心落在本方块与下一方块之间的间隙正中。
-            // 行末方块也照样画，避免跨行处的月份/季度边界被漏掉。
+            // 线属于「本方块右侧」：中心固定落在方块右侧 gap / 2。
+            // 行末没有下一块时，线仍按同一距离悬在右侧留白里，避免跨行边界漏画。
             if let separatorColor {
                 Capsule()
                     .fill(separatorColor)
                     .frame(width: GridSeparatorMetrics.width, height: separatorHeight)
-                    .offset(x: GridSeparatorMetrics.trailingOffset(gap: gap, isRowEnd: isRowEnd))
+                    .offset(x: GridSeparatorMetrics.trailingOffset(gap: gap))
                     .allowsHitTesting(false)
             }
         }

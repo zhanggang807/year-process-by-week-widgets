@@ -34,28 +34,16 @@ struct GridSeparatorTests {
         #expect(GridSeparatorRules.separator(after: 1, periods: [jan, feb], decoration: .coloredLines) == .none)
     }
 
-    @Test("行内线中心严格落在方块右侧间隙中心")
-    func interiorGeometry() {
+    @Test("行内与行末都使用相同的右侧间距")
+    func geometry() {
         let side: CGFloat = 18.6
         let gap: CGFloat = 3.348
-        let center = GridSeparatorMetrics.centerX(cellSide: side, gap: gap, isRowEnd: false)
+        let center = GridSeparatorMetrics.centerX(cellSide: side, gap: gap)
         #expect(abs(center - (side + gap / 2)) < 0.0001)
 
-        // trailing overlay 的初始中心在 side - width/2，偏移后应回到间隙中心。
+        // trailing overlay 的初始中心在 side - width/2，偏移后应回到同一中心。
         let overlayCenter = side - GridSeparatorMetrics.width / 2
-            + GridSeparatorMetrics.trailingOffset(gap: gap, isRowEnd: false)
-        #expect(abs(overlayCenter - center) < 0.0001)
-    }
-
-    @Test("行末线贴方块右边缘，不悬空到网格外")
-    func rowEndGeometry() {
-        let side: CGFloat = 18.6
-        let gap: CGFloat = 3.348
-        let center = GridSeparatorMetrics.centerX(cellSide: side, gap: gap, isRowEnd: true)
-        #expect(abs(center - (side - GridSeparatorMetrics.width / 2)) < 0.0001)
-
-        let overlayCenter = side - GridSeparatorMetrics.width / 2
-            + GridSeparatorMetrics.trailingOffset(gap: gap, isRowEnd: true)
+            + GridSeparatorMetrics.trailingOffset(gap: gap)
         #expect(abs(overlayCenter - center) < 0.0001)
     }
 }
