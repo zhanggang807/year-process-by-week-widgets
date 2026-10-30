@@ -122,9 +122,9 @@ public enum CardTheme: String, CaseIterable, Identifiable, Sendable {
     public var holidayAccent: Color { Color(red: 0.902, green: 0.318, blue: 0.235) }
 
     /// 网格分隔线的语义色：不和蓝 ring、红折角、蓝灰方块复用。
-    /// 季度固定洋红、月份固定青柠；两者在深色底和浅色底上都能区分。
-    public var quarterSeparator: Color { Color(red: 0.957, green: 0.357, blue: 1.000) } // #F45BFF
-    public var monthSeparator: Color { Color(red: 0.776, green: 0.957, blue: 0.196) }   // #C6F432
+    /// 季度固定青柠、月份固定洋红；两者在深色底和浅色底上都能区分。
+    public var quarterSeparator: Color { Color(red: 0.776, green: 0.957, blue: 0.196) } // #C6F432
+    public var monthSeparator: Color { Color(red: 0.957, green: 0.357, blue: 1.000) }   // #F45BFF
 
     /// 本周：浅色底（还没过）+ 从底部升起的深色进度条（已过）。
     public var currentFill: Color { futureFill }

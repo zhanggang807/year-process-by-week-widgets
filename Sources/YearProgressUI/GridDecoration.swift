@@ -2,7 +2,7 @@ import Foundation
 
 /// 网格月份 / 季度分隔线的显示模式。
 ///
-/// 正式产品默认使用 `.coloredLines`：季度线洋红、月份线青柠，菜单里可关闭。
+/// 正式产品默认使用 `.coloredLines`：季度线青柠、月份线洋红，菜单里可关闭。
 /// 其余 case 保留给 CLI / 快照调试，也兼容旧版本已经保存过的偏好值。
 public enum GridDecoration: String, CaseIterable, Sendable {
     case none
