@@ -1,4 +1,5 @@
 import SwiftUI
+import WidgetKit
 import YearProgressCore
 import YearProgressUI
 
@@ -12,7 +13,10 @@ final class AppState: ObservableObject {
     @Published var decoration: GridDecoration {
         didSet {
             defaults.set(decoration.rawValue, forKey: Self.decorationKey)
+            // 宿主与 WidgetKit 不在同一个进程：先把偏好写进共享容器，
+            // 再主动请求重载，系统小组件才会立刻用上新设置，而不是等下一次时间线刷新。
             WidgetPreferences.writeGridDecoration(decoration.rawValue)
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -48,7 +52,7 @@ final class AppState: ObservableObject {
             self.cardSize = Self.defaultSize          // 默认小尺寸
         }
         let savedDecoration = AppDefaults.store.string(forKey: Self.decorationKey)
-            .flatMap(GridDecoration.init(rawValue:)) ?? .coloredLines
+            .flatMap(GridDecoration.init(rawValue:)) ?? .productDefault
         self.decoration = savedDecoration
         self.progress = Self.makeProgress(for: dateOverride ?? Date(), weekStartMode: .monday)
         // 首次启动/旧版本没有共享偏好时，把当前默认值同步给 Widget。

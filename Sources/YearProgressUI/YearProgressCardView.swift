@@ -27,7 +27,7 @@ public struct YearProgressCardView: View {
     public var drawsBackground: Bool
     /// 节假日方块上的小标记样式
     public var holidayMarker: HolidayMarkerStyle
-    /// 预览用：月份/季度分隔线；默认关闭，不改变现有正式 UI。
+    /// 月份 / 季度分隔线；正式界面默认开启，宿主与系统小组件使用同一份设置。
     public var decoration: GridDecoration
 
     public init(progress: YearProgress,
@@ -41,7 +41,7 @@ public struct YearProgressCardView: View {
                 headerFontOverride: CGFloat? = nil,
                 drawsBackground: Bool = true,
                 holidayMarker: HolidayMarkerStyle = .triangle,
-                decoration: GridDecoration = .none) {
+                decoration: GridDecoration = .productDefault) {
         self.progress = progress
         self.theme = theme
         self.size = size
@@ -220,43 +220,24 @@ private struct WeekBlockView: View {
         .overlay(alignment: .leading) {
             // 分隔线画在方块之间的间隙里，和方块同高，不挤占周数字。
             // 只在同一行有前一个方块时绘制；行首没有“两个方块之间”，不能画到网格边缘。
-            if hasPreviousInRow {
-                if decoration == .coloredLines {
-                    if quarterStart {
-                        Capsule()
-                            .fill(theme.quarterSeparator)
-                            .frame(width: 1.8, height: separatorHeight)
-                            .offset(x: -gap / 2 - 0.9)
-                            .allowsHitTesting(false)
-                    } else if monthStart {
-                        Capsule()
-                            .fill(theme.monthSeparator)
-                            .frame(width: 1.8, height: separatorHeight)
-                            .offset(x: -gap / 2 - 0.9)
-                            .allowsHitTesting(false)
-                    }
-                } else if decoration.showsQuarters && quarterStart {
-                    Capsule()
-                        .fill(separatorColor.opacity(0.68))
-                        .frame(width: 1.8, height: separatorHeight)
-                        .offset(x: -gap / 2 - 0.9)
-                        .allowsHitTesting(false)
-                } else if decoration.showsMonths && monthStart {
-                    Capsule()
-                        .fill(separatorColor.opacity(0.40))
-                        .frame(width: 1.8, height: separatorHeight)
-                        .offset(x: -gap / 2 - 0.9)
-                        .allowsHitTesting(false)
-                }
+            if hasPreviousInRow, let separatorColor {
+                // 季度和月份落在同一个间隙时季度优先，避免两条 1.8pt 线挤在一起。
+                Capsule()
+                    .fill(separatorColor)
+                    .frame(width: 1.8, height: separatorHeight)
+                    .offset(x: -gap / 2 - 0.9)
+                    .allowsHitTesting(false)
             }
         }
         .modifier(TooltipModifier(text: tooltip, enabled: showsTooltip))
         .accessibilityLabel(tooltip)
     }
 
-    /// 分隔线画在方块间隙里：深色主题用白色，跟随系统主题时用主文字色，浅色底也可见。
-    private var separatorColor: Color {
-        theme == .system ? .primary : .white
+    /// 分隔线固定用主题里的洋红 / 青柠，不随深浅底切换成白线或系统色。
+    private var separatorColor: Color? {
+        if decoration.showsQuarters && quarterStart { return theme.quarterSeparator }
+        if decoration.showsMonths && monthStart { return theme.monthSeparator }
+        return nil
     }
 
     /// 方块左右直边长度再向上下各延伸半个 R 角半径，视觉上和圆角过渡更自然。

@@ -469,8 +469,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func toggleDecoration() {
-        state.decoration = state.decoration == .none ? .coloredLines : .none
-        WidgetCenter.shared.reloadAllTimelines()
+        // 重载由 AppState 的 didSet 统一负责，避免以后新增入口时漏掉 WidgetKit。
+        state.decoration = state.decoration.isEnabled ? .none : .productDefault
         rebuildMenu()
     }
 
