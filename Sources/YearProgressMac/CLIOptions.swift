@@ -33,6 +33,8 @@ struct CLIOptions {
     var popoverPreview = false
     /// 节假日标记样式
     var holidayMarker: HolidayMarkerStyle = .triangle
+    /// 预览用：网格月份/季度分隔线
+    var decoration: GridDecoration = .none
     /// 开发用：模拟"挂菜单→摘菜单→重新绑定→左键点击"的完整序列
     var testMenuClick = false
     /// 诊断用：在 App 包内检查/切换登录项（SMAppService）
@@ -74,6 +76,8 @@ struct CLIOptions {
                 o.popoverPreview = true
             case "--marker":
                 if let v = next(), let m = HolidayMarkerStyle(rawValue: v) { o.holidayMarker = m; i += 1 }
+            case "--decoration":
+                if let v = next(), let d = GridDecoration(rawValue: v) { o.decoration = d; i += 1 }
             case "--test-menu-click":
                 o.testMenuClick = true
             case "--login-status":
@@ -119,6 +123,7 @@ struct CLIOptions {
       --week-start monday|sunday|locale
       --chrome card|widget   导出样式：card（App 大卡片）/ widget（系统小组件，无外框）
       --marker none|dot|bar|triangle|ring|stripe   节假日标记样式（预览用）
+      --decoration none|months|quarters|both       网格分隔线预览
       --login-status|--login-register|--login-unregister  诊断登录项（不启动界面）
     """
 

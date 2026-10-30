@@ -14,6 +14,7 @@ public enum AppDefaults {
         public static let cardSize = "cardSize"
         public static let settingsVersion = "settingsVersion"
         public static let panelLevel = "panelLevel"
+        public static let gridDecoration = "gridDecoration"
         public static let panelVisible = "panelVisible"
         public static let didShowWelcome = "didShowWelcome"
     }

@@ -9,6 +9,12 @@ final class AppState: ObservableObject {
     @Published private(set) var progress: YearProgress
     @Published var theme: CardTheme { didSet { defaults.set(theme.rawValue, forKey: Self.themeKey) } }
     @Published var cardSize: CGSize { didSet { defaults.set(NSStringFromSize(cardSize), forKey: Self.sizeKey) } }
+    @Published var decoration: GridDecoration {
+        didSet {
+            defaults.set(decoration.rawValue, forKey: Self.decorationKey)
+            WidgetPreferences.writeGridDecoration(decoration.rawValue)
+        }
+    }
 
     var weekStartMode: WeekStartMode = .monday
 
@@ -17,6 +23,7 @@ final class AppState: ObservableObject {
     private let defaults = AppDefaults.store
     private static let themeKey = AppDefaults.Key.theme
     private static let sizeKey = AppDefaults.Key.cardSize
+    private static let decorationKey = AppDefaults.Key.gridDecoration
     private var timer: Timer?
     /// 保存 token 才能在 deinit 时移除；否则状态对象被重建时会留下悬空观察者。
     private var observerTokens: [(center: NotificationCenter, token: NSObjectProtocol)] = []
@@ -40,7 +47,12 @@ final class AppState: ObservableObject {
         } else {
             self.cardSize = Self.defaultSize          // 默认小尺寸
         }
+        let savedDecoration = AppDefaults.store.string(forKey: Self.decorationKey)
+            .flatMap(GridDecoration.init(rawValue:)) ?? .coloredLines
+        self.decoration = savedDecoration
         self.progress = Self.makeProgress(for: dateOverride ?? Date(), weekStartMode: .monday)
+        // 首次启动/旧版本没有共享偏好时，把当前默认值同步给 Widget。
+        WidgetPreferences.writeGridDecoration(savedDecoration.rawValue)
         observeEnvironment()
         scheduleMidnightRefresh()
     }

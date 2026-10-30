@@ -10,6 +10,7 @@ import YearProgressUI
 struct YearProgressEntry: TimelineEntry {
     let date: Date
     let progress: YearProgress
+    let decoration: GridDecoration
 }
 
 /// 诊断用：系统只要调用过我们（画预览 / 取时间线），就往沙盒容器里记一行。
@@ -41,12 +42,15 @@ struct YearProgressProvider: TimelineProvider {
         let calendar = WeekStartMode.monday.makeCalendar(timeZone: tz)
         let year = calendar.component(.year, from: date)
         let holidays = HolidayStore.table(for: year, timeZone: tz)
+        let decoration = WidgetPreferences.readGridDecoration()
+            .flatMap(GridDecoration.init(rawValue:)) ?? .coloredLines
         return YearProgressEntry(date: date,
                                  progress: YearProgressCalculator.progress(for: date,
                                                                           calendar: calendar,
                                                                           timeZone: tz,
                                                                           weekStartMode: .monday,
-                                                                          holidayTable: holidays))
+                                                                          holidayTable: holidays),
+                                 decoration: decoration)
     }
 
     func placeholder(in context: Context) -> YearProgressEntry {
@@ -90,7 +94,8 @@ struct YearProgressWidgetView: View {
                                      ? WidgetGridReference.columns(weekCount: entry.progress.totalWeeks)
                                      : nil,
                                  headerFontOverride: family == .systemSmall ? 13 : nil,
-                                 drawsBackground: false)
+                                 drawsBackground: false,
+                                 decoration: entry.decoration)
         }
         // macOS 14 / iOS 17 起，小组件必须用 containerBackground 声明背板，否则系统显示占位提示。
         // 背景交给系统容器，卡面本身保持透明：桌面小组件宿主的某些渲染方案会

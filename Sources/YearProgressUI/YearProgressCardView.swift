@@ -27,6 +27,8 @@ public struct YearProgressCardView: View {
     public var drawsBackground: Bool
     /// 节假日方块上的小标记样式
     public var holidayMarker: HolidayMarkerStyle
+    /// 预览用：月份/季度分隔线；默认关闭，不改变现有正式 UI。
+    public var decoration: GridDecoration
 
     public init(progress: YearProgress,
                 theme: CardTheme,
@@ -38,7 +40,8 @@ public struct YearProgressCardView: View {
                 fixedColumns: Int? = nil,
                 headerFontOverride: CGFloat? = nil,
                 drawsBackground: Bool = true,
-                holidayMarker: HolidayMarkerStyle = .triangle) {
+                holidayMarker: HolidayMarkerStyle = .triangle,
+                decoration: GridDecoration = .none) {
         self.progress = progress
         self.theme = theme
         self.size = size
@@ -50,6 +53,7 @@ public struct YearProgressCardView: View {
         self.headerFontOverride = headerFontOverride
         self.drawsBackground = drawsBackground
         self.holidayMarker = holidayMarker
+        self.decoration = decoration
     }
 
     public var body: some View {
@@ -115,17 +119,29 @@ public struct YearProgressCardView: View {
     private func grid(_ layout: WeekGridLayout, metrics m: CardMetrics) -> some View {
         let cells = progress.weeks
         let radius = CGFloat(layout.cellSize) * 0.22
+        let calendar = progress.weekStartMode.makeCalendar(timeZone: progress.timeZone)
+        let periods: [(month: Int, quarter: Int)] = cells.map { cell in
+            let month = calendar.component(.month, from: cell.start)
+            return (month, (month - 1) / 3 + 1)
+        }
         return VStack(alignment: .leading, spacing: CGFloat(layout.gap)) {
             ForEach(0..<layout.rows, id: \.self) { row in
                 HStack(spacing: CGFloat(layout.gap)) {
                     ForEach(layout.rowRange(row, weekCount: progress.totalWeeks), id: \.self) { index in
                         if index < cells.count {
+                            let previous = index > 0 ? periods[index - 1] : nil
+                            let period = periods[index]
                             WeekBlockView(cell: cells[index],
                                           side: CGFloat(layout.cellSize),
                                           radius: radius,
+                                          gap: CGFloat(layout.gap),
                                           theme: theme,
                                           showsTooltip: showsTooltips,
-                                          holidayMarker: holidayMarker)
+                                          holidayMarker: holidayMarker,
+                                          decoration: decoration,
+                                          hasPreviousInRow: index > layout.rowRange(row, weekCount: progress.totalWeeks).lowerBound,
+                                          monthStart: previous.map { $0.month != period.month } ?? false,
+                                          quarterStart: previous.map { $0.quarter != period.quarter } ?? false)
                         }
                     }
                 }
@@ -160,9 +176,14 @@ private struct WeekBlockView: View {
     let cell: WeekCell
     let side: CGFloat
     let radius: CGFloat
+    let gap: CGFloat
     let theme: CardTheme
     let showsTooltip: Bool
     let holidayMarker: HolidayMarkerStyle
+    let decoration: GridDecoration
+    let hasPreviousInRow: Bool
+    let monthStart: Bool
+    let quarterStart: Bool
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -196,8 +217,51 @@ private struct WeekBlockView: View {
                     .strokeBorder(stroke.color, lineWidth: stroke.width)
             }
         }
+        .overlay(alignment: .leading) {
+            // 分隔线画在方块之间的间隙里，和方块同高，不挤占周数字。
+            // 只在同一行有前一个方块时绘制；行首没有“两个方块之间”，不能画到网格边缘。
+            if hasPreviousInRow {
+                if decoration == .coloredLines {
+                    if quarterStart {
+                        Capsule()
+                            .fill(theme.quarterSeparator)
+                            .frame(width: 1.8, height: separatorHeight)
+                            .offset(x: -gap / 2 - 0.9)
+                            .allowsHitTesting(false)
+                    } else if monthStart {
+                        Capsule()
+                            .fill(theme.monthSeparator)
+                            .frame(width: 1.8, height: separatorHeight)
+                            .offset(x: -gap / 2 - 0.9)
+                            .allowsHitTesting(false)
+                    }
+                } else if decoration.showsQuarters && quarterStart {
+                    Capsule()
+                        .fill(separatorColor.opacity(0.68))
+                        .frame(width: 1.8, height: separatorHeight)
+                        .offset(x: -gap / 2 - 0.9)
+                        .allowsHitTesting(false)
+                } else if decoration.showsMonths && monthStart {
+                    Capsule()
+                        .fill(separatorColor.opacity(0.40))
+                        .frame(width: 1.8, height: separatorHeight)
+                        .offset(x: -gap / 2 - 0.9)
+                        .allowsHitTesting(false)
+                }
+            }
+        }
         .modifier(TooltipModifier(text: tooltip, enabled: showsTooltip))
         .accessibilityLabel(tooltip)
+    }
+
+    /// 分隔线画在方块间隙里：深色主题用白色，跟随系统主题时用主文字色，浅色底也可见。
+    private var separatorColor: Color {
+        theme == .system ? .primary : .white
+    }
+
+    /// 方块左右直边长度再向上下各延伸半个 R 角半径，视觉上和圆角过渡更自然。
+    private var separatorHeight: CGFloat {
+        max(2, side - radius)
     }
 
     private var fill: Color {

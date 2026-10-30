@@ -20,6 +20,7 @@ enum SnapshotRunner {
             let view = QuickPopoverView(progress: progress,
                                         theme: options.theme,
                                         cardSize: cardSize,
+                                        decoration: options.decoration,
                                         tailCenterX: cardSize.width / 2)
                 .padding(options.margin)
                 .background(Color.clear)
@@ -51,7 +52,8 @@ enum SnapshotRunner {
                                         chrome: chrome,
                                         fixedColumns: options.columns ?? (chrome == .card ? WidgetGridReference.columns(weekCount: progress.totalWeeks) : nil),
                                         headerFontOverride: options.headerFontOverride,
-                                        holidayMarker: options.holidayMarker)
+                                        holidayMarker: options.holidayMarker,
+                                        decoration: options.decoration)
             .padding(options.margin)
             .background(Color.clear)
 

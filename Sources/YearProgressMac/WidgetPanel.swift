@@ -34,7 +34,8 @@ struct PanelRootView: View {
         YearProgressCardView(progress: state.progress,
                             theme: state.theme,
                             size: state.cardSize,
-                            fixedColumns: WidgetGridReference.columns(weekCount: state.progress.totalWeeks))
+                            fixedColumns: WidgetGridReference.columns(weekCount: state.progress.totalWeeks),
+                            decoration: state.decoration)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }
@@ -45,6 +46,7 @@ struct QuickPopoverView: View {
     let progress: YearProgress
     let theme: CardTheme
     let cardSize: CGSize
+    let decoration: GridDecoration
     /// 尾巴尖在窗口内的 x（正常居中；被屏幕边缘夹住时会偏移，仍指向图标）
     let tailCenterX: CGFloat
 
@@ -64,7 +66,8 @@ struct QuickPopoverView: View {
                                  size: cardSize,
                                  chrome: .widget,
                                  showsTooltips: false,
-                                 drawsBackground: false)
+                                 drawsBackground: false,
+                                 decoration: decoration)
                 .frame(width: cardSize.width, height: cardSize.height)
                 .offset(y: arrow)
         }

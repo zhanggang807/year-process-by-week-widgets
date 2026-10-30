@@ -273,6 +273,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let popover = QuickPopoverView(progress: state.progress,
                                        theme: state.theme,           // 默认石墨
                                        cardSize: cardSize,
+                                       decoration: state.decoration,
                                        tailCenterX: placement.tailX)
         quickPanel.contentView = NSHostingView(rootView: popover)
         quickPanel.setFrame(placement.frame, display: false)
@@ -322,6 +323,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         login.target = self
         login.state = launchAtLoginEnabled ? .on : .off
         menu.addItem(login)
+
+        let separator = NSMenuItem(title: "显示月份/季度分隔",
+                                   action: #selector(toggleDecoration),
+                                   keyEquivalent: "")
+        separator.target = self
+        separator.state = state.decoration == .none ? .off : .on
+        menu.addItem(separator)
 
         let refresh = NSMenuItem(title: "立即刷新", action: #selector(refresh), keyEquivalent: "r")
         refresh.target = self
@@ -458,6 +466,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         alert.informativeText = message + "\n\n可以到「系统设置 → 通用 → 登录项」手动检查。"
         alert.addButton(withTitle: "好")
         alert.runModal()
+    }
+
+    @objc private func toggleDecoration() {
+        state.decoration = state.decoration == .none ? .coloredLines : .none
+        WidgetCenter.shared.reloadAllTimelines()
+        rebuildMenu()
     }
 
     @objc private func refresh() {
